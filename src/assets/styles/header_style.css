@@ -5,7 +5,7 @@ body{
 
 header{
     background: #F4F4F4;
-    z-index: 9;
+    z-index: 9999;
     margin: auto;
     position: fixed;
     padding-bottom: 12px;
@@ -13,7 +13,12 @@ header{
     left: 0;
     right: 0;
     text-align: center;
-    transition: 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
+.hidden {
+    transform: translateY(-100%);
+    /* display: none; */
 }
 
 a, a:link, a:visited, a:hover {
@@ -23,6 +28,45 @@ a, a:link, a:visited, a:hover {
 /* top-heading */
 header .top-heading{
     margin-bottom: 10px;
+}
+
+header .top-heading .slide-deal-header{
+    height: 40px;
+    background-color: #FFDADE;
+}
+
+header .top-heading .slide-deal-header .slide-deal-item{
+    align-items: center;
+    position: inherit;
+}
+
+header .top-heading .slick-prev{
+    color: #00342C;
+    left: calc((100% - 1200px) / 2);
+    opacity: 1;
+    z-index: 999;
+    position: absolute;
+    background: transparent;
+    box-shadow: none;
+    width: 30%;
+    height: 100%;
+    /* border: none; */
+    left: 0;
+}
+
+header .top-heading .slick-next{
+    top: 0;
+    color: #00342C;
+    right: calc((100% - 1200px) / 2);
+    opacity: 1;
+    z-index: 999;
+    position: absolute;
+    background: transparent;
+    box-shadow: none;
+    width: 30%;
+    height: 100%;
+    /* border: none; */
+    right: 0;
 }
 
 
