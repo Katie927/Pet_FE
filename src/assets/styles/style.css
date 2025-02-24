@@ -1,10 +1,11 @@
 
 body{
-    background: F4F4F4;
+    background: #F4F4F4;
 }
 
 .w-container{
     width: 1200px;
     min-width: 1200px;
     margin: 0 auto;
+    /* background-color: #F4F4F4; */
 }

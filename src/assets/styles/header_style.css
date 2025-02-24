@@ -4,7 +4,7 @@ body{
 }
 
 header{
-    background: #F4F4F4;
+    background: white;
     z-index: 9999;
     margin: auto;
     position: fixed;
@@ -33,11 +33,36 @@ header .top-heading{
 header .top-heading .slide-deal-header{
     height: 40px;
     background-color: #FFDADE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 header .top-heading .slide-deal-header .slide-deal-item{
     align-items: center;
     position: inherit;
+    justify-content: center;
+}
+
+header .top-heading .slide-deal-header .slide-deal-item .deal-header span{
+    font-weight: 600;
+    color: #FD475A;
+}
+
+.icon-ChangeSolidOff::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #FD475A; /* Đổi màu icon */
+    -webkit-mask-image: url(@/assets/icon/refresh-ccw.svg);
+    mask-image: url(@/assets/icon/refresh-ccw.svg);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    margin: 1px 13px 0 0;
+
 }
 
 header .top-heading .slick-prev{
@@ -50,7 +75,7 @@ header .top-heading .slick-prev{
     box-shadow: none;
     width: 30%;
     height: 100%;
-    /* border: none; */
+    border: none;
     left: 0;
 }
 
@@ -65,7 +90,7 @@ header .top-heading .slick-next{
     box-shadow: none;
     width: 30%;
     height: 100%;
-    /* border: none; */
+    border: none;
     right: 0;
 }
 

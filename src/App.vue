@@ -23,6 +23,7 @@
   const updateIsHidden = (value) => {
     isHidden.value = value;
   }
+  
 
   // routes
   const routes = {
@@ -34,7 +35,7 @@
     currentPath.value = window.location.hash || '#/';
   })
   const currentView = computed(() => {
-    return routes[currentPath.value.replace(/^#/, '') || Home]
+    return routes[currentPath.value.replace(/^#/, '') || Home ]
   })
 
 </script>

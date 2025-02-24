@@ -7,8 +7,8 @@
             </button>
             <div class="slick-list slide-deal-item draggeble">
                 <a href="" class="deal-header">
-                    <i icon-ChangeSolidOff></i>
-                    <span>Thu cũ đổi mới</span>
+                    <i class="icon-ChangeSolidOff"></i>
+                    <span>Thu cũ giá cao toàn bộ sản phẩm</span>
                 </a>
             </div>
             <button class="slick-next slick arrow">
@@ -73,6 +73,7 @@
 
     export default{
         name: "HeaderComponent",
+        emits: ['updateIsHidden'],  
 
         data(){
             return{
@@ -92,13 +93,13 @@
                 if (currentScroll > this.lastScrollPosition) { // Cuộn xuống
                     this.isHidden = true;  
                     this.$emit("update-isHidden", this.isHidden);  // Phát sự kiện gửi giá trị lên App.vue
-                    console.log("cuon xuong ")
-                    console.log(this.isHidden)
+                    // console.log("cuon xuong ")
+                    // console.log(this.isHidden)
                 } else {    // Cuộn lên
                     this.isHidden = false;
                     this.$emit("update-isHidden", this.isHidden); 
-                    console.log("len")
-                    console.log(this.isHidden)
+                    // console.log("len")
+                    // console.log(this.isHidden)
                 }
                 this.lastScrollPosition = currentScroll;
             },
