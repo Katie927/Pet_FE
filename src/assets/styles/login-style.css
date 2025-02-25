@@ -112,6 +112,7 @@ main .login-form .form-create-user .login-row input::placeholder{
 }
 
 main .login-form .form-create-user .password-forget{
+    margin: 13px 0;
     display: flex;
     justify-content: end
 }
