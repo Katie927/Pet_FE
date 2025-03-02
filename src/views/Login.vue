@@ -71,7 +71,7 @@
 
     import "@/assets/styles/login-style.css";
     import "@/assets/styles/style.css";
-import axios from "axios";
+    import axios from "axios";
 
     import { ref } from "vue";
 

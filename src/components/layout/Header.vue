@@ -19,9 +19,9 @@
     <section class="w-container">
         <div class="logo-search-user">
             <div class="logo">
-                <a href="#/">
+                <router-link to="/">
                     <img src="@/assets/img/logo.svg" alt="">
-                </a>
+                </router-link>
             </div>
             <div class="search">
                 <div class="search-box">
@@ -44,18 +44,18 @@
                 </div>
             </div>
             <div class="quick-for-user">
-                <a href="" class="shop-location">
+                <router-link to="/user" class="shop-location">
                     <i class="icon-location"></i>
                     <span>Tìm siêu thị</span>
-                </a>
-                <a href="#/login" class="member-login">
+                </router-link>
+                <router-link to="/login" class="member-login">
                     <i class="icon-UserSolidOff"></i>
                     <span>Tài khoản</span>
-                </a>
-                <a href="" class="cart text-link">
+                </router-link>
+                <router-link to="" class="cart text-link">
                     <i class="icon-CartSolidOff"></i>
                     <label for="" id="cart-total" class="cart-counter">0</label>
-                </a>
+                </router-link>
             </div>
 
         </div>
@@ -92,12 +92,12 @@
                 let currentScroll = window.scrollY;
                 if (currentScroll > this.lastScrollPosition) { // Cuộn xuống
                     this.isHidden = true;  
-                    this.$emit("update-isHidden", this.isHidden);  // Phát sự kiện gửi giá trị lên App.vue
+                    this.$emit("updateIsHidden", this.isHidden);  // Phát sự kiện gửi giá trị lên App.vue
                     // console.log("cuon xuong ")
                     // console.log(this.isHidden)
                 } else {    // Cuộn lên
                     this.isHidden = false;
-                    this.$emit("update-isHidden", this.isHidden); 
+                    this.$emit("updateIsHidden", this.isHidden); 
                     // console.log("len")
                     // console.log(this.isHidden)
                 }
