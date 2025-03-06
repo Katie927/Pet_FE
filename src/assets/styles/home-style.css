@@ -11,3 +11,55 @@ main .body-wrapper{
     margin-top: 10px;
     margin-top: 130px;
 }
+
+/* slider */
+.container {
+    border-radius: 10px;
+    background: #fff;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.top-slider {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 6px;
+}
+
+/* Tạo button hình tròn */
+.swiper-button-prev,
+.swiper-button-next {
+    
+    width: 31px !important; /* Độ rộng */
+    height: 31px !important; /* Độ cao */
+    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+    border-radius: 50%; /* Bo tròn */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Định vị trí các nút */
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+/* Tùy chỉnh mũi tên */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 13px !important; /* Kích thước mũi tên */
+  font-weight: bold;
+  color: white; /* Màu mũi tên */
+
+}

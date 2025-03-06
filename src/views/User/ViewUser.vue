@@ -5,25 +5,15 @@
             <div class="nav-full">
                 <nav>
                     <ul class="root">
-                        <li> <router-link :class="{isActive: $route.path === '/user/promotion'}" to="/user/promotion">
-                                <i class="icon-MenuSolidOff"></i><span>Tổng quan</span>
+                        <li v-for="item in userSidebar" :key="item.path">
+                            <router-link :class="{ isActive: $route.path === item.path }" :to="item.path">
+                                <i :class="item.icon"></i>
+                                <span>{{ item.label }}</span>
                             </router-link>
                         </li>
-                        <li> <router-link :class="{isActive: $route.path === '/user/order'}" to="/user/order">
-                                <i class="icon-BoxSolidOff"></i><span>Đơn hàng</span>
-                            </router-link>
-                        </li>
-                        <li> <router-link :class="{isActive: $route.path === '/user/history'}" to="/user/history">
-                                <i class="icon-MoonSolidOff"></i><span>Lịch sử mua hàng</span>
-                            </router-link>
-                        </li>
-                        <li> <router-link :class="{isActive: $route.path === '/user/profile'}" to="/user/profile">
-                                <i class="icon-ShieldSolidOff"></i><span>Thông tin cá nhân</span>
-                            </router-link>
-                        </li>
-                        <li> <router-link to="">
+                        <li> <a href="">
                                 <i class="icon-LogOutSolidOff"></i><span>Đăng xuất</span>
-                            </router-link>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -39,5 +29,14 @@
 <script setup>
 
     import "@/assets/styles/login-style.css";
+    import { ref } from "vue";
+
+    const userSidebar = ref([
+        { path: "/user/promotion", icon: "icon-MenuSolidOff", label: "Tổng quan" },
+        { path: "/user/order", icon: "icon-BoxSolidOff", label: "Đơn hàng" },
+        { path: "/user/history", icon: "icon-MoonSolidOff", label: "Lịch sử mua hàng" },
+        { path: "/user/profile", icon: "icon-ShieldSolidOff", label: "Thông tin cá nhân" },
+    ])
+
 
 </script>
