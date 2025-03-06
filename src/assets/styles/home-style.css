@@ -1,5 +1,4 @@
 
-
 /* 
  */
 main{
@@ -16,50 +15,73 @@ main .body-wrapper{
 .container {
     border-radius: 10px;
     background: #fff;
-    padding: 12px;
+    padding: 12px 12px 0 12px;
     margin-bottom: 12px;
+}
+
+.swiper {
+  padding-bottom: 30px !important;
 }
 
 .top-slider {
     background: #fff;
     border-radius: 10px;
-    margin-bottom: 6px;
+    /* margin-bottom: 6px; */
 }
 
-/* Tạo button hình tròn */
 .swiper-button-prev,
 .swiper-button-next {
-    
-    width: 31px !important; /* Độ rộng */
-    height: 31px !important; /* Độ cao */
-    background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
-    border-radius: 50%; /* Bo tròn */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    transition: background-color 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none; /* Ngăn button nhận sự kiện khi ẩn */
+    transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-/* Hiệu ứng hover */
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+/* Hover vào swiper thì hiện button */
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+    opacity: 1;
+    pointer-events: auto; /* Cho phép click khi hiện */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: 31px !important;
+    height: 31px !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Định vị trí các nút */
 .swiper-button-prev {
   left: 10px;
 }
-
 .swiper-button-next {
   right: 10px;
 }
 
-/* Tùy chỉnh mũi tên */
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  font-size: 13px !important; /* Kích thước mũi tên */
-  font-weight: bold;
-  color: white; /* Màu mũi tên */
-
+    font-size: 13px !important;
+    font-weight: bold;
+    color: #009981;
+    opacity: 1; /* Luôn hiển thị */
 }
+
+.swiper-slide a img{
+  width: 100%;
+  border-radius: 7px;
+}
+
+.swiper .swiper-pagination .swiper-pagination-bullet {
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: #009981;
+  margin: 0 5px !important;
+}
+
+

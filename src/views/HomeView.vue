@@ -42,6 +42,15 @@
             </div>
           </div>
         </section>
+
+        <!-- product-list -->
+        <section>
+          <div class="container list-for-you">
+            <div class="title">
+              Dành cho bạn
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -89,7 +98,11 @@
       link: "",
     },
     {
-      url: "/src/assets/img/main-slider-img/redmi-pad-pro-01.png",
+      url: "/src/assets/img/main-slider-img/redmi-pad-pro-01.jpg",
+      link: "",
+    },
+    {
+      url: "/src/assets/img/main-slider-img/pad-11-web.png",
       link: "",
     },
   ]);

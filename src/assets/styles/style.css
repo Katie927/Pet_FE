@@ -1,6 +1,10 @@
 
 body{
     background: #F4F4F4;
+    background: url(/src/assets/img/nen2.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .w-container{
