@@ -49,6 +49,141 @@
             <div class="title">
               Dành cho bạn
             </div>
+            <div class="v5-list">
+              <div class="v5-list-items">
+                <div class="v5-list-container">
+                  <div id="pageHolder" class="v5-grid-items item-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+                    <div class="pj16-item" style="grid-row: span 1; grid-column: span 2; padding: 0; justify-content:center; background: rgba(238, 255, 247, 1);">
+                      <div class="item-img-video-gif">
+                        <a title="Đặt trước ngay Xiaomi 15 Series" href="https://hoanghamobile.com/dien-thoai/xiaomi-15" data-id="0" class="" style="width: 100%;">
+                          <i class="icon-PlayCircleSolidOn" id="play-icon-0" style="position: absolute; bottom: 12px; left: 12px; font-size: 40px; opacity: 0.5; display: none;"></i>
+                          <img alt="Đặt trước ngay Xiaomi 15 Series" src="https://cdn.hoanghamobile.com/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.jpg" id="product-img-0" data-id="0" style="width: 100%; display: none;">
+                          <video id="video-player-0" data-id="0" data-src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4" type="video/mp4" class="embed-responsive-item auto-play" style="background-color: black; width: 100%; pointer-events: none; display: block;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4">
+                            <source src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>
+                        </a>
+                      </div>
+                    </div>
+                    <div 
+                      v-for="(product, index) in products.slice(0)" 
+                      :key="index" 
+                      class="pj16-item" 
+                      :style="{
+                        gridRow: 'span 1',
+                        gridColumn: 'span 1',
+                        padding: '12px 12px 12px 12px'
+                      }">
+                      <div class="pj16-item-info">
+                        <div class="img">
+                          <div class="img-info">
+                            <span class="left-sticker"> Góp 0%, 0 phí </span>
+                            <a href="">
+                              <img :src="product.image" :alt="product.name" style="max-width: 180px; max-height: 180px;">
+                            </a>
+                          </div>
+                          <div class="specs">
+                            <ul>
+                              <li v-for="(spec, i) in product.specs" :key="i" class="spec-item">
+                                <label>
+                                  <span :class="['icon-CPU', 'icon-Battery', 'icon-Storage'][i % 3]"></span>
+                                </label>
+                                <div><span>{{ spec }}</span></div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <h3><a href="">{{ product.name }}</a></h3>
+                        <div class="item-gap8px">
+                          <div class="price price-last">
+                            <strike>{{ product.originalPrice }} ₫</strike>
+                            <span>- {{ product.discount }}%</span>
+                          </div>
+                          <div class="price">
+                            <strong>{{ product.finalPrice }} ₫</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!--  -->
+                  <!-- <div id="pageHolder" class="v5-grid-items item-4"
+                          style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+                    <div class="pj16-item" 
+                            style="grid-row: span 1;  grid-column: span 2; padding: 0;justify-content:center;background: rgba(238, 255, 247, 1);">
+                            <div class="item-img-video-gif">
+                              <a title="Đặt trước ngay Xiaomi 15 Series" href="https://hoanghamobile.com/dien-thoai/xiaomi-15" data-id="0" class="" style="width: 100%;">
+                                  <i class="icon-PlayCircleSolidOn" id="play-icon-0" style="position: absolute; bottom: 12px; left: 12px; font-size: 40px; opacity: 0.5; display: none;"></i>
+                                  <img alt="Đặt trước ngay Xiaomi 15 Series" src="https://cdn.hoanghamobile.com/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.jpg;trim.threshold=0;trim.percentpadding=0;width=480;" id="product-img-0" data-id="0" style="width: 100%; display: none;">
+
+                                  <video id="video-player-0" data-id="0" data-src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4" type="video/mp4" class="embed-responsive-item auto-play" style="background-color: black; width: 100%; pointer-events: none; display: block;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4">
+                                      <source src="" type="video/mp4">
+                                      Your browser does not support the video tag.
+                                  </video>
+                              </a>
+
+                      </div>
+                    </div>
+                    
+                    <div class="pj16-item" style="grid-row: span 1;  grid-column: span 1; padding: 22px 12px 12px 12px;">
+                      <div class="pj16-item-info">
+                        <div class="img">
+                          <div class="img-info">
+                            <span class="left-sticker"> Góp 0%, 0 phí </span>
+                            <a href="">
+                              <img src="/src/assets/img/product-img/product-preview/image-removebg-preview.png" alt="">
+                            </a>
+                          </div>
+                          <div class="specs">
+                            <ul >
+                              <li class="spec-item item-1-0 type-">
+                                <label for="">
+                                  <span class="icon-CPU"></span>
+                                </label>
+                                <div>
+                                  <span>Snap 8 Elite</span>
+                                </div>
+                              </li>
+                              <li class="spec-item item-1-0 type-">
+                                <label for="">
+                                  <span class="icon-CPU"></span>
+                                </label>
+                                <div>
+                                  <span>Snap 8 Elite</span>
+                                </div>
+                              </li>
+                              <li class="spec-item item-1-0 type-">
+                                <label for="">
+                                  <span class="icon-CPU"></span>
+                                </label>
+                                <div>
+                                  <span>Snap 8 Elite</span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <h3>
+                          <a href="">Samsung Galaxy S25 Ultra - 12GB/256GB</a>
+                        </h3>
+                        <div class="item-gap8px">
+                          <div class="price price-last">
+                              <strike>33,990,000 ₫</strike>
+                                  <span>- 15%</span>
+                          </div>
+                          <div class="price">
+                                  <strong>28,990,000 ₫</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div> -->
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -60,6 +195,7 @@
 <script setup>
   import "@/assets/styles/home-style.css";
   import "@/assets/styles/style.css";
+  import "@/assets/styles/product-list.css";
   import { ref } from "vue";
 
   import { Swiper, SwiperSlide } from "swiper/vue";
@@ -108,6 +244,51 @@
   ]);
 
   // const thumbsSwiper = ref(null);
+
+  const products = ref([
+    // {}, video
+
+    {
+      name: 'Samsung Galaxy S25 Ultra - 12GB/256GB',
+      image: '/src/assets/img/product-img/product-preview/image-removebg-preview.png',
+      specs: ['Snap 8 Elite', '5000 mAh', '12GB'],
+      originalPrice: '33,990,000',
+      discount: 15,
+      finalPrice: '28,990,000'
+    },
+    {
+      name: 'Điện thoại Xiaomi 15 Ultra 16GB/512GB',
+      image: '/src/assets/img/product-img/product-preview/xiaomi-15-ultra_638763351156143849.png',
+      specs: ['Snap 8 Elite', '5410 mAh', '16GB'],
+      originalPrice: '34,990,000',
+      discount: 25,
+      finalPrice: '26,190,000'
+    },
+    {
+      name: 'iPhone 16 Pro Max (256GB) - Chính hãng VN/A',
+      image: '/src/assets/img/product-img/product-preview/iphone-16-pro-sa-mac-1.png',
+      specs: ['A18 Pro', '8GB', '256GB'],
+      originalPrice: '33,990,000',
+      discount: 15,
+      finalPrice: '28,990,000'
+    },
+    {
+      name: 'Samsung Galaxy S25 - 12GB/256GB',
+      image: '/src/assets/img/product-img/product-preview/thumb.png',
+      specs: ['Snap 8 Elite', '4000 mAh', '12GB'],
+      originalPrice: '33,990,000',
+      discount: 15,
+      finalPrice: '28,990,000'
+    },
+    {
+      name: 'iPhone 13 (128GB) - Chính hãng VN/A',
+      image: '/src/assets/img/product-img/product-preview/iphone-13-trang-1.webp',
+      specs: ['A15', '3240 mAh', '4GB'],
+      originalPrice: '19,990,000',
+      discount: 15,
+      finalPrice: '11,590,000'
+    }
+  ]);
   
 </script>
 

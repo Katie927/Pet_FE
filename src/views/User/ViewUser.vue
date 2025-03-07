@@ -38,5 +38,4 @@
         { path: "/user/profile", icon: "icon-ShieldSolidOff", label: "Thông tin cá nhân" },
     ])
 
-
 </script>
