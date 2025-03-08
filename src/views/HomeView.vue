@@ -235,4 +235,6 @@
   .nav-full nav ul li > a{
     font-weight: 700;
   }
+
+  
 </style>

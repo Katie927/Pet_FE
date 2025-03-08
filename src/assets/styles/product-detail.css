@@ -1,12 +1,4 @@
 
-.container {
-    min-width: 1200px;
-    width: 1200px;
-    margin: 0 auto;
-    padding: 0;
-    background: unset;
-    /* background-color: aliceblue; */
-}
 
 .product-detail .box-header {
     flex-wrap: wrap;
@@ -42,3 +34,5 @@
 .position-relative {
     position: relative;
 }
+
+/*  */

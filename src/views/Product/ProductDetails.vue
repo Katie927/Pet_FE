@@ -62,8 +62,8 @@
     const productImages = {
     blue: [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-blue-2.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-blue-3.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
     ],
     silver: [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-white-silver-1-e9f4db0fc4.png",
@@ -95,44 +95,64 @@
 </script>
 
 <style scoped>
+
+.container {
+    min-width: 1200px;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    background: unset;
+    /* background-color: aliceblue; */
+}
 .product-gallery {
-  text-align: center;
+    text-align: center;
 }
 
 .main-slider {
-  width: 100%;
-  height: 400px;
+    width: 100%;
+    height: 400px;
 }
 .main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* Danh sách màu sắc */
 .color-selector {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .color-item {
-  cursor: pointer;
-  text-align: center;
-  transition: transform 0.2s;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
 }
 .color-item:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 .color-item.active {
-  border: 2px solid #007bff;
+    border: 2px solid #007bff;      
 }
 
 .color-thumb {
-  width: 80px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 5px;
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
 }
+.product-gallery .swiper .swiper-wrapper{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+}
+
+/* .swiper-slide{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+} */
 </style>
