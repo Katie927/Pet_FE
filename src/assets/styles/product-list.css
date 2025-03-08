@@ -149,7 +149,7 @@ strike {
     font-size: 12px;
     font-weight: 600 /*;height:29px*/;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    /* -webkit-line-clamp: 2; */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

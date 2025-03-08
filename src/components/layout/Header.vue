@@ -65,7 +65,7 @@
 
 
 <script>
-    import "@/assets/styles/header_style.css";
+    import "@/assets/styles/header-style.css";
     import "@/assets/styles/style.css";
     import "@/assets/slick/slick.css";
     import "@/assets/slick/jquery-3.7.1.min.js";

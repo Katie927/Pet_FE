@@ -1,0 +1,44 @@
+
+.container {
+    min-width: 1200px;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    background: unset;
+    /* background-color: aliceblue; */
+}
+
+.product-detail .box-header {
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.product-detail .box-header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+    text-align: left;
+}
+
+.box-detail-info {
+    display: flex;
+    gap: 12px;
+}
+
+.box-detail-info .detail-info-left {
+    flex: none;
+    width: 60%;
+    max-width: 688px;
+    height: max-content;
+    height: max-content;
+    position: sticky;
+    top: 70px;
+}
+
+.detail-info-left .box-gallery {
+    position: relative;
+}
+
+.position-relative {
+    position: relative;
+}

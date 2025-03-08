@@ -55,10 +55,10 @@
                   <div id="pageHolder" class="v5-grid-items item-4" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
                     <div class="pj16-item" style="grid-row: span 1; grid-column: span 2; padding: 0; justify-content:center; background: rgba(238, 255, 247, 1);">
                       <div class="item-img-video-gif">
-                        <a title="Đặt trước ngay Xiaomi 15 Series" href="https://hoanghamobile.com/dien-thoai/xiaomi-15" data-id="0" class="" style="width: 100%;">
+                        <a title="Gaming REDMAGIC 10 PRO 12GB/256GB" href="https://hoanghamobile.com/dien-thoai/redmagic-10-pro-16gb-512gb" data-id="0" class="" style="width: 100%;">
                           <i class="icon-PlayCircleSolidOn" id="play-icon-0" style="position: absolute; bottom: 12px; left: 12px; font-size: 40px; opacity: 0.5; display: none;"></i>
-                          <img alt="Đặt trước ngay Xiaomi 15 Series" src="https://cdn.hoanghamobile.com/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.jpg" id="product-img-0" data-id="0" style="width: 100%; display: none;">
-                          <video id="video-player-0" data-id="0" data-src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4" type="video/mp4" class="embed-responsive-item auto-play" style="background-color: black; width: 100%; pointer-events: none; display: block;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4">
+                          <img alt="Gaming REDMAGIC 10 PRO 12GB/256GB" src="https://cdn.hoanghamobile.com/Uploads/2024/12/25/r…;trim.threshold=0;trim.percentpadding=0;width=480" id="product-img-0" data-id="0" style="width: 100%; display: none;">
+                          <video id="video-player-0" data-id="0" data-src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2024/12/25/rm-10-pro-desktop.mp4" type="video/mp4" class="embed-responsive-item auto-play" style="background-color: black; width: 100%; pointer-events: none; display: block;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2024/12/25/rm-10-pro-desktop.mp4">
                             <source src="" type="video/mp4">
                             Your browser does not support the video tag.
                           </video>
@@ -107,80 +107,8 @@
                     </div>
                   </div>
 
-
                   <!--  -->
-                  <!-- <div id="pageHolder" class="v5-grid-items item-4"
-                          style="grid-template-columns: repeat(4, minmax(0, 1fr));">
-                    <div class="pj16-item" 
-                            style="grid-row: span 1;  grid-column: span 2; padding: 0;justify-content:center;background: rgba(238, 255, 247, 1);">
-                            <div class="item-img-video-gif">
-                              <a title="Đặt trước ngay Xiaomi 15 Series" href="https://hoanghamobile.com/dien-thoai/xiaomi-15" data-id="0" class="" style="width: 100%;">
-                                  <i class="icon-PlayCircleSolidOn" id="play-icon-0" style="position: absolute; bottom: 12px; left: 12px; font-size: 40px; opacity: 0.5; display: none;"></i>
-                                  <img alt="Đặt trước ngay Xiaomi 15 Series" src="https://cdn.hoanghamobile.com/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.jpg;trim.threshold=0;trim.percentpadding=0;width=480;" id="product-img-0" data-id="0" style="width: 100%; display: none;">
-
-                                  <video id="video-player-0" data-id="0" data-src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4" type="video/mp4" class="embed-responsive-item auto-play" style="background-color: black; width: 100%; pointer-events: none; display: block;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" src="https://cdn.hoanghamobile.com/FetchVideo?src=/Uploads/2025/03/05/video-xiaomi-545_638767854207233308.mp4">
-                                      <source src="" type="video/mp4">
-                                      Your browser does not support the video tag.
-                                  </video>
-                              </a>
-
-                      </div>
-                    </div>
-                    
-                    <div class="pj16-item" style="grid-row: span 1;  grid-column: span 1; padding: 22px 12px 12px 12px;">
-                      <div class="pj16-item-info">
-                        <div class="img">
-                          <div class="img-info">
-                            <span class="left-sticker"> Góp 0%, 0 phí </span>
-                            <a href="">
-                              <img src="/src/assets/img/product-img/product-preview/image-removebg-preview.png" alt="">
-                            </a>
-                          </div>
-                          <div class="specs">
-                            <ul >
-                              <li class="spec-item item-1-0 type-">
-                                <label for="">
-                                  <span class="icon-CPU"></span>
-                                </label>
-                                <div>
-                                  <span>Snap 8 Elite</span>
-                                </div>
-                              </li>
-                              <li class="spec-item item-1-0 type-">
-                                <label for="">
-                                  <span class="icon-CPU"></span>
-                                </label>
-                                <div>
-                                  <span>Snap 8 Elite</span>
-                                </div>
-                              </li>
-                              <li class="spec-item item-1-0 type-">
-                                <label for="">
-                                  <span class="icon-CPU"></span>
-                                </label>
-                                <div>
-                                  <span>Snap 8 Elite</span>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <h3>
-                          <a href="">Samsung Galaxy S25 Ultra - 12GB/256GB</a>
-                        </h3>
-                        <div class="item-gap8px">
-                          <div class="price price-last">
-                              <strike>33,990,000 ₫</strike>
-                                  <span>- 15%</span>
-                          </div>
-                          <div class="price">
-                                  <strong>28,990,000 ₫</strong>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                  </div> -->
+                  
                 </div>
               </div>
             </div>
@@ -193,8 +121,8 @@
 </template>
 
 <script setup>
-  import "@/assets/styles/home-style.css";
   import "@/assets/styles/style.css";
+  import "@/assets/styles/home-style.css";
   import "@/assets/styles/product-list.css";
   import { ref } from "vue";
 
@@ -287,6 +215,14 @@
       originalPrice: '19,990,000',
       discount: 15,
       finalPrice: '11,590,000'
+    },
+    {
+      name: 'Samsung Galaxy S23 Ultra - 8GB/256GB',
+      image: '/src/assets/img/product-img/product-preview/samsung-galaxy-s23-ultra.webp',
+      specs: ['Snap 8 Gen 3', '5000 mAh', '256GB'],
+      originalPrice: '28,990,000',
+      discount: 15,
+      finalPrice: '20,990,000'
     }
   ]);
   
