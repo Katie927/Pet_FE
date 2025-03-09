@@ -90,20 +90,22 @@
         methods: {
             handleScroll() {
                 let currentScroll = window.scrollY;
-                if (currentScroll > this.lastScrollPosition) { // Cuộn xuống
-                    this.isHidden = true;  
-                    this.$emit("updateIsHidden", this.isHidden);  // Phát sự kiện gửi giá trị lên App.vue
-                    // console.log("cuon xuong ")
-                    // console.log(this.isHidden)
-                } else {    // Cuộn lên
-                    this.isHidden = false;
-                    this.$emit("updateIsHidden", this.isHidden); 
-                    // console.log("len")
-                    // console.log(this.isHidden)
+                let scrollThreshold = 50; // Ngưỡng cuộn
+
+                if (Math.abs(currentScroll - this.lastScrollPosition) < scrollThreshold) {
+                    return; // Không thay đổi trạng thái nếu cuộn chưa đạt ngưỡng
                 }
+
+                if (currentScroll > this.lastScrollPosition) { // Cuộn xuống
+                    this.isHidden = true;
+                } else { // Cuộn lên
+                    this.isHidden = false;
+                }
+
+                this.$emit("updateIsHidden", this.isHidden);
                 this.lastScrollPosition = currentScroll;
             },
-        },  
+        }, 
 
     };
     

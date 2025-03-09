@@ -60,30 +60,30 @@
     
     // Dữ liệu: Danh sách ảnh theo màu sắc
     const productImages = {
-    blue: [
+    "Xanh dương": [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
     ],
-    silver: [
+    "Bạc": [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-white-silver-1-e9f4db0fc4.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-silver-2.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-silver-3.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-white-silver-1-e9f4db0fc4.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-white-silver-1-e9f4db0fc4.png",
     ],
-    gray: [
+    "Xám": [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/xam.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-gray-2.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-gray-3.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/xam.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/xam.png",
     ],
-    black: [
+    "Đen": [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-black-1-5ffaab118c.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-black-2.png",
-        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/02/11/galaxy-s25-ultra-black-3.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-black-1-5ffaab118c.png",
+        "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-black-1-5ffaab118c.png",
     ],
     };
 
     // Màu sắc đang được chọn (mặc định là xanh dương)
-    const selectedColor = ref("blue");
+    const selectedColor = ref("Xanh dương");
     const thumbsSwiper = ref(null);
 
     // Khi chọn màu mới, cập nhật slider chính
@@ -93,6 +93,7 @@
     
 
 </script>
+
 
 <style scoped>
 
@@ -104,55 +105,5 @@
     background: unset;
     /* background-color: aliceblue; */
 }
-.product-gallery {
-    text-align: center;
-}
 
-.main-slider {
-    width: 100%;
-    height: 400px;
-}
-.main-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* Danh sách màu sắc */
-.color-selector {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.color-item {
-    cursor: pointer;
-    text-align: center;
-    transition: transform 0.2s;
-}
-.color-item:hover {
-    transform: scale(1.1);
-}
-.color-item.active {
-    border: 2px solid #007bff;      
-}
-
-.color-thumb {
-    width: 80px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-.product-gallery .swiper .swiper-wrapper{
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-}
-
-/* .swiper-slide{
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-} */
 </style>
