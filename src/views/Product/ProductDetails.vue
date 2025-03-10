@@ -36,6 +36,66 @@
                         </div>
                     </div>
                 </div>
+                <div class="detail-info-right">
+                    <div class="position-relative">
+                        <div class="box-price">
+                            <strong class="price"> 28,990,000 ₫ </strong>
+                            <span class="last-price">33,990,000 ₫</span>
+                            <br>
+                            <i style="font-size: 14px;">Máy nguyên seal chính hãng, kick hoạt bảo hành 8/2/2025 giá 26.990.000 (LH 1900 2091)</i>
+                        </div>
+                        
+                    </div>
+                    <div class="box-product-option version">
+                        <strong class="label"> Lựa chọn phiên bản </strong>
+                        <div class="list-option" id="option-version" data-id="5">
+                            <div class="item-option btn-active selected">
+                                <a href=""><span>256GB</span></a>
+                            </div>
+                            <div class="item-option btn-active ">
+                                <a href=""><span>512GB</span></a>
+                            </div>
+                            <div class="item-option btn-active ">
+                                <a href=""><span>1TB</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-product-option color">
+                        <strong class="label">
+                            Lựa chọn màu
+                        </strong>
+                        <div class="list-option" id="option-color">
+                            <div data-name="Xanh Dương" data-hotsale="" data-limitstock="0" data-pricenote="Máy nguyên seal chính hãng, kick hoạt bảo hành 8/2/2025 giá 26.990.000 (LH 1900 2091)" data-buyonline="true" data-bestprice="28,990,000 ₫" data-lastprice="33,990,000 ₫" data-idx="0" data-hex="#d5dde0" data-title="" data-id="185" data-sku="S938B256XD" class="item-option btn-active">
+                                        <img src="https://cdn.hoanghamobile.com/i/productlist/dst/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png;trim.threshold=80;trim.percentpadding=0.5;mode=pad;paddingWidth=0;" title="Samsung Galaxy S25 Ultra - 12GB/256GB Xanh Dương" alt="Samsung Galaxy S25 Ultra - 12GB/256GB Xanh Dương">
+                                <div class="color-price">
+                                    <span>Xanh Dương</span>
+                                    <p>28,990,000 ₫ </p>                                            
+                                </div>
+                            </div>
+                            <div class="item-option btn-active">
+                                        <img src="https://cdn.hoanghamobile.com/i/productlist/dst/Uploads/2025/01/23/galaxy-s25-ultra-titan-white-silver-1-e9f4db0fc4.png;trim.threshold=80;trim.percentpadding=0.5;mode=pad;paddingWidth=0;" title="Samsung Galaxy S25 Ultra - 12GB/256GB Bạc" alt="Samsung Galaxy S25 Ultra - 12GB/256GB Bạc">
+                                <div class="color-price">
+                                    <span>Bạc</span>
+                                    <p>28,990,000 ₫ </p>                                            
+                                </div>
+                            </div>
+                            <div class="item-option btn-active">
+                                        <img src="https://cdn.hoanghamobile.com/i/productlist/dst/Uploads/2025/01/23/xam.png;trim.threshold=80;trim.percentpadding=0.5;mode=pad;paddingWidth=0;" title="Samsung Galaxy S25 Ultra - 12GB/256GB Xám" alt="Samsung Galaxy S25 Ultra - 12GB/256GB Xám">
+                                <div class="color-price">
+                                    <span>Xám</span>
+                                    <p>28,990,000 ₫ </p>                                            
+                                </div>
+                            </div>
+                            <div class="item-option btn-active selected">
+                                        <img src="https://cdn.hoanghamobile.com/i/productlist/dst/Uploads/2025/01/23/galaxy-s25-ultra-titan-black-1-5ffaab118c.png;trim.threshold=80;trim.percentpadding=0.5;mode=pad;paddingWidth=0;" title="Samsung Galaxy S25 Ultra - 12GB/256GB Đen" alt="Samsung Galaxy S25 Ultra - 12GB/256GB Đen">
+                                <div class="color-price">
+                                    <span>Đen</span>
+                                    <p>28,990,000 ₫ </p>                                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         

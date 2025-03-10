@@ -79,7 +79,7 @@
                           <div class="img-info">
                             <span class="left-sticker"> Góp 0%, 0 phí </span>
                             <a href="">
-                              <img :src="product.image" :alt="product.name" style="max-width: 180px; max-height: 180px;">
+                              <img :src="product.image" :alt="product.name" style="max-width: 100%; max-height: 100%;">
                             </a>
                           </div>
                           <div class="specs">
@@ -177,52 +177,219 @@
     // {}, video
 
     {
-      name: 'Samsung Galaxy S25 Ultra - 12GB/256GB',
-      image: '/src/assets/img/product-img/product-preview/image-removebg-preview.png',
-      specs: ['Snap 8 Elite', '5000 mAh', '12GB'],
-      originalPrice: '33,990,000',
-      discount: 15,
-      finalPrice: '28,990,000'
+        "name": "iPhone 16 Pro Max - Chính hãng VN/A",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/iphone-16-pro-sa-mac-1.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "A18 Pro",
+            "8GB",
+            "256GB"
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "30,590,000 ",
     },
     {
-      name: 'Điện thoại Xiaomi 15 Ultra 16GB/512GB',
-      image: '/src/assets/img/product-img/product-preview/xiaomi-15-ultra_638763351156143849.png',
-      specs: ['Snap 8 Elite', '5410 mAh', '16GB'],
-      originalPrice: '34,990,000',
-      discount: 25,
-      finalPrice: '26,190,000'
+        "name": "iPhone 16 - Chính hãng VN/A",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/ip16-xanh-mong-ket.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "A18",
+            "8GB",
+            "128GB"
+        ],
+        "originalPrice": "22,990,000 ",
+        "discount": 17,
+        "finalPrice": "18,990,000 ",
     },
     {
-      name: 'iPhone 16 Pro Max (256GB) - Chính hãng VN/A',
-      image: '/src/assets/img/product-img/product-preview/iphone-16-pro-sa-mac-1.png',
-      specs: ['A18 Pro', '8GB', '256GB'],
-      originalPrice: '33,990,000',
-      discount: 15,
-      finalPrice: '28,990,000'
+        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB (BHĐT)",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/03/s25-ultra.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Gen 3",
+            "12GB"
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "26,990,000 ",
     },
     {
-      name: 'Samsung Galaxy S25 - 12GB/256GB',
-      image: '/src/assets/img/product-img/product-preview/thumb.png',
-      specs: ['Snap 8 Elite', '4000 mAh', '12GB'],
-      originalPrice: '33,990,000',
-      discount: 15,
-      finalPrice: '28,990,000'
+        "name": "Samsung Galaxy Z Fold6 12GB/1TB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/07/11/z-fold6-thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Gen 3",
+            "4400mAh",
+            "12GB"
+        ],
+        "originalPrice": "54,990,000 ",
+        "discount": 4,
+        "finalPrice": "52,990,000 ",
     },
     {
-      name: 'iPhone 13 (128GB) - Chính hãng VN/A',
-      image: '/src/assets/img/product-img/product-preview/iphone-13-trang-1.webp',
-      specs: ['A15', '3240 mAh', '4GB'],
-      originalPrice: '19,990,000',
-      discount: 15,
-      finalPrice: '11,590,000'
+        "name": "Samsung Galaxy S25 - 12GB/256GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "4000mAh",
+            "12GB"
+        ],
+        "originalPrice": "22,990,000 ",
+        "discount": 16,
+        "finalPrice": "19,290,000 ",
     },
     {
-      name: 'Samsung Galaxy S23 Ultra - 8GB/256GB',
-      image: '/src/assets/img/product-img/product-preview/samsung-galaxy-s23-ultra.webp',
-      specs: ['Snap 8 Gen 3', '5000 mAh', '256GB'],
-      originalPrice: '28,990,000',
-      discount: 15,
-      finalPrice: '20,990,000'
+        "name": "Samsung Galaxy S25 - 12GB/512GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "4000mAh",
+            "12GB"
+        ],
+        "originalPrice": "26,490,000 ",
+        "discount": 14,
+        "finalPrice": "22,790,000 ",
+    },
+    {
+        "name": "Samsung Galaxy S25 Plus - 12GB/512GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/thumb_638731947924860898.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "4900mAh",
+            "12GB"
+        ],
+        "originalPrice": "30,490,000 ",
+        "discount": 13,
+        "finalPrice": "26,490,000 ",
+    },
+    {
+        "name": "Samsung Galaxy S25 Ultra - 12GB/1TB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/image-removebg-preview.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "5000mAh",
+            "12GB"
+        ],
+        "originalPrice": "44,790,000 ",
+        "discount": 13,
+        "finalPrice": "38,990,000 ",
+    },
+    {
+        "name": "Samsung Galaxy Z Fold6 12GB/512GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/07/11/z-fold6-thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Gen 3",
+            "4400mAh",
+            "12GB"
+        ],
+        "originalPrice": "47,990,000 ",
+        "discount": 21,
+        "finalPrice": "37,990,000 ",
+    },
+    {
+        "name": "Samsung Galaxy S25 Ultra - 12GB/512GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/image-removebg-preview.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "5000mAh",
+            "12GB"
+        ],
+        "originalPrice": "37,490,000 ",
+        "discount": 13,
+        "finalPrice": "32,490,000 ",
+    },
+    {
+        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/image-removebg-preview.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "5000mAh",
+            "12GB"
+        ],
+        "originalPrice": "33,990,000 ",
+        "discount": 15,
+        "finalPrice": "28,990,000 ",
+    },
+    {
+        "name": "Samsung Galaxy S25 Plus - 12GB/256GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/01/23/thumb_638731947924860898.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Elite",
+            "4900mAh",
+            "12GB"
+        ],
+        "originalPrice": "26,990,000 ",
+        "discount": 14,
+        "finalPrice": "23,290,000 ",
+    },
+    {
+        "name": "Samsung Galaxy Z Flip6 12GB/256GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/07/11/z-flip6-thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Gen 3",
+            "4000mAh",
+            "12GB"
+        ],
+        "originalPrice": "28,990,000 ",
+        "discount": 36,
+        "finalPrice": "18,490,000 ",
+    },
+    {
+        "name": "Samsung Galaxy Z Flip6 12GB/512GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/07/11/z-flip6-thumb.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 8 Gen 3",
+            "4000mAh",
+            "12GB"
+        ],
+        "originalPrice": "32,990,000 ",
+        "discount": 30,
+        "finalPrice": "22,990,000 ",
+    },
+    {
+        "name": "iPhone 16e (256GB) - Chính hãng VN/A",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/20/iphone-16e-den-1.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "A18",
+            "256GB",
+            "6.1\""
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "19,390,000 ",
+    },
+    {
+        "name": "iPhone 16e (128GB) - Chính hãng VN/A",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/20/iphone-16e-trang-1.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "A18",
+            "128GB",
+            "6.1\""
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "16,390,000 ",
+    },
+    {
+        "name": "iPhone 16e (512GB) - Chính hãng VN/A",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/20/iphone-16e-trang-1.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "A18",
+            "512GB",
+            "6.1\""
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "25,390,000 ",
+    },
+    {
+        "name": "OPPO Reno13 F 5G 12GB/256GB",
+        "image": "https://cdn.hoanghamobile.com/Uploads/2024/12/26/combo-product-reno13f-rhyder-grey.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+        "specs": [
+            "Snap 6 Gen 1 5G",
+            "5800mAh",
+            "12GB"
+        ],
+        "originalPrice": "N/A",
+        "discount": 0,
+        "finalPrice": "10,790,000 ",
     }
   ]);
   
