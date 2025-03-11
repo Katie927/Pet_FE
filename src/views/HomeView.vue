@@ -93,7 +93,7 @@
                             </ul>
                           </div>
                         </div>
-                        <h3><a href="">{{ productData.name }}</a></h3>
+                        <h3><a href="">{{ product.name }}</a></h3>
                         <div class="item-gap8px">
                           <div class="price price-last">
                             <strike>{{ product.originalPrice }} ₫</strike>
