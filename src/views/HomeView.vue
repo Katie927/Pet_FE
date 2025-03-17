@@ -79,28 +79,31 @@
                           <div class="img-info">
                             <span class="left-sticker"> Góp 0%, 0 phí </span>
                             <a href="">
-                              <img :src="product.image" :alt="product.name" style="max-width: 100%; max-height: 100%;">
+                              <img :src="product.image" :alt="product.name" style="max-width: 140px; max-height: 100%;">
                             </a>
                           </div>
                           <div class="specs">
-                            <ul>
-                              <!-- <li v-for="(spec, i) in product.specs" :key="i" class="spec-item">
+                            <ul v-if="product.specs && product.specs.length > 0">
+                              <li v-for="(spec, i) in product.specs" :key="i" class="spec-item">
                                 <label>
                                   <span :class="['icon-CPU', 'icon-Battery', 'icon-Storage'][i % 3]"></span>
                                 </label>
                                 <div><span>{{ spec }}</span></div>
-                              </li> -->
+                              </li>
                             </ul>
                           </div>
                         </div>
                         <h3><a href="">{{ product.name }}</a></h3>
                         <div class="item-gap8px">
                           <div class="price price-last">
-                            <strike>{{ product.originalPrice }} ₫</strike>
-                            <span>- {{ product.discount }}%</span>
+                            <!-- <span style="text-decoration: line-through;" v-if="product.originalPrice"> -->
+                              <strike>{{ product.originalPrice.toLocaleString('vi-VN') }} ₫</strike>
+                              
+                            <!-- </span> -->
+                            <span v-if="product.discount">- {{ product.discount }}%</span>
                           </div>
                           <div class="price">
-                            <strong>{{ product.finalPrice }} ₫</strong>
+                            <strong>{{ product.finalPrice > 0 ? product.finalPrice.toLocaleString('vi-VN') + " ₫" : "Liên hệ" }}</strong>
                           </div>
                         </div>
                       </div>
@@ -172,11 +175,37 @@
     },
   ]);
 
-  const productData = ref(null)
+  const productData = ref([
+  // {
+  //        "name": "iPhone 16 - Chính hãng VN/A",
+  //        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/ip16-xanh-mong-ket.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+  //        "specs": [
+  //            "A18",
+  //            "8GB",
+  //            "128GB"
+  //        ],
+  //        "originalPrice": "22,990,000 ",
+  //        "discount": 17,
+  //        "finalPrice": "18,990,000 ",
+  //    },
+  //    {
+  //        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB (BHĐT)",
+  //        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/03/s25-ultra.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+  //        "specs": [
+  //            "Snap 8 Gen 3",
+  //            "12GB"
+  //        ],
+  //        "originalPrice": "N/A",
+  //        "discount": 0,
+  //        "finalPrice": "26,990,000 ",
+  //    }
+  ])
   const fetchProductData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/bej3/');
-      productData.value = response.data;
+      // console.log("Response Data:", response.data);
+      productData.value = response.data.result;
+      console.log("Product Data in Vue:", productData.value);
     } catch (error) {
       console.error('Error: ', error);
     }
@@ -184,7 +213,6 @@
   onMounted(fetchProductData);
 
   // const thumbsSwiper = ref(null);
-
   
   
 </script>

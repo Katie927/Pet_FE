@@ -33,35 +33,37 @@
           <div class="login-button">
             <button type="submit">Đăng nhập</button>
           </div>
+
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
         </form>
       </div>
 
       <!-- Form sign up -->
       <div class="login-form" v-else>
-        <form action="" class="form-create-user" @submit.prevent="handleSignUp">
-          <div class="login-row login-row-aa">
-            <label for="">Email</label>
-            <input type="email" name="email" id="email" placeholder="Nhập email" required
-                      v-model="signUpData.email">
+        <form class="form-create-user" @submit.prevent="handleSignUp">
+          <div class="login-row">
+            <label>Email</label>
+            <input type="email" placeholder="Nhập email" required v-model="signUpData.email">
+            <span v-if="errors.email" class="error">{{ errors.email }}</span>
           </div>
           <div class="login-row">
-            <label for="">Mật khẩu</label>
-            <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" required
-                      v-model="signUpData.password">
+            <label>Mật khẩu</label>
+            <input type="password" placeholder="Nhập mật khẩu" required v-model="signUpData.password">
+            <span v-if="errors.password" class="error">{{ errors.password }}</span>
           </div>
           <div class="login-row">
-            <label for="">Nhập lại mật khẩu</label>
-            <input type="password" name="retypePassword" id="retypePassword" placeholder="Nhập lại mật khẩu" required
-                      v-model="signUpData.retypePassword">
+            <label>Nhập lại mật khẩu</label>
+            <input type="password" placeholder="Nhập lại mật khẩu" required v-model="signUpData.retypePassword">
+            <span v-if="errors.retypePassword" class="error">{{ errors.retypePassword }}</span>
           </div>
 
           <div class="login-button">
             <button type="submit">Đăng ký</button>
           </div>
+
+          <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
         </form>
       </div>
-
-      <p v-if="errorMessage">{{ errorMessage }}</p>
 
     </div>
     
@@ -73,7 +75,7 @@
     import "@/assets/styles/style.css";
     import axios from "axios";
 
-    import { ref } from "vue";
+    import { ref, watch } from "vue";
 
     const isLoginForm = ref(true);
 
@@ -84,47 +86,92 @@
       email: "",
       password: "",
     })
-    function handleLogin(){
-      if(loginData.value.email === "admin@gmail.com" && loginData.value.password === "123"){
-        errorMessage.value = "Dang nhap thanh cong!";
-        alert("Dang nhap thanh cong");
-      }
-      else{
-        errorMessage.value = "Thong tin khong chinh xac!";
+    const handleLogin = async() => {
+      errorMessage.value = "";
+
+      try {
+        const response = await axios.post("http://localhost:8080/bej3/auth/token", {
+          email: signUpData.value.email,
+          password: signUpData.value.password,
+        })
+        
+      } catch (error) {
+        
       }
     }
 
 // sign up
+    const errors = ref({});
     const signUpData = ref({
       email: "",
       password: "",
       retypePassword: "",
     });
-    const handleSignUp = async () => {
-      errorMessage.value = "";
-      console.log("email");
-      console.log(signUpData.value.email);
+
+    const validateSignUpForm = () => {
+      errors.value = {};
+
+      if (!signUpData.value.email.includes("@")) {
+        errors.value.email = "Email không hợp lệ.";
+      }
+
+      if (signUpData.value.password.length < 6) {
+        errors.value.password = "Mật khẩu phải có ít nhất 6 ký tự.";
+      }
 
       if (signUpData.value.password !== signUpData.value.retypePassword) {
-        errorMessage.value = "Mật khẩu và xác nhận mật khẩu không khớp.";
+        errors.value.retypePassword = "Mật khẩu không khớp.";
+      }
+
+      return Object.keys(errors.value).length === 0;
+    };
+
+    const handleSignUp = async () => {
+      errorMessage.value = "";
+
+      if (!validateSignUpForm()) {
         return;
-      } 
+      }
+
       try {
         const response = await axios.post("http://localhost:8080/bej3/users", {
           email: signUpData.value.email,
-          password: signUpData.value.password
-        })
+          password: signUpData.value.password,
+        });
 
-        errorMessage.value = "Tao nguoi dung thanh cong!";
-        signUpData.value.email = "";
-        signUpData.value.password = "";
-        signUpData.value.retypePassword = "";
+        errorMessage.value = "Tạo người dùng thành công!";
+        
+        alert(response.data.message||"Tạo người dùng thành công!");
+        // Reset form sau khi đăng ký thành công
+        signUpData.value = { email: "", password: "", retypePassword: "" };
+        isLoginForm.value = true; // Chuyển sang form đăng nhập sau khi đăng ký thành công
       } catch (error) {
-        errorMessage.value = error.response?.data?.message || "Da xay ra loi.";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage.value = error.response.data.message;
+        } else {
+          errorMessage.value = "Đã xảy ra lỗi, vui lòng thử lại.";
+        }
       }
-      console.log(signUpData.value.email);
-    }
+    };
 
+    // Xóa lỗi khi người dùng nhập lại thông tin đúng
+  watch(signUpData, () => {
+    errorMessage.value = "";
+    errors.value = {};
+  }, { deep: true });
     
 </script>
+
+<style scoped>
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
+</style>
 

@@ -95,6 +95,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="box-order product-action">
+
+                        <div class="box-order-btn">
+                            <a title="MUA NGAY" data-returnurl="/dien-thoai/samsung-galaxy-s25?buy=1" data-sku="S931B256BAC" href="javascript:;" class="add-buy order-btn btnQuickOrder inventory"><strong>MUA NGAY</strong><span>(Giao tận nhà hoặc nhận tại cửa hàng)</span></a>
+                            <a title="Thêm giỏ hàng" data-sku="S931B256BAC" data-authorize="True" href="javascript:;" class="add-buy add-cart inventory">
+                                <i class="icon-Cart1SolidOn"></i>
+                                <label>Thêm giỏ hàng </label>
+                            </a>
+                        </div>
+                        <div class="box-order-btn">
+                            <a title="TRẢ GÓP 0%" href="/tra-gop/dien-thoai/samsung-galaxy-s25" class="add-buy btn-installment order-btn btnInstallment" data-sku="S931B256BAC"><strong>TRẢ GÓP 0%</strong><span>Không phí - Duyệt nhanh&nbsp;10p</span></a>
+                            <a title="TRẢ GÓP 0%" href="/tra-gop/dien-thoai/samsung-galaxy-s25?color=123&amp;prepay=5&amp;month=5&amp;card=True#estimation" class="add-buy btn-installment order-btn btnInstallment" data-sku="S931B256BAC"><strong>TRẢ GÓP QUA THẺ</strong><span>(Visa, Mastercard, JCB)</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
