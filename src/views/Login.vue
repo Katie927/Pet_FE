@@ -18,7 +18,7 @@
         <form action="" class="form-create-user" @submit.prevent="handleLogin">
           <div class="login-row login-row-aa">
             <label for="">Email</label>
-            <input type="email" name="email" id="email" placeholder="Nhập email" required
+            <input type="text" name="email" id="email" placeholder="Nhập email" required
                   v-model="loginData.email">
           </div>
           <div class="login-row">
@@ -73,6 +73,7 @@
 
     import "@/assets/styles/login-style.css";
     import "@/assets/styles/style.css";
+import router from "@/router";
     import axios from "axios";
 
     import { ref, watch } from "vue";
@@ -90,10 +91,18 @@
       errorMessage.value = "";
 
       try {
-        const response = await axios.post("http://localhost:8080/bej3/auth/token", {
-          email: signUpData.value.email,
-          password: signUpData.value.password,
+        const response = await axios.post("http://localhost:8080/bej3/auth/log-in", {
+          email: loginData.value.email,
+          password: loginData.value.password,
         })
+        console.log(response.data.result)
+        if(response.data.result){
+          const {token, authenticated} = response.data.result;
+          if(authenticated == true){
+            localStorage.setItem("token", token);
+            router.push("user/profile/my-info")
+          }
+        }
         
       } catch (error) {
         

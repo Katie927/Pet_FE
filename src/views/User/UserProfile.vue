@@ -52,22 +52,39 @@
     import "@/assets/styles/user-style.css";
     import axios from "axios";
     import { onMounted, ref } from "vue";
-    import { useRoute } from "vue-router";
+    import { useRouter } from "vue-router";
 
     // user data
-    const route = useRoute();   
+    const router = useRouter();   
     const userData = ref({
         fullName: '',
         email: '',
         phoneNumber: ''
     });
     const fetchUserProfile = async () => {
-        const userId = route.params.id;
+        const token = localStorage.getItem("token"); // Lấy token từ localStorage
+        if (!token) {
+            console.error("Token không tồn tại!");
+            router.push("/login"); // Chuyển hướng về trang login
+            return;
+        }
+
         try {
-            const response = await axios.get(`http://localhost:8080/bej3/users/profile/${userId}`);
-            userData.value = response.data;
+            const response = await axios.get(`http://localhost:8080/bej3/users/profile/my-info`, {
+                headers: {
+                    Authorization: `Bearer ${token}` // Gửi token trong header
+                }
+            });
+
+            userData.value = response.data.result; // Gán dữ liệu user
         } catch (error) {
             console.error('Lỗi:', error);
+
+            // Nếu lỗi 401 (Unauthorized) hoặc 403 (Forbidden), chuyển hướng về trang login
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                localStorage.removeItem("token"); // Xóa token cũ
+                router.push("/login"); // Chuyển hướng về trang đăng nhập
+            }
         }
     };
     onMounted(fetchUserProfile);

@@ -44,11 +44,11 @@
                 </div>
             </div>
             <div class="quick-for-user">
-                <router-link to="/user" class="shop-location">
+                <router-link to="" class="shop-location">
                     <i class="icon-location"></i>
                     <span>Tìm siêu thị</span>
                 </router-link>
-                <router-link to="/login" class="member-login">
+                <router-link :to="userIsLoggedIn ? '/user/profile/my-info' : '/login'" class="member-login">
                     <i class="icon-UserSolidOff"></i>
                     <span>Tài khoản</span>
                 </router-link>
@@ -64,50 +64,48 @@
 </template>
 
 
-<script>
+<script setup>
+    import { ref, computed, onMounted, onUnmounted } from "vue";
     import "@/assets/styles/header-style.css";
     import "@/assets/styles/style.css";
     import "@/assets/slick/slick.css";
     import "@/assets/slick/jquery-3.7.1.min.js";
     import "@/assets/slick/slick.min.js";
 
-    export default{
-        name: "HeaderComponent",
-        emits: ['updateIsHidden'],  
+    defineProps(["updateIsHidden"]);
+    const emit = defineEmits(["updateIsHidden"]);
 
-        data(){
-            return{
-                lastScrollPosition: 0,
-                isHidden: false,
-            }
-        },
-        mounted(){
-            window.addEventListener("scroll", this.handleScroll)
-        },
-        beforeUnmount(){
-            window.removeEventListener("scroll", this.handleScroll)
-        },
-        methods: {
-            handleScroll() {
-                let currentScroll = window.scrollY;
-                let scrollThreshold = 50; // Ngưỡng cuộn
+    const lastScrollPosition = ref(0);
+    const isHidden = ref(false);
 
-                if (Math.abs(currentScroll - this.lastScrollPosition) < scrollThreshold) {
-                    return; // Không thay đổi trạng thái nếu cuộn chưa đạt ngưỡng
-                }
+    const handleScroll = () => {
+        let currentScroll = window.scrollY;
+        let scrollThreshold = 50; // Ngưỡng cuộn
 
-                if (currentScroll > this.lastScrollPosition) { // Cuộn xuống
-                    this.isHidden = true;
-                } else { // Cuộn lên
-                    this.isHidden = false;
-                }
+        if (Math.abs(currentScroll - lastScrollPosition.value) < scrollThreshold) {
+            return;
+        }
 
-                this.$emit("updateIsHidden", this.isHidden);
-                this.lastScrollPosition = currentScroll;
-            },
-        }, 
+        if (currentScroll > lastScrollPosition.value) {
+            isHidden.value = true;
+        } else {
+            isHidden.value = false;
+        }
 
+        emit("updateIsHidden", isHidden.value);
+        lastScrollPosition.value = currentScroll;
     };
-    
 
+    onMounted(() => {
+        window.addEventListener("scroll", handleScroll);
+    });
+
+    onUnmounted(() => {
+        window.removeEventListener("scroll", handleScroll);
+    });
+
+    const userIsLoggedIn = computed(() => {
+        return !!localStorage.getItem("token");
+    });
 </script>
+

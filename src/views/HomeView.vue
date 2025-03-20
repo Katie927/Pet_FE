@@ -97,7 +97,7 @@
                         <div class="item-gap8px">
                           <div class="price price-last">
                             <!-- <span style="text-decoration: line-through;" v-if="product.originalPrice"> -->
-                              <strike>{{ product.originalPrice.toLocaleString('vi-VN') }} ₫</strike>
+                              <s>{{ product.originalPrice.toLocaleString('vi-VN') }} ₫</s>
                               
                             <!-- </span> -->
                             <span v-if="product.discount">- {{ product.discount }}%</span>
@@ -205,7 +205,7 @@
       const response = await axios.get('http://localhost:8080/bej3/');
       // console.log("Response Data:", response.data);
       productData.value = response.data.result;
-      console.log("Product Data in Vue:", productData.value);
+      // console.log("Product Data in Vue:", productData.value);
     } catch (error) {
       console.error('Error: ', error);
     }

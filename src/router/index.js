@@ -15,7 +15,7 @@ const routes = [
       children:[
         { path: 'promotion', component: UserProfile },
         { path: 'history', component: UserHistory },
-        { path: 'profile/:id', component: UserProfile },
+        { path: 'profile/my-info', component: UserProfile },
         { path: 'order', component: UserOrders },
       ],
       

@@ -35,7 +35,7 @@
         { path: "/user/promotion", icon: "icon-MenuSolidOff", label: "Tổng quan" },
         { path: "/user/order", icon: "icon-BoxSolidOff", label: "Đơn hàng" },
         { path: "/user/history", icon: "icon-MoonSolidOff", label: "Lịch sử mua hàng" },
-        { path: "/user/profile", icon: "icon-ShieldSolidOff", label: "Thông tin cá nhân" },
+        { path: "/user/profile/my-info", icon: "icon-ShieldSolidOff", label: "Thông tin cá nhân" },
     ])
 
 </script>
