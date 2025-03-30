@@ -143,7 +143,7 @@ import router from "@/router";
       }
 
       try {
-        const response = await axios.post("http://localhost:8080/bej3/users", {
+        const response = await axios.post("http://localhost:8080/bej3/users/create", {
           email: signUpData.value.email,
           password: signUpData.value.password,
         });

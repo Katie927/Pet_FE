@@ -5,7 +5,7 @@
     <div class="member-info-wrapper">
         <div class="member-infomation">
             <div class="account-form">
-                <form action="">
+                <form action="" @submit.prevent="updateMyInfo">
                     <div class="form-controls">
                         <label for="">Họ tên</label>
                         <div class="controls">
@@ -15,23 +15,29 @@
                     <div class="form-controls">
                         <label for="">Điện thoại</label>
                         <div class="controls">
-                            <input type="text" id="phoneNumber" v-model="userData.phoneNumber" readonly="true">
+                            <input type="text" id="phoneNumber" v-model="userData.phoneNumber">
                         </div>
                     </div>
                     <div class="form-controls">
                         <label for="">Email</label>
                         <div class="controls">
-                            <input type="text" id="email" v-model="userData.email">
+                            <input type="text" id="email" v-model="userData.email" readonly="true">
                         </div>
                     </div>
                     <div class="form-controls">
-                        <label for="">Ngày sinh</label>
+                        <label for="dob">Ngày sinh</label>
                         <div class="controls">
-                            <input type="text" id="dob">
+                            <input type="date" id="dob" v-model="userData.dob" pattern="\d{4}-\d{2}-\d{2}">
                         </div>
                     </div>
                     <div class="form-controls">
                         <label for="">Mật khẩu mới</label>
+                        <div class="controls">
+                            <input type="text" >
+                        </div>
+                    </div>
+                    <div class="form-controls">
+                        <label for="">Xác nhận mật khẩu mới</label>
                         <div class="controls">
                             <input type="text" >
                         </div>
@@ -59,7 +65,8 @@
     const userData = ref({
         fullName: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
+        dob: ''
     });
     const fetchUserProfile = async () => {
         const token = localStorage.getItem("token"); // Lấy token từ localStorage
@@ -89,4 +96,28 @@
     };
     onMounted(fetchUserProfile);
 
-</script>
+    const updateMyInfo = async() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.error("Token không tồn tại!");
+            router.push("/login");
+            return;
+        }
+
+        try {
+            const response = await axios.put("http://localhost:8080/bej3/users/profile/my-info/update", userData.value, {
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                 }
+            });
+
+            console.log("Cập nhật thành công!", response.data);
+            alert("Cập nhật thông tin thành công!");
+        } catch (error) {
+            console.error("Lỗi khi cập nhật:", error);
+            alert("Cập nhật thất bại!");
+        }
+    }
+
+</script> 
