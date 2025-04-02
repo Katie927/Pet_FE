@@ -50,7 +50,7 @@
                 </router-link>
                 <router-link :to="userIsLoggedIn ? '/user/profile/my-info' : '/login'" class="member-login">
                     <i class="icon-UserSolidOff"></i>
-                    <span>Tài khoản</span>
+                    <span>{{displayName}}</span>
                 </router-link>
                 <router-link to="" class="cart text-link">
                     <i class="icon-CartSolidOff"></i>
@@ -107,5 +107,9 @@
     const userIsLoggedIn = computed(() => {
         return !!localStorage.getItem("token");
     });
+
+    const displayName = computed(() => userIsLoggedIn.value ? localStorage.getItem("name") || "Người dùng" : "Tài khoản");
 </script>
+
+
 

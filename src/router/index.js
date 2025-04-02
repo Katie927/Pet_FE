@@ -7,6 +7,7 @@ import ProductDetails from "@/views/Product/ProductDetails.vue";
 import UserProfile from "@/views/User/UserProfile.vue";
 import UserOrders from "@/views/User/UserOrders.vue";
 import UserHistory from "@/views/User/UserHistory.vue";
+import ManageProduct from "@/views/manage-view/manage-product.vue";
 
 const routes = [
   { path: '/', component: Home},
@@ -21,6 +22,7 @@ const routes = [
       
   },
   { path: '/product-detail', component: ProductDetails },
+  { path: '/manage-product', component: ManageProduct },
 ]
 
 const router = createRouter({
