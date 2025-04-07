@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header style="padding-bottom: 0;">
         <ManageComponent/>
     </header>
     <main>
@@ -10,3 +10,10 @@
 <script setup>
     import ManageComponent from '@/components/layout/manage.vue';   
 </script>
+
+<style>
+
+main{
+    margin-top: 44px;
+}
+</style>
