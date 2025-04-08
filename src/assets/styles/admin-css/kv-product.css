@@ -381,8 +381,17 @@
     cursor: pointer;
 }
 
+#btnAddProductList {
+    display: none;
+}
+
+#addMoreProductButton:hover #btnAddProductList {
+    display: block;
+    cursor: pointer;
+}
+
 #animationContainerProduct {
-    width: 400px;
+    width: 200px;
     height: 300px;
 }
 
@@ -410,4 +419,93 @@
     justify-content: start;
     flex-wrap: wrap;
     display: none;
+}
+
+/* product table */
+/* 
+
+
+*/
+
+.table-container {
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    max-height: 800px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+}
+
+.table-container table {
+    width: 100%;
+    margin: 0;
+    max-width: none;
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: show;
+    border-width: 0;
+    outline: 0;
+}
+th {
+    background-color: #e6f1fe;
+}
+.table-container th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.table-row-header {
+    height: 44px;
+}
+
+#cellCheckAll {
+    width: 32px;
+}
+
+table thead tr th {
+    width: 200px;
+}
+
+table .cell-img {
+    position: relative;
+}
+
+.cell-check {
+    width: 44px;
+    padding-left: 9px;
+}
+.cell-img {
+    min-width: 58px;
+    padding: 1px;
+}
+
+.product-name {
+    min-width: 250px;
+}
+.product-type {
+    min-width: 150px;
+}
+.selling-price {
+    min-width: 160px;
+}
+.cost-price {
+    min-width: 190px;
+}
+.trademark {
+    min-width: 250px;
+}
+.inventory {
+    min-width: 125px;
+}
+
+.kv-table-row{
+    background-color: #f7f8f9;
+    height: 60px;
+}
+
+.kv-table-row td{
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    padding-left: 7px;
 }

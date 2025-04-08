@@ -15,20 +15,20 @@
                         <div class="em-left-content-title">
                             <h3 class="em-left-content-heading">Loại hàng</h3>
                         </div>
-                    <div class="product-type-group-check">
-                        <label
-                        v-for="(item, index) in productTypes"
-                        :key="index"
-                        class="container-check-box check-box-menu-type"
-                        >
-                        {{ item.label }}
-                            <input
-                                type="checkbox"
-                                v-model="item.checked"
-                            />
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
+                        <div class="product-type-group-check">
+                            <label
+                            v-for="(item, index) in productTypes"
+                            :key="index"
+                            class="container-check-box check-box-menu-type"
+                            >
+                            {{ item.label }}
+                                <input
+                                    type="checkbox"
+                                    v-model="item.checked"
+                                />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Nhóm hàng -->
@@ -90,13 +90,13 @@
 
                                 <li class="header-filter-button-item" id="addMoreProductButton">
                                     <button class="btn-success">
-                                    <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
-                                    <span>Thêm mới</span>
-                                    <span></span>
-                                    <i class="btn-icon fas fa-solid fa-caret-down" aria-hidden="true"></i>
+                                        <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
+                                        <span>Thêm mới</span>
+                                        <span></span>
+                                        <i class="btn-icon fas fa-solid fa-caret-down" aria-hidden="true"></i>
                                     </button>
                                     <ul class="btn-add-product-list" id="btnAddProductList">
-                                        <!-- <li>
+                                        <li>
                                             <button class="operation" id="addCommodityProductButton" data-action="">
                                             <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
                                             <span>Thêm hàng hóa</span>
@@ -113,11 +113,11 @@
                                             <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
                                             <span>Thêm Combo-đóng gói</span>
                                             </button>
-                                        </li> -->
+                                        </li>
                                     </ul>
                                     
                                 </li>
-
+                                
                                 <li class="header-filter-button-item">
                                     <button class="btn-success" id="" data-action="importFile">
                                     <i class="btn-icon fas fa-solid fa-file-import" aria-hidden="true"></i>
@@ -134,9 +134,9 @@
 
                                 <li class="header-filter-button-item">
                                     <button class="btn-success k-link">
-                                    <i class="btn-icon fas fa-solid fa-list" aria-hidden="true"></i>
-                                    <span></span>
-                                    <i class="btn-icon fas fa-solid fa-caret-down" aria-hidden="true"></i>
+                                        <i class="btn-icon fas fa-solid fa-list" aria-hidden="true"></i>
+                                        <span></span>
+                                        <i class="btn-icon fas fa-solid fa-caret-down" aria-hidden="true"></i>
                                     </button>
                                     <ul class="">
                                         <li class="">
@@ -151,11 +151,6 @@
                                                     <span class="checkmark"></span>
                                                 </label>
 
-                                                <label class="container-check-box check-box-menu">Mã vạch
-                                                    <input id="containerCheckBoxBarcode" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
                                                 <label class="container-check-box check-box-menu">Tên hàng
                                                     <input id="containerCheckBoxProductName" type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
@@ -166,15 +161,6 @@
                                                     <span class="checkmark"></span>
                                                 </label>
 
-                                                <label class="container-check-box check-box-menu">Loại hàng
-                                                    <input id="containerCheckBoxProductType" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
-                                                <label class="container-check-box check-box-menu">Liên kết bán hàng
-                                                    <input id="containerCheckBoxSalesChannelLink" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
 
                                                 <label class="container-check-box check-box-menu">Giá bán
                                                     <input id="containerCheckBoxSellingPrice" type="checkbox" checked="checked">
@@ -201,26 +187,6 @@
                                                     <span class="checkmark"></span>
                                                 </label>
 
-                                                <label class="container-check-box check-box-menu">Khách đặt
-                                                    <input id="containerCheckBoxGuestBooked" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
-                                                <label class="container-check-box check-box-menu">Dự kiến hết hàng
-                                                    <input id="containerCheckBoxEstimatedOOSDate" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
-                                                <label class="container-check-box check-box-menu">Định mức tồn ít nhất
-                                                    <input id="containerCheckBoxMinInventory" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
-                                                <label class="container-check-box check-box-menu">Định mức tồn nhiều nhất
-                                                    <input id="containerCheckBoxMaxInventory" type="checkbox" checked="checked">
-                                                    <span class="checkmark"></span>
-                                                </label>
-
                                                 <label class="container-check-box check-box-menu">Trạng thái
                                                     <input id="containerCheckBoxProductStatus" type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
@@ -231,6 +197,71 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+
+                    <!-- product table -->
+                    <div class="table-container">
+                        <table class="employee-table-list">
+                            <thead class="table-header">
+                                <tr class="table-row-header">
+                                    <th id="cellCheckAll">
+                                        <label class="container-check-box">
+                                            <input
+                                            class="check-all"
+                                            type="checkbox"
+                                            id="checkAllProduct"
+                                            v-model="checkAll"
+                                            @change="toggleCheckAll"
+                                            />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </th>
+                                    <th class="cell-img" for="containerCheckBoxCellImgProduct">
+                                        <a href="#" class="k-link"></a>
+                                    </th>
+                                    <!-- <th class="cell-img" for="containerCheckBoxCellImgProduct">
+                                        <a href="#" class="k-link"></a>
+                                    </th> -->
+                                    <th class="product-name" for="containerCheckBoxProductName">Tên hàng</th>
+                                    <th class="product-type" for="containerCheckBoxProductType">Loại hàng</th>
+                                    <th class="selling-price" for="containerCheckBoxSellingPrice">Giá bán</th>
+                                    <th class="cost-price" for="containerCheckBoxCostPrice">Giá vốn</th>
+                                    <th class="trademark" for="containerCheckBoxTrademark">Thương hiệu</th>
+                                    <th class="inventory" for="containerCheckBoxInventory">Tồn kho</th>
+                                    <th class="inventory" for="containerCheckBoxInventory">Tồn kho</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr
+                                    v-for="(product, index) in productList"
+                                    :key="product.id"
+                                    class="kv-table-row"
+                                >
+                                    <td class="cell-check">
+                                        <label class="container-check-box">
+                                            <input
+                                            type="checkbox"
+                                            v-model="selected"
+                                            :value="product.id"
+                                            />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                    <td class="cell-img">
+                                        <img :src="product.image" alt="img" style="width: 30px" />
+                                    </td>
+                                    <!-- <td class="cell-img"></td> -->
+                                    <td class="product-name">{{ product.name }}</td>
+                                    <td class="product-type">{{ product.type }}</td>
+                                    <td class="selling-price">{{ product.sellingPrice }}</td>
+                                    <td class="cost-price">{{ (product.costPrice) }}</td>
+                                    <td class="trademark">{{ product.trademark }}</td>
+                                    <td class="inventory">{{ product.inventory }}</td>
+                                    <td class="inventory">{{ product.inventory }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -261,6 +292,30 @@ const filteredProductGroups = computed(() => {
   )
 })
 
+
+
+const productList = ref([
+  {
+    id: 1,
+    name: 'Sản phẩm A',
+    type: 'Hàng hóa',
+    sellingPrice: 100000,
+    costPrice: 80000,
+    trademark: 'Brand A',
+    inventory: 12,
+    image: 'https://via.placeholder.com/30'
+  },
+  {
+    id: 2,
+    name: 'Sản phẩm B',
+    type: 'Dịch vụ',
+    sellingPrice: 200000,
+    costPrice: 150000,
+    trademark: 'Brand B',
+    inventory: 5,
+    image: 'https://via.placeholder.com/30'
+  }
+])
 
 </script>
 
