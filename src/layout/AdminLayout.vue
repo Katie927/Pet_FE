@@ -11,7 +11,7 @@
     import ManageComponent from '@/components/layout/manage.vue';   
 </script>
 
-<style>
+<style scoped>
 
 main{
     margin-top: 44px;

@@ -33,35 +33,39 @@
 
                     <!-- Nhóm hàng -->
                     <div class="em-left-content content-product-group">
-                    <div class="em-left-content-title">
-                        <h3 class="em-left-content-heading">Nhóm hàng</h3>
-                    </div>
-                    <div class="product-group-list">
-                        <div class="product-group-icon-input">
-                        <i class="product-group-search-icon fas fa-search" aria-hidden="true"></i>
-                        <input
-                            id="productGroupListSearch"
-                            type="search"
-                            class="form-control hide-show-product-group"
-                            placeholder="Tìm kiếm nhóm hàng"
-                            v-model="searchKeyword"
-                        />
+                        <div class="em-left-content-title">
+                            <h3 class="em-left-content-heading">Nhóm hàng</h3>
                         </div>
+                        <div class="product-group-list">
+                            <div class="product-group-icon-input">
+                            <i class="product-group-search-icon fas fa-search" aria-hidden="true"></i>
+                            <input
+                                id="productGroupListSearch"
+                                type="search"
+                                class="form-control hide-show-product-group"
+                                placeholder="Tìm kiếm nhóm hàng"
+                                v-model="searchKeyword"
+                            />
+                            </div>
 
-                        <div class="product-group-list-items">
-                        <ul class="form-items">
-                            <li
-                            v-for="(group, index) in filteredProductGroups"
-                            :key="index"
-                            class="form-item"
-                            >
-                            <span class="item-name product-group-name">{{ group }}</span>
-                            <i class="fas fa-pen" aria-hidden="true"></i>
-                            </li>
-                        </ul>
+                            <div class="product-group-list-items">
+                            <ul class="form-items">
+                                <li
+                                v-for="(group, index) in filteredProductGroups"
+                                :key="index"
+                                class="form-item"
+                                >
+                                <span class="item-name product-group-name">{{ group }}</span>
+                                <i class="fas fa-pen" aria-hidden="true"></i>
+                                </li>
+                            </ul>
+                            </div>
                         </div>
                     </div>
-                    </div>
+                    <!-- <aside class="em-left-pageside">
+                        <label for="numberOfRecordsProduct">Số bản ghi</label>
+                        <select name="Số bản ghi: " id="numberOfRecord"></select>
+                    </aside> -->
                 </div>
 
                 <!-- right -->
@@ -210,7 +214,6 @@
                                             class="check-all"
                                             type="checkbox"
                                             id="checkAllProduct"
-                                            v-model="checkAll"
                                             @change="toggleCheckAll"
                                             />
                                             <span class="checkmark"></span>
@@ -223,18 +226,18 @@
                                         <a href="#" class="k-link"></a>
                                     </th> -->
                                     <th class="product-name" for="containerCheckBoxProductName">Tên hàng</th>
-                                    <th class="product-type" for="containerCheckBoxProductType">Loại hàng</th>
+                                    <th class="product-type" for="containerCheckBoxProductType">Giá vốn</th>
                                     <th class="selling-price" for="containerCheckBoxSellingPrice">Giá bán</th>
-                                    <th class="cost-price" for="containerCheckBoxCostPrice">Giá vốn</th>
+                                    <th class="cost-price" for="containerCheckBoxCostPrice">Giá khuyến mãi</th>
                                     <th class="trademark" for="containerCheckBoxTrademark">Thương hiệu</th>
                                     <th class="inventory" for="containerCheckBoxInventory">Tồn kho</th>
-                                    <th class="inventory" for="containerCheckBoxInventory">Tồn kho</th>
+                                    <th class="inventory" for="containerCheckBoxInventory">Trạng thái</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr
-                                    v-for="(product, index) in productList"
+                                    v-for="(product, index) in productData"
                                     :key="product.id"
                                     class="kv-table-row"
                                 >
@@ -242,7 +245,6 @@
                                         <label class="container-check-box">
                                             <input
                                             type="checkbox"
-                                            v-model="selected"
                                             :value="product.id"
                                             />
                                             <span class="checkmark"></span>
@@ -253,12 +255,12 @@
                                     </td>
                                     <!-- <td class="cell-img"></td> -->
                                     <td class="product-name">{{ product.name }}</td>
-                                    <td class="product-type">{{ product.type }}</td>
-                                    <td class="selling-price">{{ product.sellingPrice }}</td>
-                                    <td class="cost-price">{{ (product.costPrice) }}</td>
-                                    <td class="trademark">{{ product.trademark }}</td>
-                                    <td class="inventory">{{ product.inventory }}</td>
-                                    <td class="inventory">{{ product.inventory }}</td>
+                                    <td class="product-type">{{ product.costPrice }}</td>
+                                    <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td>
+                                    <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>
+                                    <td class="trademark">{{ product.name }}</td>
+                                    <td class="inventory">{{ product.name }}</td>
+                                    <td class="inventory">{{ product.name }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -275,7 +277,8 @@
 import '@/assets/styles/admin-css/kv-product.css'; 
 import '@/assets/styles/admin-css/kv-style.css'; 
 
-import { ref, computed } from 'vue'
+import axios from "axios";
+import { ref, computed, onMounted } from 'vue'
 
 const productTypes = ref([
   { label: 'Hàng hóa', checked: true },
@@ -292,7 +295,42 @@ const filteredProductGroups = computed(() => {
   )
 })
 
-
+const productData = ref([
+  // {
+  //        "name": "iPhone 16 - Chính hãng VN/A",
+  //        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/ip16-xanh-mong-ket.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+  //        "specs": [
+  //            "A18",
+  //            "8GB",
+  //            "128GB"
+  //        ],
+  //        "originalPrice": "22,990,000 ",
+  //        "discount": 17,
+  //        "finalPrice": "18,990,000 ",
+  //    },
+  //    {
+  //        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB (BHĐT)",
+  //        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/03/s25-ultra.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
+  //        "specs": [
+  //            "Snap 8 Gen 3",
+  //            "12GB"
+  //        ],
+  //        "originalPrice": "N/A",
+  //        "discount": 0,
+  //        "finalPrice": "26,990,000 ",
+  //    }
+  ])
+  const fetchProductData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/bej3/');
+      // console.log("Response Data:", response.data);
+      productData.value = response.data.result;
+      // console.log("Product Data in Vue:", productData.value);
+    } catch (error) {
+      console.error('Error: ', error);
+    }
+  };
+  onMounted(fetchProductData);
 
 const productList = ref([
   {

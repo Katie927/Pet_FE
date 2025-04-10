@@ -1,36 +1,16 @@
+<template>
 
                  <!-- row-detail --> 
-                 <tr id="'+showDetailProductId+'" class="row-detail row-detail-commodity" data-product-id="' + productId + '"> 
+                 <tr id="'+showDetailProductId+'" class="row-detail row-detail-commodity" > 
                    <td class="cell-detail"> 
                      <div class="make-boder-table"></div> 
                      <div class="product-detail"> 
                        <div class="product-detail-container"> 
-                         <div class="product-detail-menu"> 
-                           <ul class="product-detail-menu-items"> 
-                             <li class="product-detail-menu-item"> 
-                               <span class="detail-item">Thông tin</span> 
-                             </li> 
-                             <li class="product-detail-menu-item"> 
-                               <span class="detail-item">Thẻ kho</span> 
-                             </li> 
-                             <li class="product-detail-menu-item"> 
-                               <span class="detail-item">Tồn kho</span> 
-                             </li> 
-                           </ul> 
-                         </div> 
   
                          <!-- product-detail-body --> 
                          <div class="product-detail-body"> 
                                    <div class="identification-item"> 
                                      <h3 id="identificationProductName" class="identification-item-title">'+product.name+'</h3> 
-                                     <ul class="identification-item-direct"> 
-                                       <li class="identification-item-directly"> 
-                                         <i class="direct-icon fas fa-solid fa-check"></i>Bán trực tiếp 
-                                       </li> 
-                                       <li class="identification-item-not-directly"> 
-                                         <i class="not-direct-icon fas fa-solid fa-times"></i>Không tích điểm 
-                                        </li> 
-                                     </ul>';
                                    </div> 
   
                            <div class="form-wrapper product-detail-body-container"> 
@@ -38,39 +18,39 @@
                              <div class="product-detail-left"> 
                                <div class="profile-img-detail-large"> 
                                  <div class="wrap-img-detail-large"> 
-                                   <img id="'+previewImgZoom+'" class="preview-img-detail-large" src="'+product.img1+'" 
-                                     alt="Preview Image" data-product-id="' + productId + '"/> 
+                                   <img class="preview-img-detail-large" src="" 
+                                     alt="Preview Image" /> 
                                  </div> 
                                </div> 
                                <div class="profile-img-detail-group"> 
                                  <div class="profile-img-detail"> 
                                    <div class="wrap-img-detail"> 
-                                     <img id="'+previewImg1Id+'" class="preview-img-detail-1" src="'+product.img1+'" 
-                                       alt="Preview Image" data-product-id="' + productId + '"/> 
+                                     <img class="preview-img-detail-1" src="" 
+                                       alt="Preview Image" /> 
                                    </div> 
                                  </div> 
                                  <div class="profile-img-detail"> 
                                    <div class="wrap-img-detail"> 
-                                     <img id="'+previewImg2Id+'" class="preview-img-detail-2" src="'+product.img2+'" 
-                                       alt="Preview Image" data-product-id="' + productId + '" /> 
+                                     <img class="preview-img-detail-2" src="" 
+                                       alt="Preview Image"  /> 
                                    </div> 
                                  </div> 
                                  <div class="profile-img-detail"> 
                                    <div class="wrap-img-detail"> 
-                                     <img id="'+previewImg3Id+'" class="preview-img-detail-3" src="'+product.img3+'" 
-                                       alt="Preview Image" data-product-id="' + productId + '"/> 
+                                     <img class="preview-img-detail-3" src="" 
+                                       alt="Preview Image" /> 
                                    </div> 
                                  </div> 
                                  <div class="profile-img-detail"> 
                                    <div class="wrap-img-detail"> 
-                                     <img id="'+previewImg4Id+'" class="preview-img-detail-4" src="'+product.img4+'" 
-                                       alt="Preview Image" data-product-id="' + productId + '"/> 
+                                     <img class="preview-img-detail-4" src="" 
+                                       alt="Preview Image" /> 
                                    </div> 
                                  </div> 
                                  <div class="profile-img-detail"> 
                                    <div class="wrap-img-detail"> 
-                                     <img id="'+previewImg5Id+'" class="preview-img-detail-5" src="'+product.img5+'" 
-                                       alt="Preview Image" data-product-id="' + productId + '"/> 
+                                     <img  class="preview-img-detail-5" src="" 
+                                       alt="Preview Image" /> 
                                    </div> 
                                  </div> 
                                 </div> 
@@ -85,14 +65,9 @@
                                  <div class="identification-group"> 
                                    <div class="identification-item"> 
                                      <span class="identification-item-name">Mã hàng:</span> 
-                                     <span id="identificationProductCode" 
+                                     <span
                                        class="identification-item-code">'+product.code+'</span> 
                                    </div> 
-  
-                                 <div class="identification-item"> 
-                                   <span class="identification-item-name">Mã vạch:</span> 
-                                   <span id="'+identificationProductBarcode+'" class="identification-item-code" data-product-id="' + productId + '">'+product.barcode+'</span> 
-                                 </div> 
   
                                  <div class="identification-item"> 
                                    <span class="identification-item-name">Nhóm hàng:</span> 
@@ -107,11 +82,6 @@
                                  <div class="identification-item"> 
                                    <span class="identification-item-name">Thương hiệu:</span> 
                                    <span id="identificationProductTrademark" class="identification-item-code">'+product.trademark+'</span> 
-                                 </div> 
-  
-                                 <div class="identification-item"> 
-                                   <span class="identification-item-name">Định mức tồn:</span> 
-                                   <span id="identificationProductInventory" class="identification-item-code">'+product.mininventory+'>'+product.maxinventory+'</span> 
                                  </div> 
   
                                    <div class="identification-item"> 
@@ -163,43 +133,22 @@
   
                            <!-- add-edit-product --> 
                            <div class="add-edit-product"> 
-                             <button id="'+showEditProduct+'" class="btn btn-success btn-success-bottom btn-edit-product" data-action="editCommodity" data-product-id="' + productId + '"> 
+                             <button class="btn btn-success btn-success-bottom btn-edit-product" data-action="editCommodity" > 
                                <i class="btn-success-icon fas fa-solid fa-check-square"></i> 
                                <span>Cập nhật</span> 
                              </button> 
-                             <button id="'+showPrintCodeStamp+'" class="btn btn-default btn-red-bottom btn-default-product" data-product-id="' + productId + '"> 
-                               <i class="btn-success-icon fas fa-solid fa-barcode"></i> 
-                               <span>In tem mã</span> 
-                             </button> 
-                             <button id="'+showCopyProduct+'" class="btn btn-success btn-success-bottom btn-copy-product" data-action="copyCommodity" data-product-id="' + productId + '"> 
-                               <i class="btn-success-icon fa fa-regular fa-copy"></i> 
-                               <span>Sao chép</span> 
-                             </button> 
-                             <button id="'+showStatusProduct+'" class="btn btn-red btn-red-bottom btn-lock-product" data-product-id="' + productId + '"> 
+                             <button id="'+showStatusProduct+'" class="btn btn-red btn-red-bottom btn-lock-product" > 
                                <i class="btn-success-icon fas fa-solid fa-lock"></i> 
                                <span>Ngừng kinh doanh</span> 
                              </button> 
-                             <button id="'+showRemoveProduct+'" class="btn btn-red btn-red-bottom btn-remove-product" data-product-id="' + productId + '"> 
+                             <button id="'+showRemoveProduct+'" class="btn btn-red btn-red-bottom btn-remove-product" > 
                                <i class="btn-success-icon fas fa-solid fa-trash-can"></i> 
                                <span>Xóa</span> 
                              </button> 
-                             <button id="'+showMoreOperationProduct+'" class="btn btn-more btn-more-bottom btn-more-product" data-product-id="' + productId + '"> 
+                             <button id="'+showMoreOperationProduct+'" class="btn btn-more btn-more-bottom btn-more-product" > 
                                <i class="btn-success-icon fas fa-solid fa-ellipsis-vertical"></i> 
                              </button> 
-                   <ul class="operation-detail-list" id="'+operationDetailProductList+'" data-product-id="' + productId + '"> 
-                     <li> 
-                       <button class="operation" id="btnOperationInboxProduct"> 
-                         <i class="btn-icon fas fa-solid fa-inbox"></i> 
-                         <span>Đặt nhập hàng</span> 
-                       </button> 
-                     </li> 
-                     <li> 
-                       <button class="operation" id="btnOperationFlatbedProduct"> 
-                         <i class="btn-icon fas fa-solid fa-cart-flatbed"></i> 
-                         <span>Nhập hàng</span> 
-                       </button> 
-                     </li> 
-                   </ul>
+                   
                          </div> 
                        </div> 
                      </div> 
@@ -207,3 +156,13 @@
                      </div> 
                    </td> 
                  </tr>
+</template>
+
+
+<script setup>
+
+import '@/assets/styles/admin-css/kv-product.css'; 
+import '@/assets/styles/admin-css/kv-style.css'; 
+
+
+</script>

@@ -30,7 +30,7 @@ const navbarItems = ref([
   { id: 1, icon: 'fas fa-eye', label: 'Tổng quan', link: '' },
   {
     id: 2, icon: 'fas fa-cube', label: 'Hàng hóa', dropdown: [
-      { label: 'Danh mục', icon: 'fas fa-table-list', link: 'product.html' },
+      { label: 'Danh mục', icon: 'fas fa-table-list', link: '/admin/product' },
       { label: 'Thiết lập giá', icon: 'fas fa-tags', link: 'price_book.html' },
       { label: 'Kiểm kho', icon: 'fas fa-clipboard-check', link: 'stock_takes.html' }
     ]
@@ -47,7 +47,7 @@ const navbarItems = ref([
   },
   {
     id: 4, icon: 'fas fa-user-group', label: 'Nhân viên', dropdown: [
-      { label: 'Nhân viên', icon: 'fas fa-user-friends', link: 'employee.html' },
+      { label: 'Nhân viên', icon: 'fas fa-user-friends', link: '/admin/employee' },
       { label: 'Chấm công', icon: 'fas fa-calendar-alt', link: '' },
       { label: 'Bảng tính lương', icon: 'fas fa-coins', link: '' },
       { label: 'Bảng hoa hồng', icon: 'fas fa-sack-dollar', link: '' },
@@ -198,9 +198,9 @@ tr:hover {
   background-color: #e6f1fe;
 }
 
-tr:last-child:hover {
-  /* padding-bottom: 100px; */
-}
+/* tr:last-child:hover {
+  padding-bottom: 100px;
+} */
 
 img {
   vertical-align: middle;
