@@ -536,12 +536,14 @@ table .cell-img {
 
 
 .row-detail {
-    display: none;
+    display: block;
     width: 100%;
     z-index: 1;
 }
 
 .cell-detail {
+    padding: 0;
+    overflow: hidden;
     background-color: rgb(255, 255, 255);
 }
 

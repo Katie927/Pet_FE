@@ -236,32 +236,35 @@
                             </thead>
 
                             <tbody>
-                                <tr
-                                    v-for="(product, index) in productData"
-                                    :key="product.id"
-                                    class="kv-table-row"
-                                >
-                                    <td class="cell-check">
-                                        <label class="container-check-box">
-                                            <input
-                                            type="checkbox"
-                                            :value="product.id"
-                                            />
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </td>
-                                    <td class="cell-img">
-                                        <img :src="product.image" alt="img" style="width: 30px" />
-                                    </td>
-                                    <!-- <td class="cell-img"></td> -->
-                                    <td class="product-name">{{ product.name }}</td>
-                                    <td class="product-type">{{ product.costPrice }}</td>
-                                    <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td>
-                                    <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>
-                                    <td class="trademark">{{ product.name }}</td>
-                                    <td class="inventory">{{ product.name }}</td>
-                                    <td class="inventory">{{ product.name }}</td>
-                                </tr>
+                                <template v-for="(product, index) in productData" :key="product.id">
+                                    <tr
+                                        class="kv-table-row"
+                                        @click="toggleDetail(product.id)"
+                                    >
+                                        <td class="cell-check">
+                                            <label class="container-check-box">
+                                                <input type="checkbox" :value="product.id" />
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
+                                        <td class="cell-img">
+                                            <img :src="product.image" alt="img" style="width: 30px" />
+                                        </td>
+                                        <td class="product-name">{{ product.name }}</td>
+                                        <td class="product-type">{{ product.name }}</td>
+                                        <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td>
+                                        <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>
+                                        <td class="trademark">{{ product.name }}</td>
+                                        <td class="inventory">{{ product.name }}</td>
+                                        <td class="inventory">{{ product.name }}</td>
+                                    </tr>
+                                    <tr v-if="expandedId === product.id">
+                                        <td colspan="9" class="cell-detail p-0">
+                                            <ProductDetailRow :product="product" />
+                                        </td>
+                                    </tr>
+                                </template>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -276,6 +279,8 @@
 
 import '@/assets/styles/admin-css/kv-product.css'; 
 import '@/assets/styles/admin-css/kv-style.css'; 
+
+import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
 
 import axios from "axios";
 import { ref, computed, onMounted } from 'vue'
@@ -295,31 +300,7 @@ const filteredProductGroups = computed(() => {
   )
 })
 
-const productData = ref([
-  // {
-  //        "name": "iPhone 16 - Chính hãng VN/A",
-  //        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/ip16-xanh-mong-ket.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
-  //        "specs": [
-  //            "A18",
-  //            "8GB",
-  //            "128GB"
-  //        ],
-  //        "originalPrice": "22,990,000 ",
-  //        "discount": 17,
-  //        "finalPrice": "18,990,000 ",
-  //    },
-  //    {
-  //        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB (BHĐT)",
-  //        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/03/s25-ultra.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
-  //        "specs": [
-  //            "Snap 8 Gen 3",
-  //            "12GB"
-  //        ],
-  //        "originalPrice": "N/A",
-  //        "discount": 0,
-  //        "finalPrice": "26,990,000 ",
-  //    }
-  ])
+const productData = ref([ ])
   const fetchProductData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/bej3/');
@@ -332,28 +313,16 @@ const productData = ref([
   };
   onMounted(fetchProductData);
 
-const productList = ref([
-  {
-    id: 1,
-    name: 'Sản phẩm A',
-    type: 'Hàng hóa',
-    sellingPrice: 100000,
-    costPrice: 80000,
-    trademark: 'Brand A',
-    inventory: 12,
-    image: 'https://via.placeholder.com/30'
-  },
-  {
-    id: 2,
-    name: 'Sản phẩm B',
-    type: 'Dịch vụ',
-    sellingPrice: 200000,
-    costPrice: 150000,
-    trademark: 'Brand B',
-    inventory: 5,
-    image: 'https://via.placeholder.com/30'
-  }
-])
+  const expandedId = ref(null)
+
+function toggleDetail(id) {
+    // console.log('Chọn product:', id);
+  expandedId.value = expandedId.value === id ? null : id
+}
+
+defineProps({
+  productData: Array
+})
 
 </script>
 

@@ -7,14 +7,11 @@ import ProductDetails from "@/views/Product/ProductDetails.vue";
 import UserProfile from "@/views/User/UserProfile.vue";
 import UserOrders from "@/views/User/UserOrders.vue";
 import UserHistory from "@/views/User/UserHistory.vue";
-import ManageProduct from "@/components/layout/manage.vue";
-import Manage from "@/components/layout/manage.vue";
 import ListProduct from "@/views/manage-view/list-product.vue";
-import Header from "@/components/layout/Header.vue";
 import AdminLayout from "@/layout/AdminLayout.vue";
 import CustomerLayout from "@/layout/CustomerLayout.vue";
 import ListEmployee from "@/views/manage-view/list-employee.vue";
-import ProductDetailM from "@/views/manage-view/product-detail-m.vue";
+import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
 
 //-----------------------------------------------------------------
 const customerRoutes = [
@@ -47,7 +44,7 @@ const customerRoutes = [
       children: [
         { path: 'products', component: ListProduct },
         { path: 'employee', component: ListEmployee },
-        { path: 'product/details', component: ProductDetailM }
+        { path: 'product/details', component: ProductDetailRow }
       ]
     }
   ];
