@@ -1134,3 +1134,16 @@ table .cell-img {
     border-color: rgb(0, 182, 62);
     border-image: initial;
 }
+
+.add-product-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255);
+    margin-right: 25px;
+}
+.add-product-bottom button span {
+    margin-left: 10px;
+}
