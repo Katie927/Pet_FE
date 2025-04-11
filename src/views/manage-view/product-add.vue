@@ -6,7 +6,8 @@
         <div class="add-product-head header">
           <div class="add-product-head-title header-title">
             <span id="titleAddProduct" class="add-product-title-heading span-heading">Thêm hàng hóa</span>
-            <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" data-action="addCommodity"></i>
+            <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" data-action="addCommodity"
+                  @click="$emit('close')"></i>
           </div>
         </div>
         <!-- add product container -->

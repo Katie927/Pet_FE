@@ -91,7 +91,6 @@
                         <!-- header filter buttons -->
                         <div class="header-filter-buttons">
                             <ul class="header-filter-button-items">
-
                                 <li class="header-filter-button-item" id="addMoreProductButton">
                                     <button class="btn-success">
                                         <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
@@ -101,15 +100,16 @@
                                     </button>
                                     <ul class="btn-add-product-list" id="btnAddProductList">
                                         <li>
-                                            <button class="operation" id="addCommodityProductButton" data-action="">
-                                            <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
-                                            <span>Thêm hàng hóa</span>
+                                            <button class="operation" id="addCommodityProductButton" data-action="" @click="showProductAdd = true">
+                                                <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
+                                                <span>Thêm hàng hóa</span>
                                             </button>
+                                            
                                         </li>
                                         <li>
                                             <button class="operation" id="addServiceProductButton" data-action="">
-                                            <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
-                                            <span>Thêm dịch vụ</span>
+                                                <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
+                                                <span>Thêm dịch vụ</span>
                                             </button>
                                         </li>
                                         <li>
@@ -273,6 +273,7 @@
         </div>
     </div>
 
+    <ProductAdd v-if="showProductAdd" @close="showProductAdd = false" />
 </template>
 
 <script setup>
@@ -281,6 +282,7 @@ import '@/assets/styles/admin-css/kv-product.css';
 import '@/assets/styles/admin-css/kv-style.css'; 
 
 import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
+import ProductAdd from './product-add.vue';
 
 import axios from "axios";
 import { ref, computed, onMounted } from 'vue'
@@ -323,6 +325,8 @@ function toggleDetail(id) {
 defineProps({
   productData: Array
 })
+
+const showProductAdd = ref(false);
 
 </script>
 
