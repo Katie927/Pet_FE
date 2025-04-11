@@ -6,7 +6,7 @@
         <div class="product-detail-container">
           <div class="product-detail-body">
             <div class="identification-item">
-              <h3 class="identification-item-title">{{ product.id }}</h3>
+              <h3 class="identification-item-title">{{ product.name }}</h3>
             </div>
 
             <div class="form-wrapper product-detail-body-container">
@@ -16,9 +16,9 @@
                     <img class="preview-img-detail-large" :src="product.image" alt="Preview" />
                   </div>
                 </div>
-                <!-- <div class="profile-img-detail-group">
+                <div class="profile-img-detail-group">
                   <div
-                    v-for="(img, index) in product.image"
+                    v-for="(img, index) in 5"
                     :key="index"
                     class="profile-img-detail"
                   >
@@ -26,29 +26,30 @@
                       <img :class="'preview-img-detail-' + (index + 1)" :src="img" alt="Preview" />
                     </div>
                   </div>
-                </div> -->
+                </div>
+                
               </div>
 
               <div class="product-detail-right">
                 <div class="product-detail-right-content">
                   <div class="product-detail-identification">
                     <div class="identification-group">
-                      <div class="identification-item"><span>Mã hàng:</span><span>{{ product.name }}</span></div>
-                      <div class="identification-item"><span>Nhóm hàng:</span><span>{{ product.name }}</span></div>
-                      <div class="identification-item"><span>Loại hàng:</span><span>{{ product.name }}</span></div>
-                      <div class="identification-item"><span>Thương hiệu:</span><span>{{ product.name }}</span></div>
-                      <div class="identification-item"><span>Giá bán:</span><span>{{ product.originalPrice.toLocaleString('vi-VN') }}</span></div>
-                      <div class="identification-item"><span>Giá vốn:</span><span>{{ product.finalPrice.toLocaleString('vi-VN') }}</span></div>
-                      <div class="identification-item"><span>Trọng lượng:</span><span>{{ product.name }}</span></div>
-                      <div class="identification-item"><span>Vị trí:</span><span>{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Mã hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Nhóm hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Loại hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Thương hiệu:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá bán:</span><span class="identification-item-code">{{ product.originalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá vốn:</span><span class="identification-item-code">{{ product.finalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Trọng lượng:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code">{{ product.name }}</span></div>
                     </div>
                   </div>
 
                   <div class="product-detail-description">
                     <div class="description-group">
-                      <div class="description-item"><span>Mô tả</span><span>{{ product.name }}</span></div>
-                      <div class="description-item"><span>Ghi chú đặt hàng</span><span>{{ product.name }}</span></div>
-                      <div class="description-item"><span>Nhà cung cấp</span><span>{{ product.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Mô tả</span><span class="description-item-code">{{ product.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Ghi chú đặt hàng</span><span class="description-item-code">{{ product.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Nhà cung cấp</span><span class="description-item-code">{{ product.name }}</span></div>
                     </div>
                   </div>
                 </div>

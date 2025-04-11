@@ -12,6 +12,7 @@ import AdminLayout from "@/layout/AdminLayout.vue";
 import CustomerLayout from "@/layout/CustomerLayout.vue";
 import ListEmployee from "@/views/manage-view/list-employee.vue";
 import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
+import ProductAdd from "@/views/manage-view/product-add.vue";
 
 //-----------------------------------------------------------------
 const customerRoutes = [
@@ -44,7 +45,8 @@ const customerRoutes = [
       children: [
         { path: 'products', component: ListProduct },
         { path: 'employee', component: ListEmployee },
-        { path: 'product/details', component: ProductDetailRow }
+        { path: 'product/details', component: ProductDetailRow },
+        { path: 'product/add', component: ProductAdd }
       ]
     }
   ];
