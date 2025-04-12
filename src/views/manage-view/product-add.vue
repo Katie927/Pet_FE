@@ -32,7 +32,7 @@
                         class="form-control form-control-form-group-product"
                         type="text"
                         placeholder="Mã hàng tự động"
-                        maxlength="16"
+                        readonly="true"
                         v-model="form.code"
                       />
                     </div>
@@ -41,17 +41,16 @@
                   <!-- Mã vạch -->
                   <div class="form-group form-group-product">
                     <label class="form-label">
-                      Mã vạch
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Mã vạch của hàng hóa thường được tạo ra bởi nhà sản xuất" aria-hidden="true"></i>
-                      <span class="sr-only">Mã vạch của hàng hóa thường được tạo ra bởi nhà sản xuất</span>
+                      Tên hàng
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Tên hàng là tên của sản phẩm" aria-hidden="true"></i>
+                      <span class="sr-only">Tên hàng là tên của sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input
                         class="form-control form-control-form-group-product"
-                        type="number"
-                        maxlength="16"
+                        type="text"
                         required
-                        v-model="form.barcode"
+                        v-model="form.name"
                       />
                     </div>
                   </div>
@@ -218,12 +217,33 @@
                   </div>
 
                   <div class="form-group form-price-add-product">
+                    <label class="form-label">
+                      Giá niêm yết
+                      <i
+                        class="parameter-type-icon fas fa-solid fa-circle-info"
+                        title="Giá niêm yết hãng đưa ra"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="sr-only">
+                        Giá niêm yết hãng đưa ra
+                      </span>
+                    </label>
+                    <div class="form-wrap form-wrap-product">
+                      <input
+                        type="text"
+                        class="form-control form-control-form-price-add-product"
+                        v-model="form.originalPrice"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group form-price-add-product">
                     <label class="form-label">Giá bán</label>
                     <div class="form-wrap form-wrap-product">
                       <input
                         type="text"
                         class="form-control form-control-form-price-add-product"
-                        v-model="form.sellingPrice"
+                        v-model="form.finalPrice"
                       />
                       <i
                         id="tagsIconProduct"
@@ -412,13 +432,13 @@ import '@/assets/styles/admin-css/kv-style.css';
 import { reactive } from 'vue'
 
 const form = reactive({
-  code: '',
-  barcode: '',
+  id: '',
   name: '',
-  group: '',
-  brand: '',
-  location: '',
-  images: [null, null, null, null, null]  // 5 ảnh
+  originalPrice: '',
+  finalPrice: '',
+  Image: ''
+  // location: '',
+  // images: [null, null, null, null, null]  // 5 ảnh
 })
 
 </script>
