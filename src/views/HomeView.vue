@@ -83,12 +83,12 @@
                             </a>
                           </div>
                           <div class="specs">
-                            <ul v-if="product.specs && product.specs.length > 0">
-                              <li v-for="(spec, i) in product.specs" :key="i" class="spec-item">
+                            <ul v-if="product.attributes && product.attributes.length > 0">
+                              <li v-for="(attribute, i) in product.attributes" :key="i" class="spec-item">
                                 <label>
                                   <span :class="['icon-CPU', 'icon-Battery', 'icon-Storage'][i % 3]"></span>
                                 </label>
-                                <div><span>{{ spec }}</span></div>
+                                <div><span>{{ attribute }}</span></div>
                               </li>
                             </ul>
                           </div>

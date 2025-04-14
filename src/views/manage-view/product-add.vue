@@ -33,7 +33,7 @@
                         type="text"
                         placeholder="Mã hàng tự động"
                         readonly="true"
-                        v-model="form.code"
+                        v-model="form.id"
                       />
                     </div>
                   </div>
@@ -211,7 +211,7 @@
                       <input
                         type="text"
                         class="form-control form-control-form-price-add-product"
-                        v-model="form.costPrice"
+                        v-model="form.originalPrice"
                       />
                     </div>
                   </div>
@@ -381,23 +381,14 @@
 
         <!-- add product bottom -->
         <div class="add-product-bottom">
-          <button
-            id="btnSaveApplicationProduct"
-            class="btn btn-success btn-success-bottom"
-            data-action="addCommodity"
-            @click="handleSave"
-          >
-            <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
-            <span>Lưu</span>
-          </button>
 
           <button
             id="btnSaveApplicationProductMore"
             class="btn btn-success btn-success-bottom"
-            @click="handleSaveAndAddNew"
+            @click="handleAddNew"
           >
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
-            <span>Lưu &amp; Thêm mới</span>
+            <span>Thêm mới</span>
           </button>
 
           <button
@@ -428,6 +419,7 @@
 
 import '@/assets/styles/admin-css/kv-product.css'; 
 import '@/assets/styles/admin-css/kv-style.css';
+import axios from 'axios';
 
 import { reactive } from 'vue'
 
@@ -440,5 +432,36 @@ const form = reactive({
   // location: '',
   // images: [null, null, null, null, null]  // 5 ảnh
 })
+
+const handleAddNew = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error("Token không tồn tại!");
+    router.push("/login");
+    return;
+  }
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/bej3/admin/product/add",
+      {
+        name: form.name,
+        originalPrice: form.originalPrice,
+        finalPrice: form.finalPrice
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+    alert("Thêm hàng hóa thành công!");
+    form.name = '';
+    form.originalPrice = '';
+    form.finalPrice = '';
+  } catch (error) {
+    console.error("Lỗi khi thêm sản phẩm:", error);
+    alert("Thêm hàng hóa thất bại!");
+  }
+}
 
 </script>
