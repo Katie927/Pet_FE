@@ -43,7 +43,7 @@ const customerRoutes = [
       path: '/admin',
       component: AdminLayout,
       children: [
-        { path: 'products', component: ListProduct },
+        { path: 'product/list', component: ListProduct },
         { path: 'employee', component: ListEmployee },
         { path: 'product/details', component: ProductDetailRow },
         { path: 'product/add', component: ProductAdd }

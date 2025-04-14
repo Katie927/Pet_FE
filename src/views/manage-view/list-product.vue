@@ -286,6 +286,7 @@ import ProductAdd from './product-add.vue';
 
 import axios from "axios";
 import { ref, computed, onMounted } from 'vue'
+import router from '@/router';
 
 const productTypes = ref([
   { label: 'Hàng hóa', checked: true },
@@ -304,13 +305,28 @@ const filteredProductGroups = computed(() => {
 
 const productData = ref([ ])
   const fetchProductData = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        console.error("Token không tồn tại!");
+        router.push("/login"); // Chuyển hướng về trang login
+        return;
+    }
     try {
-      const response = await axios.get('http://localhost:8080/bej3/');
+      const response = await axios.get('http://localhost:8080/bej3/admin/product/list',{
+            headers: {
+                Authorization: `Bearer ${token}` // Gửi token trong header
+            }
+        });
       // console.log("Response Data:", response.data);
       productData.value = response.data.result;
       // console.log("Product Data in Vue:", productData.value);
     } catch (error) {
-      console.error('Error: ', error);
+        console.error('Lỗi:', error);
+        // Nếu lỗi 401 (Unauthorized) hoặc 403 (Forbidden), chuyển hướng về trang login
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+            localStorage.removeItem("token"); // Xóa token cũ
+            router.push("/login"); // Chuyển hướng về trang đăng nhập
+        }
     }
   };
   onMounted(fetchProductData);

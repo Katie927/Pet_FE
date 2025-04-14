@@ -30,7 +30,7 @@ const navbarItems = ref([
   { id: 1, icon: 'fas fa-eye', label: 'Tổng quan', link: '' },
   {
     id: 2, icon: 'fas fa-cube', label: 'Hàng hóa', dropdown: [
-      { label: 'Danh mục', icon: 'fas fa-table-list', link: '/admin/products' },
+      { label: 'Danh mục', icon: 'fas fa-table-list', link: '/admin/product/list' },
       { label: 'Thiết lập giá', icon: 'fas fa-tags', link: 'price_book.html' },
       { label: 'Kiểm kho', icon: 'fas fa-clipboard-check', link: 'stock_takes.html' }
     ]
