@@ -260,7 +260,8 @@
                                     </tr>
                                     <tr v-if="expandedId === product.id">
                                         <td colspan="9" class="cell-detail p-0">
-                                            <ProductDetailRow :product="product" />
+                                            <ProductDetailRow :product="product" @edit-product="handleEditProduct"
+                                                                                    @deleted-success="fetchProductData"/>
                                         </td>
                                     </tr>
                                 </template>
@@ -273,7 +274,8 @@
         </div>
     </div>
 
-    <ProductAdd v-if="showProductAdd" @close="showProductAdd = false" />
+    <ProductAdd v-if="showProductAdd" :product="selectedProduct"  @close="showProductAdd = false"
+                                        @added-success="fetchProductData" />
 </template>
 
 <script setup>
@@ -304,7 +306,7 @@ const filteredProductGroups = computed(() => {
 })
 
 const productData = ref([ ])
-  const fetchProductData = async () => {
+const fetchProductData = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
         console.error("Token không tồn tại!");
@@ -328,10 +330,12 @@ const productData = ref([ ])
             router.push("/login"); // Chuyển hướng về trang đăng nhập
         }
     }
-  };
-  onMounted(fetchProductData);
+};
+onMounted(async () => {
+  await fetchProductData();
+});
 
-  const expandedId = ref(null)
+const expandedId = ref(null)
 
 function toggleDetail(id) {
     // console.log('Chọn product:', id);
@@ -343,6 +347,11 @@ defineProps({
 })
 
 const showProductAdd = ref(false);
+const selectedProduct = ref(null);
+const handleEditProduct = (product) => {
+    selectedProduct.value = { ...product };  // clone product
+    showProductAdd.value = true;
+};
 
 </script>
 

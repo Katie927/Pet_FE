@@ -57,9 +57,9 @@
             </div>
 
             <div class="add-edit-product">
-              <button class="btn btn-success btn-edit-product">Cập nhật</button>
+              <button class="btn btn-success btn-edit-product" @click="emit('edit-product', product)">Cập nhật</button>
               <button class="btn btn-red btn-lock-product">Ngừng kinh doanh</button>
-              <button class="btn btn-red btn-remove-product">Xóa</button>
+              <button class="btn btn-red btn-remove-product" @click="handleDeleteProduct">Xóa</button>
               <button class="btn btn-more btn-more-product">...</button>
             </div>
           </div>
@@ -75,9 +75,36 @@
 import '@/assets/styles/admin-css/kv-product.css'; 
 import '@/assets/styles/admin-css/kv-style.css'; 
 
+import axios from 'axios';
 
-defineProps({
+const props = defineProps({
   product: Object
-})
+});
+
+const emit = defineEmits(['edit-product', 'deleted-success']);
+
+const handleDeleteProduct = async () => {
+  if (!confirm(`Bạn có chắc muốn xóa sản phẩm: ${props.product.name}?`)) return;
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Vui lòng đăng nhập lại!");
+    router.push('/login');
+    return;
+  }
+
+  try {
+    await axios.delete(`http://localhost:8080/bej3/admin/product/delete/${props.product.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    alert("Xóa thành công!");
+    emit('deleted-success');  // báo cha load lại danh sách
+  } catch (error) {
+    console.error("Lỗi khi xóa:", error);
+    alert("Xóa thất bại!");
+  }
+};
 
 </script>

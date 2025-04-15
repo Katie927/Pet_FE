@@ -419,29 +419,28 @@
 
 import '@/assets/styles/admin-css/kv-product.css'; 
 import '@/assets/styles/admin-css/kv-style.css';
+import router from '@/router';
 import axios from 'axios';
 
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 
 const form = reactive({
   id: '',
   name: '',
   originalPrice: '',
   finalPrice: '',
-  Image: ''
+  Image: '',
   // location: '',
-  // images: [null, null, null, null, null]  // 5 ảnh
+  images: [null, null, null, null, null, null]  
 })
 
+const emit = defineEmits(['added-success', 'close']);
 const handleAddNew = async () => {
   const token = localStorage.getItem("token");
-  if (!token) {
-    console.error("Token không tồn tại!");
-    router.push("/login");
-    return;
-  }
+  if (!token) return router.push("/login");
+
   try {
-    const response = await axios.post(
+    await axios.post(
       "http://localhost:8080/bej3/admin/product/add",
       {
         name: form.name,
@@ -449,19 +448,36 @@ const handleAddNew = async () => {
         finalPrice: form.finalPrice
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+        headers: { Authorization: `Bearer ${token}` }
       }
     );
     alert("Thêm hàng hóa thành công!");
-    form.name = '';
-    form.originalPrice = '';
-    form.finalPrice = '';
+    Object.assign(form, { name: '', originalPrice: '', finalPrice: '' });
+    emit('added-success');
   } catch (error) {
-    console.error("Lỗi khi thêm sản phẩm:", error);
+    console.error("Lỗi khi thêm sản phẩm:", error.message);
+    if (error.response) {
+      console.error("Chi tiết:", error.response.data);
+      if ([401, 403].includes(error.response.status)) {
+        localStorage.removeItem("token");
+        router.push("/login");
+      }
+    }
     alert("Thêm hàng hóa thất bại!");
   }
 }
 
+const props = defineProps({
+  product: {
+    type: Object,
+    default: () => ({})
+  }
+});
+watch(() => props.product, (newVal) => {
+  if (newVal) {
+    form.name = newVal.name || '';
+    form.originalPrice = newVal.originalPrice || '';
+    form.finalPrice = newVal.finalPrice || '';
+  }
+}, { immediate: true });
 </script>
