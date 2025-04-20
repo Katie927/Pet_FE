@@ -637,7 +637,7 @@ table .cell-img {
 }
 
 .wrap-img-detail-large img {
-    width: 236px;
+    /* width: 236px; */
     height: 218px;
 }
 
@@ -665,8 +665,8 @@ table .cell-img {
 }
 
 .wrap-img-detail img {
-    width: 60px;
-    /* height: 50px; */
+    /* width: 60px; */
+    height: 58px;
 }
 
 .product-detail-right {

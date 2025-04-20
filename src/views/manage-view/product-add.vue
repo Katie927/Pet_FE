@@ -151,7 +151,6 @@
                 </div>
 
                 <!--  -->
-
                 <div class="form-image-group">
                   <div
                     class="form-image-product"

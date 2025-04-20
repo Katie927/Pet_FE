@@ -18,12 +18,21 @@
                 </div>
                 <div class="profile-img-detail-group">
                   <div
-                    v-for="(img, index) in 5"
+                    v-for="(img, index) in product.detailImages"
                     :key="index"
                     class="profile-img-detail"
                   >
                     <div class="wrap-img-detail">
                       <img :class="'preview-img-detail-' + (index + 1)" :src="img" alt="Preview" />
+                    </div>
+                  </div>
+                  <div
+                    v-for="n in (4 - product.detailImages.length)"
+                    :key="'empty-' + n"
+                    class="profile-img-detail"
+                  >
+                    <div class="wrap-img-detail">
+                      <span>+</span>
                     </div>
                   </div>
                 </div>
@@ -58,7 +67,7 @@
 
             <div class="add-edit-product">
               <button class="btn btn-success btn-edit-product" @click="emit('edit-product', product)">Cập nhật</button>
-              <button class="btn btn-red btn-lock-product">Ngừng kinh doanh</button>
+              <button class="btn btn-red btn-lock-product" @click="handleInactiveProduct">Ngừng kinh doanh</button>
               <button class="btn btn-red btn-remove-product" @click="handleDeleteProduct">Xóa</button>
               <button class="btn btn-more btn-more-product">...</button>
             </div>
@@ -107,4 +116,40 @@ const handleDeleteProduct = async () => {
   }
 };
 
+const handleInactiveProduct = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Vui lòng đăng nhập lại!");
+    router.push('/login');
+    return;
+  }
+
+  try {
+    await axios.put(`http://localhost:8080/bej3/admin/product/inactive/${props.product.id}`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    alert("Cập nhật thành công!");
+    emit('deleted-success');  // báo cha load lại danh sách
+  } catch (error) {
+    console.error("Lỗi khi xóa:", error);
+    alert("Xóa thất bại!");
+  }
+};
+
 </script>
+
+<style scoped>
+.add-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #ccc;
+  cursor: pointer;
+}
+.add-more span {
+  font-size: 24px;
+  color: #999;
+}
+</style>

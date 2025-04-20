@@ -256,7 +256,7 @@
                                         <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>
                                         <td class="trademark">{{ product.name }}</td>
                                         <td class="inventory">{{ product.name }}</td>
-                                        <td class="inventory">{{ product.name }}</td>
+                                        <td class="inventory">{{ product.status }}</td>
                                     </tr>
                                     <tr v-if="expandedId === product.id">
                                         <td colspan="9" class="cell-detail p-0">
@@ -274,7 +274,7 @@
         </div>
     </div>
 
-    <ProductAdd v-if="showProductAdd" :product="selectedProduct"  @close="showProductAdd = false"
+    <ProductAdd v-if="showProductAdd" :product="selectedProduct"  @close="showProductAdd = false, selectedProduct = null"
                                         @added-success="fetchProductData" />
 </template>
 
