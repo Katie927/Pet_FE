@@ -58,15 +58,15 @@
                   <!-- Tên hàng -->
                   <div class="form-group form-group-product">
                     <label class="form-label">
-                      Tên hàng
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Tên hàng là tên của sản phẩm" aria-hidden="true"></i>
-                      <span class="sr-only">Tên hàng là tên của sản phẩm</span>
+                      Màu sắc
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Màu sắc" aria-hidden="true"></i>
+                      <span class="sr-only">Màu sắc</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input
                         class="form-control form-control-form-group-product"
                         type="text"
-                        v-model="form.name"
+                        v-model="form.color"
                       />
                     </div>
                   </div>
@@ -152,9 +152,31 @@
 
                 <!--  -->
                 <div class="form-image-group">
+                  <div class="form-image-product">
+                    <div class="wrap-img wrap-img-form-product">
+                      <label for="mainProductImg" class="custom-upload-btn">
+                        <img
+                          id="mainPreviewImg"
+                          :src="form.image || ''"
+                          alt="Preview Image"
+                        />
+                      </label>
+                    </div>
+                    <div class="dropzone">
+                      <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
+                        <input
+                          type="file"
+                          id="mainProductImg"
+                          accept="image/*"
+                          @change="e => handleMainImageChange(e)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   <div
                     class="form-image-product"
-                    v-for="(img, index) in form.images"
+                    v-for="(img, index) in form.detailImages"
                     :key="index"
                   >
                     <div class="wrap-img wrap-img-form-product">
@@ -166,7 +188,6 @@
                         />
                       </label>
                     </div>
-
                     <div class="dropzone">
                       <div
                         class="upload-button"
@@ -179,12 +200,6 @@
                           accept="image/*"
                           @change="e => handleImageChange(e, index)"
                         />
-                        <!-- <div class="upload-status-total">
-                          <em>drop files here to upload*</em>
-                          <strong class="upload-status"></strong>
-                          <span class="file-name">{{ getFileName(index) }}</span>
-                          <strong>100%</strong>
-                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -428,9 +443,10 @@ const form = reactive({
   name: '',
   originalPrice: '',
   finalPrice: '',
-  Image: '',
+  image: '',
+  color: '',
   // location: '',
-  images: [null, null, null, null, null, null]  
+  detailImages: [null, null, null, null, null]  
 })
 
 const emit = defineEmits(['added-success', 'close']);
@@ -444,7 +460,8 @@ const handleAddNew = async () => {
       {
         name: form.name,
         originalPrice: form.originalPrice,
-        finalPrice: form.finalPrice
+        finalPrice: form.finalPrice,
+        Image: form.image
       },
       {
         headers: { Authorization: `Bearer ${token}` }

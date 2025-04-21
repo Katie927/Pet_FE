@@ -27,17 +27,19 @@
                     </div>
                   </div>
                   <div
-                    v-for="n in (4 - product.detailImages.length)"
+                    v-for="n in (8 - product.detailImages.length)"
                     :key="'empty-' + n"
                     class="profile-img-detail"
                   >
-                    <div class="wrap-img-detail">
+                    <div class="wrap-img-detail add-more">
                       <span>+</span>
                     </div>
                   </div>
                 </div>
                 
+                
               </div>
+              
 
               <div class="product-detail-right">
                 <div class="product-detail-right-content">
@@ -151,5 +153,15 @@ const handleInactiveProduct = async () => {
 .add-more span {
   font-size: 24px;
   color: #999;
+}
+
+.profile-img-detail-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px; 
+}
+
+.profile-img-detail {
+  width: calc(50% - 9px); 
 }
 </style>

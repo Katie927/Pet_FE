@@ -226,6 +226,7 @@
                                         <a href="#" class="k-link"></a>
                                     </th> -->
                                     <th class="product-name" for="containerCheckBoxProductName">Tên hàng</th>
+                                    <th class="inventory" for="containerCheckBoxInventory">Màu</th>
                                     <th class="product-type" for="containerCheckBoxProductType">Giá vốn</th>
                                     <th class="selling-price" for="containerCheckBoxSellingPrice">Giá bán</th>
                                     <th class="cost-price" for="containerCheckBoxCostPrice">Giá khuyến mãi</th>
@@ -251,6 +252,7 @@
                                             <img :src="product.image" alt="img" style="width: 30px" />
                                         </td>
                                         <td class="product-name">{{ product.name }}</td>
+                                        <td class="inventory">{{ product.color }}</td>
                                         <td class="product-type">{{ product.name }}</td>
                                         <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td>
                                         <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>

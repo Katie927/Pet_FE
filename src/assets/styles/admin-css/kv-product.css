@@ -638,26 +638,28 @@ table .cell-img {
 
 .wrap-img-detail-large img {
     /* width: 236px; */
-    height: 218px;
+    height: 268px;
 }
 
 .profile-img-detail-group {
+    margin-left: 24px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: start;
     justify-content: start;
+    max-width: 200px;
 }
 
 .profile-img-detail {
-    width: 62px;
+    width: 71px;
     cursor: pointer;
 }
 
 .wrap-img-detail {
     width: 62px;
-    height: 52px;
+    /* height: 52px; */
     background-color: #fff;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -666,7 +668,7 @@ table .cell-img {
 
 .wrap-img-detail img {
     /* width: 60px; */
-    height: 58px;
+    height: 92px;
 }
 
 .product-detail-right {
