@@ -362,7 +362,7 @@
 .operation {
     text-align: left;
     padding: 8px 24px;
-    background-color: #fff;
+    background-color: #e6e6e6;
     border: none;
     color: #121212;
     font-size: 13px;
@@ -376,6 +376,10 @@
     justify-content: start;
     z-index: 500;
 }
+
+/* .operation :hover{
+    background-color: #b84646;
+} */
 
 .header-filter-buttons button i {
     line-height: 20px;
@@ -569,7 +573,7 @@ table .cell-img {
 
 .product-detail-body {
     width: 1042px;
-    height: 545px;
+    /* height: 545px; */
     background-color: rgb(255, 255, 255);
     color: rgb(46, 46, 46);
     padding: 25px 45px 0px 30px;
@@ -1096,7 +1100,7 @@ table .cell-img {
 
 .wrap-img-form-product img {
     width: 95.797px;
-    height: 76px;
+    /* height: 76px; */
 }
 
 .upload-button {

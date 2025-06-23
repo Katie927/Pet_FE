@@ -98,7 +98,7 @@
                                         <span></span>
                                         <i class="btn-icon fas fa-solid fa-caret-down" aria-hidden="true"></i>
                                     </button>
-                                    <ul class="btn-add-product-list" id="btnAddProductList">
+                                    <ul class="btn-add-product-list" id="btnAddProductList" style="z-index: 11;">
                                         <li>
                                             <button class="operation" id="addCommodityProductButton" data-action="" @click="showProductAdd = true">
                                                 <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>

@@ -152,7 +152,7 @@
 
                 <!--  -->
                 <div class="form-image-group">
-                  <div class="form-image-product">
+                  <div class="form-image-product" style="margin-right: 34px;">
                     <div class="wrap-img wrap-img-form-product">
                       <label for="mainProductImg" class="custom-upload-btn">
                         <img
@@ -175,12 +175,12 @@
                   </div>
 
                   <div
-                    class="form-image-product"
+                    class="form-image-product" style="margin-left: 7px;"
                     v-for="(img, index) in form.detailImages"
                     :key="index"
                   >
                     <div class="wrap-img wrap-img-form-product">
-                      <label :for="`productImg${index + 1}`" class="custom-upload-btn">
+                      <label :for="'productImg' + (index + 1)" class="custom-upload-btn">
                         <img
                           :id="`previewImg${index + 1}`"
                           :src="img || ''"
@@ -191,8 +191,8 @@
                     <div class="dropzone">
                       <div
                         class="upload-button"
-                        :id="`uploadBtn${index + 1}`"
-                        :data-preview-id="`previewImg${index + 1}`"
+                        :id="'previewImg' + (index + 1)"
+                        :data-preview-id="'previewImg' + (index + 1)"
                       >
                         <input
                           type="file"
@@ -446,7 +446,7 @@ const form = reactive({
   image: '',
   color: '',
   // location: '',
-  detailImages: [null, null, null, null, null]  
+  detailImages: [null, null, null, null, null, null]  
 })
 
 const emit = defineEmits(['added-success', 'close']);
@@ -494,6 +494,8 @@ watch(() => props.product, (newVal) => {
     form.name = newVal.name || '';
     form.originalPrice = newVal.originalPrice || '';
     form.finalPrice = newVal.finalPrice || '';
+    form.image = newVal.image || '';
+    form.detailImages = newVal.detailImages || '';
   }
 }, { immediate: true });
 </script>
