@@ -226,11 +226,13 @@
                                         <a href="#" class="k-link"></a>
                                     </th> -->
                                     <th class="product-name" for="containerCheckBoxProductName">Tên hàng</th>
-                                    <th class="inventory" for="containerCheckBoxInventory">Màu</th>
-                                    <th class="product-type" for="containerCheckBoxProductType">Giá vốn</th>
+                                   
+                                    <!-- <th class="inventory" for="containerCheckBoxInventory">Màu</th>
+                                    <th class="product-type" for="containerCheckBoxProductType">Giá vốn</th> -->
                                     <th class="selling-price" for="containerCheckBoxSellingPrice">Giá bán</th>
-                                    <th class="cost-price" for="containerCheckBoxCostPrice">Giá khuyến mãi</th>
-                                    <th class="trademark" for="containerCheckBoxTrademark">Thương hiệu</th>
+                                
+                                    <th class="cost-price" for="containerCheckBoxCostPrice">Thương hiệu</th>
+                                    <th class="trademark" for="containerCheckBoxTrademark">Đã bán</th>
                                     <th class="inventory" for="containerCheckBoxInventory">Tồn kho</th>
                                     <th class="inventory" for="containerCheckBoxInventory">Trạng thái</th>
                                 </tr>
@@ -249,15 +251,17 @@
                                             </label>
                                         </td>
                                         <td class="cell-img">
-                                            <img :src="product.image" alt="img" style="width: 30px" />
+                                            <img :src="product.variant.thumbnail" alt="img" style="width: 43px" />
                                         </td>
                                         <td class="product-name">{{ product.name }}</td>
-                                        <td class="inventory">{{ product.color }}</td>
-                                        <td class="product-type">{{ product.name }}</td>
-                                        <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td>
-                                        <td class="cost-price">{{ product.finalPrice.toLocaleString('vi-VN') }}</td>
-                                        <td class="trademark">{{ product.name }}</td>
+                                        <!-- <td class="inventory">{{ product.color }}</td> -->
+                                        <!-- <td class="product-type">{{ product.name }}</td>
+                                        <td class="selling-price">{{ product.originalPrice.toLocaleString('vi-VN') }}</td> -->
+                                        <td class="cost-price">{{ product.variant.finalPrice.toLocaleString('vi-VN') }}</td>
+                                        <td class="cost-price">{{ product.name }}</td>
+                                        <!-- <td class="trademark">{{ product.name }}</td> -->
                                         <td class="inventory">{{ product.name }}</td>
+                                        <td class="inventory">{{ product.status }}</td>
                                         <td class="inventory">{{ product.status }}</td>
                                     </tr>
                                     <tr v-if="expandedId === product.id">

@@ -486,6 +486,7 @@ table thead tr th {
 
 table .cell-img {
     position: relative;
+    width: 50px;
 }
 
 .cell-check {
@@ -507,7 +508,7 @@ table .cell-img {
     min-width: 160px;
 }
 .cost-price {
-    min-width: 190px;
+    min-width: 167px;
 }
 .trademark {
     min-width: 250px;
@@ -522,9 +523,10 @@ table .cell-img {
 }
 
 .kv-table-row td{
+    font-size: 15px;
     border-top: 1px solid #ddd;
     border-left: 1px solid #ddd;
-    padding-left: 7px;
+    padding: 7px 11px;
 }
 
 
