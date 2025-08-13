@@ -1,24 +1,35 @@
 <!-- components/ProductDetailRow.vue -->
 <template>
-  <tr v-if="product" class="row-detail row-detail-commodity">
+  <tr v-if="productDetails" class="row-detail row-detail-commodity">
     <td colspan="9" class="cell-detail">
       <div class="product-detail">
         <div class="product-detail-container">
           <div class="product-detail-body">
             <div class="identification-item">
-              <h3 class="identification-item-title">{{ product.name }}</h3>
+              <h3 class="identification-item-title">{{ productDetails.name }}</h3>
+            </div>
+
+            <div class="variant-selector">
+              <button
+                v-for="(variant, vIndex) in productDetails.variants || []"
+                :key="variant.id"
+                :class="['variant-btn', { active: vIndex === selectedVariantIndex }]"
+                @click="selectVariant(vIndex)"
+              >
+                {{ variant.color || 'Variant ' + (vIndex + 1) }}
+              </button>
             </div>
 
             <div class="form-wrapper product-detail-body-container">
               <div class="product-detail-left">
                 <div class="profile-img-detail-large">
                   <div class="wrap-img-detail-large">
-                    <img class="preview-img-detail-large" :src="product.image" alt="Preview" />
+                    <img class="preview-img-detail-large" :src="productDetails?.variants?.[selectedVariantIndex]?.detailImages?.[0]" alt="Preview" />
                   </div>
                 </div>
                 <div class="profile-img-detail-group">
                   <div
-                    v-for="(img, index) in product.detailImages"
+                    v-for="(img, index) in productDetails?.variants?.[selectedVariantIndex]?.detailImages || []"
                     :key="index"
                     class="profile-img-detail"
                   >
@@ -27,7 +38,7 @@
                     </div>
                   </div>
                   <div
-                    v-for="n in (8 - product.detailImages.length)"
+                    v-for="n in (8 - productDetails?.variants?.[0]?.detailImages?.length)"
                     :key="'empty-' + n"
                     class="profile-img-detail"
                   >
@@ -45,22 +56,22 @@
                 <div class="product-detail-right-content">
                   <div class="product-detail-identification">
                     <div class="identification-group">
-                      <div class="identification-item"><span class="identification-item-name">Mã hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Nhóm hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Loại hàng:</span><span class="identification-item-code">{{ product.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Thương hiệu:</span><span class="identification-item-code">{{ product.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Giá bán:</span><span class="identification-item-code">{{ product.originalPrice.toLocaleString('vi-VN') }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Giá vốn:</span><span class="identification-item-code">{{ product.finalPrice.toLocaleString('vi-VN') }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Trọng lượng:</span><span class="identification-item-code">{{ product.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code">{{ product.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Mã hàng:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Nhóm hàng:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Loại hàng:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Thương hiệu:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá bán:</span><span class="identification-item-code">{{ productDetails.variants[0].originalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá vốn:</span><span class="identification-item-code">{{ productDetails.variants[0].finalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Trọng lượng:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
                     </div>
                   </div>
 
                   <div class="product-detail-description">
                     <div class="description-group">
-                      <div class="description-item"><span class="description-item-name">Mô tả</span><span class="description-item-code">{{ product.name }}</span></div>
-                      <div class="description-item"><span class="description-item-name">Ghi chú đặt hàng</span><span class="description-item-code">{{ product.name }}</span></div>
-                      <div class="description-item"><span class="description-item-name">Nhà cung cấp</span><span class="description-item-code">{{ product.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Mô tả</span><span class="description-item-code">{{ productDetails.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Ghi chú đặt hàng</span><span class="description-item-code">{{ productDetails.name }}</span></div>
+                      <div class="description-item"><span class="description-item-name">Nhà cung cấp</span><span class="description-item-code">{{ productDetails.name }}</span></div>
                     </div>
                   </div>
                 </div>
@@ -68,7 +79,7 @@
             </div>
 
             <div class="add-edit-product">
-              <button class="btn btn-success btn-edit-product" @click="emit('edit-product', product)">Cập nhật</button>
+              <button class="btn btn-success btn-edit-product" @click="emit('edit-product', productDetails)">Cập nhật</button>
               <button class="btn btn-red btn-lock-product" @click="handleInactiveProduct">Ngừng kinh doanh</button>
               <button class="btn btn-red btn-remove-product" @click="handleDeleteProduct">Xóa</button>
               <button class="btn btn-more btn-more-product">...</button>
@@ -87,16 +98,26 @@ import '@/assets/styles/admin-css/kv-product.css';
 import '@/assets/styles/admin-css/kv-style.css'; 
 
 import axios from 'axios';
+import { ref, onMounted, watch } from 'vue';
 
 const props = defineProps({
-  product: Object
-});
+  productId: {
+    type: [String, Number],
+    required: true
+  }
+})
 
 const emit = defineEmits(['edit-product', 'deleted-success']);
 
-const handleDeleteProduct = async () => {
-  if (!confirm(`Bạn có chắc muốn xóa sản phẩm: ${props.product.name}?`)) return;
+// --- details ------------------------------------------------------------------------------------
+const selectedVariantIndex = ref(0)
 
+function selectVariant(index) {
+  selectedVariantIndex.value = index
+}
+
+const productDetails = ref(null)
+const handleFetchProductDetails = async () => {
   const token = localStorage.getItem("token");
   if (!token) {
     alert("Vui lòng đăng nhập lại!");
@@ -105,40 +126,77 @@ const handleDeleteProduct = async () => {
   }
 
   try {
-    await axios.delete(`http://localhost:8080/bej3/admin/product/delete/${props.product.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    const response = await axios.get(
+      `http://localhost:8080/bej3/admin/product/${props.productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
-    });
-    alert("Xóa thành công!");
-    emit('deleted-success');  // báo cha load lại danh sách
+    )
+    productDetails.value = response.data.result;
   } catch (error) {
-    console.error("Lỗi khi xóa:", error);
-    alert("Xóa thất bại!");
+    console.error("Lỗi", error);
+    alert("Lỗi!");
   }
 };
+watch(
+  () => props.productId,
+  (newId) => {
+    if (newId) {
+      handleFetchProductDetails();
+    }
+  },
+  { immediate: true }
+);
 
-const handleInactiveProduct = async () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    alert("Vui lòng đăng nhập lại!");
-    router.push('/login');
-    return;
-  }
+// delete------------------------------------------------------------------------------------------
+// const handleDeleteProduct = async () => {
+//   if (!confirm(`Bạn có chắc muốn xóa sản phẩm: ${props.product.name}?`)) return;
 
-  try {
-    await axios.put(`http://localhost:8080/bej3/admin/product/inactive/${props.product.id}`, null, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    alert("Cập nhật thành công!");
-    emit('deleted-success');  // báo cha load lại danh sách
-  } catch (error) {
-    console.error("Lỗi khi xóa:", error);
-    alert("Xóa thất bại!");
-  }
-};
+//   const token = localStorage.getItem("token");
+//   if (!token) {
+//     alert("Vui lòng đăng nhập lại!");
+//     router.push('/login');
+//     return;
+//   }
+
+//   try {
+//     await axios.delete(`http://localhost:8080/bej3/admin/product/delete/${props.product.id}`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     });
+//     alert("Xóa thành công!");
+//     emit('deleted-success');  // báo cha load lại danh sách
+//   } catch (error) {
+//     console.error("Lỗi khi xóa:", error);
+//     alert("Xóa thất bại!");
+//   }
+// };
+
+//inactinve --------------------------------------------------------------------------------------------
+// const handleInactiveProduct = async () => {
+//   const token = localStorage.getItem("token");
+//   if (!token) {
+//     alert("Vui lòng đăng nhập lại!");
+//     router.push('/login');
+//     return;
+//   }
+
+//   try {
+//     await axios.put(`http://localhost:8080/bej3/admin/product/inactive/${props.product.id}`, null, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     });
+//     alert("Cập nhật thành công!");
+//     emit('deleted-success');  // báo cha load lại danh sách
+//   } catch (error) {
+//     console.error("Lỗi khi xóa:", error);
+//     alert("Xóa thất bại!");
+//   }
+// };
 
 </script>
 
@@ -163,5 +221,22 @@ const handleInactiveProduct = async () => {
 
 .profile-img-detail {
   width: calc(50% - 9px); 
+}
+
+
+.variant-selector {
+  margin-bottom: 10px;
+}
+.variant-btn {
+  margin-right: 5px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  cursor: pointer;
+}
+.variant-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 </style>

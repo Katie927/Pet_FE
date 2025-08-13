@@ -266,7 +266,7 @@
                                     </tr>
                                     <tr v-if="expandedId === product.id">
                                         <td colspan="9" class="cell-detail p-0">
-                                            <ProductDetailRow :product="product" @edit-product="handleEditProduct"
+                                            <ProductDetailRow :product-id ="product.id" @edit-product="handleEditProduct"
                                                                                     @deleted-success="fetchProductData"/>
                                         </td>
                                     </tr>
@@ -342,7 +342,6 @@ onMounted(async () => {
 });
 
 const expandedId = ref(null)
-
 function toggleDetail(id) {
     // console.log('Chọn product:', id);
   expandedId.value = expandedId.value === id ? null : id
