@@ -56,20 +56,7 @@
                   </div>
 
                   <!-- Tên hàng -->
-                  <div class="form-group form-group-product">
-                    <label class="form-label">
-                      Màu sắc
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Màu sắc" aria-hidden="true"></i>
-                      <span class="sr-only">Màu sắc</span>
-                    </label>
-                    <div class="form-wrap form-wrap-product">
-                      <input
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        v-model="form.color"
-                      />
-                    </div>
-                  </div>
+              
 
                   <!-- Nhóm hàng -->
                   <div class="form-group form-group-product">
@@ -209,6 +196,28 @@
               <!-- right content -->
               <div class="info-form-price-add-product right-content-info-product">
                 <div class="information-group information-group-form-product">
+                  <!--  -->
+                  <div class="form-group form-price-add-product">
+                    <label class="form-label">
+                      Màu sắc
+                      <i
+                        class="parameter-type-icon fas fa-solid fa-circle-info"
+                        title="Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="sr-only">
+                        Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)
+                      </span>
+                    </label>
+                    <div class="form-wrap form-wrap-product">
+                      <input
+                        type="text"
+                        class="form-control form-control-form-price-add-product"
+                        v-model="form.originalPrice"
+                      />
+                    </div>
+                  </div>
+                  <!--  -->
                   <div class="form-group form-price-add-product">
                     <label class="form-label">
                       Giá vốn

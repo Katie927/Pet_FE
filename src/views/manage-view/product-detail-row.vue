@@ -151,29 +151,29 @@ watch(
 );
 
 // delete------------------------------------------------------------------------------------------
-// const handleDeleteProduct = async () => {
-//   if (!confirm(`Bạn có chắc muốn xóa sản phẩm: ${props.product.name}?`)) return;
+const handleDeleteProduct = async () => {
+  if (!confirm(`Bạn có chắc muốn xóa sản phẩm: ${props.productId}?`)) return;
 
-//   const token = localStorage.getItem("token");
-//   if (!token) {
-//     alert("Vui lòng đăng nhập lại!");
-//     router.push('/login');
-//     return;
-//   }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Vui lòng đăng nhập lại!");
+    router.push('/login');
+    return;
+  }
 
-//   try {
-//     await axios.delete(`http://localhost:8080/bej3/admin/product/delete/${props.product.id}`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     });
-//     alert("Xóa thành công!");
-//     emit('deleted-success');  // báo cha load lại danh sách
-//   } catch (error) {
-//     console.error("Lỗi khi xóa:", error);
-//     alert("Xóa thất bại!");
-//   }
-// };
+  try {
+    await axios.delete(`http://localhost:8080/bej3/admin/product/delete/${props.productId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    alert("Xóa thành công!");
+    emit('deleted-success');  // báo cha load lại danh sách
+  } catch (error) {
+    console.error("Lỗi khi xóa:", error);
+    alert("Xóa thất bại!");
+  }
+};
 
 //inactinve --------------------------------------------------------------------------------------------
 // const handleInactiveProduct = async () => {
@@ -235,8 +235,8 @@ watch(
   cursor: pointer;
 }
 .variant-btn.active {
-  background: #007bff;
+  background: #009981;
   color: white;
-  border-color: #007bff;
+  border-color: #009981;
 }
 </style>
