@@ -223,7 +223,7 @@ const handleDeleteProduct = async () => {
   width: calc(50% - 9px); 
 }
 
-
+/*  */
 .variant-selector {
   margin-bottom: 10px;
 }

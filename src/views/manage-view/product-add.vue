@@ -9,17 +9,33 @@
             <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" data-action="addCommodity"
                   @click="$emit('close')"></i>
           </div>
+
+          
         </div>
         <!-- add product container -->
         <div class="add-product-container">
 
           <!-- form content -->
           <div class="tab-content tab-content-form-product" style="display: block;">
+
             <div class="form-wrapper">
+
+              
+
               <!-- left content -->
               <div class="info-form-image-add-product left-content-info-product">
+                
+                <div class="variant-selector">
+                  <button
+                    class="variant-btn"
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
+                  </button>
+                </div>
                 <!-- Initialization information -->
                 <div class="information-group information-group-form-product">
+                  
                   <!-- Mã hàng -->
                   <div class="form-group form-group-product">
                     <label class="form-label">
@@ -137,9 +153,10 @@
 
                 <div class="variant-selector">
                   <button
-                    
+                    class="variant-btn"
                   >
                     <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
                   </button>
                 </div>
 
@@ -163,6 +180,7 @@
                           accept="image/*"
                           @change="e => handleMainImageChange(e)"
                         />
+              
                       </div>
                     </div>
                   </div>
@@ -197,6 +215,8 @@
                     </div>
                   </div>
                 </div>
+
+                
               </div>
 
               <!-- right content -->
@@ -437,7 +457,7 @@ import '@/assets/styles/admin-css/kv-style.css';
 import router from '@/router';
 import axios from 'axios';
 
-import { reactive, watch } from 'vue'
+import { reactive, watch, ref } from 'vue'
 
 const form = reactive({
   id: '',
@@ -499,4 +519,37 @@ watch(() => props.product, (newVal) => {
     form.detailImages = newVal.detailImages || '';
   }
 }, { immediate: true });
+
+
+// preview img
+const previewUrl = ref(null);
+const handleMainImageChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    form.image = URL.createObjectURL(file);
+  } else {
+    form.image = '';
+  }
+};
 </script>
+
+
+<style scoped>
+
+.variant-selector {
+  margin-bottom: 10px;
+}
+.variant-btn {
+  margin-right: 5px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  cursor: pointer;
+}
+.variant-btn.active {
+  background: #009981;
+  color: white;
+  border-color: #009981;
+}
+
+</style>

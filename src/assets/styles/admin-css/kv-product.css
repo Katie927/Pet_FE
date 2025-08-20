@@ -1072,7 +1072,7 @@ table .cell-img {
 
 .wrap-img-form-product {
     width: 96.797px;
-    height: 78px;
+    height: 113px;
     background-color: rgb(255, 255, 255);
     margin-bottom: 12px;
     display: flex;
@@ -1098,11 +1098,13 @@ table .cell-img {
     border-style: dashed;
     border-color: rgb(149, 149, 149);
     border-image: initial;
+    /* max-height: ; */
 }
 
 .wrap-img-form-product img {
-    width: 95.797px;
+    max-width: 95.797px;
     /* height: 76px; */
+    max-height: 113px;
 }
 
 .upload-button {
