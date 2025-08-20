@@ -251,7 +251,7 @@
                                             </label>
                                         </td>
                                         <td class="cell-img">
-                                            <img :src="product.variant.thumbnail" alt="img" style="width: 43px" />
+                                            <img :src="product.image" alt="img" style="width: 43px" />
                                         </td>
                                         <td class="product-name">{{ product.name }}</td>
                                         <!-- <td class="inventory">{{ product.color }}</td> -->

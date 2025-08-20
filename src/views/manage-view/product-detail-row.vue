@@ -30,7 +30,7 @@
                 <div class="profile-img-detail-group">
                   <div
                     v-for="(img, index) in productDetails?.variants?.[selectedVariantIndex]?.detailImages || []"
-                    :key="index"
+                    :key="img"
                     class="profile-img-detail"
                   >
                     <div class="wrap-img-detail">

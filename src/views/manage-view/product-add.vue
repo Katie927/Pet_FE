@@ -39,6 +39,7 @@
                   </div>
 
                   <!-- Mã vạch -->
+                  <!-- Tên hàng -->
                   <div class="form-group form-group-product">
                     <label class="form-label">
                       Tên hàng
@@ -54,9 +55,6 @@
                       />
                     </div>
                   </div>
-
-                  <!-- Tên hàng -->
-              
 
                   <!-- Nhóm hàng -->
                   <div class="form-group form-group-product">
@@ -135,6 +133,14 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div class="variant-selector">
+                  <button
+                    
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                  </button>
                 </div>
 
                 <!--  -->
@@ -382,21 +388,7 @@
                 </div>
 
                 <!-- detail notes -->
-                <div class="form-group form-detail-notes-add-product">
-                  <h3 class="form-title form-title-notes">
-                    <span class="form-span form-span-notes">Mẫu ghi chú (hóa đơn, đặt hàng)</span>
-                  </h3>
-                  <div class="form-wrapper form-wrapper-detail-notes">
-                    <div class="form-wrap form-wrap-product-detail-notes">
-                      <div class="form-label-icon form-label-icon-notes">
-                        <textarea
-                          class="note-form form-input"
-                          v-model="form.note"
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
