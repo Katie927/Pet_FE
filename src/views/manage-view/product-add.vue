@@ -6,7 +6,7 @@
         <div class="add-product-head header">
           <div class="add-product-head-title header-title">
             <span id="titleAddProduct" class="add-product-title-heading span-heading">Thêm hàng hóa</span>
-            <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" data-action="addCommodity"
+            <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" 
                   @click="$emit('close')"></i>
           </div>
 
@@ -32,7 +32,20 @@
                     <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
                       Xanh
                   </button>
+                  <button
+                    class="variant-btn"
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
+                  </button>
+                  <button
+                    class="variant-btn"
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
+                  </button>
                 </div>
+                
                 <!-- Initialization information -->
                 <div class="information-group information-group-form-product">
                   
@@ -151,63 +164,38 @@
                   </div>
                 </div>
 
-                <div class="variant-selector">
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
-                  </button>
-                </div>
 
                 <!--  -->
                 <div class="form-image-group">
                   <div class="form-image-product" style="margin-right: 34px;">
                     <div class="wrap-img wrap-img-form-product">
                       <label for="mainProductImg" class="custom-upload-btn">
-                        <img
-                          id="mainPreviewImg"
-                          :src="form.image || ''"
-                          alt="Preview Image"
-                        />
+                        <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
                       </label>
                     </div>
                     <div class="dropzone">
                       <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
-                        <input
-                          type="file"
-                          id="mainProductImg"
-                          accept="image/*"
+                        <input type="file" id="mainProductImg" accept="image/*"
                           @change="e => handleMainImageChange(e)"
                         />
-              
                       </div>
                     </div>
                   </div>
 
-                  <div
-                    class="form-image-product" style="margin-left: 7px;"
+                  <div class="form-image-product" style="margin-left: 7px;"
                     v-for="(img, index) in form.detailImages"
                     :key="index"
                   >
                     <div class="wrap-img wrap-img-form-product">
                       <label :for="'productImg' + (index + 1)" class="custom-upload-btn">
-                        <img
-                          :id="`previewImg${index + 1}`"
-                          :src="img || ''"
-                          alt="Preview Image"
-                        />
+                        <img  :id="`previewImg${index + 1}`"  :src="img || ''" alt="Preview Image"/>
                       </label>
                     </div>
                     <div class="dropzone">
-                      <div
-                        class="upload-button"
-                        :id="'previewImg' + (index + 1)"
+                      <div class="upload-button" :id="'previewImg' + (index + 1)" 
                         :data-preview-id="'previewImg' + (index + 1)"
                       >
-                        <input
-                          type="file"
-                          :id="`productImg${index + 1}`"
+                        <input type="file" :id="`productImg${index + 1}`"
                           accept="image/*"
                           @change="e => handleImageChange(e, index)"
                         />
@@ -379,11 +367,8 @@
                       </label>
 
                       <div class="form-label-icon form-label-icon-inventory">
-                        <input
-                          type="text"
-                          class="form-control form-control-inventory-levels-detail"
-                          placeholder="999,999,999"
-                          v-model="form.maxInventory"
+                        <input type="text" class="form-control form-control-inventory-levels-detail"
+                          placeholder="999,999,999" v-model="form.maxInventory"
                         />
                       </div>
                     </div>
@@ -416,19 +401,14 @@
 
         <!-- add product bottom -->
         <div class="add-product-bottom">
-
-          <button
-            id="btnSaveApplicationProductMore"
-            class="btn btn-success btn-success-bottom"
+          <button id="btnSaveApplicationProductMore" class="btn btn-success btn-success-bottom"
             @click="handleAddNew"
           >
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
             <span>Thêm mới</span>
           </button>
 
-          <button
-            id="btnSaveApplicationProductCopy"
-            class="btn btn-success btn-success-bottom"
+          <button id="btnSaveApplicationProductCopy" class="btn btn-success btn-success-bottom"
             @click="handleSaveAndCopy"
           >
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
@@ -438,7 +418,6 @@
           <button
             id="cancelAddProduct"
             class="btn btn-default btn-default-bottom"
-            data-action="addCommodity"
             @click="handleCancel"
           >
             <i class="btn-success-icon fas fa-solid fa-ban" aria-hidden="true"></i>
@@ -531,13 +510,20 @@ const handleMainImageChange = (event) => {
     form.image = '';
   }
 };
+
+const handleImageChange = (event, index) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  const imageUrl = URL.createObjectURL(file);
+  form.detailImages[index] = imageUrl;
+};
 </script>
 
 
 <style scoped>
 
 .variant-selector {
-  margin-bottom: 10px;
+  margin: 10px;
 }
 .variant-btn {
   margin-right: 5px;
