@@ -20,18 +20,11 @@
 
             <div class="form-wrapper">
 
-              
 
               <!-- left content -->
               <div class="info-form-image-add-product left-content-info-product">
                 
                 <div class="variant-selector">
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
-                  </button>
                   <button
                     class="variant-btn"
                   >
@@ -57,12 +50,8 @@
                       <span class="sr-only">Mã hàng là thông tin duy nhất</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        placeholder="Mã hàng tự động"
-                        readonly="true"
-                        v-model="form.id"
+                      <input class="form-control form-control-form-group-product" type="text"
+                        placeholder="Mã hàng tự động" readonly="true" v-model="form.id"
                       />
                     </div>
                   </div>
@@ -76,11 +65,8 @@
                       <span class="sr-only">Tên hàng là tên của sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        required
-                        v-model="form.name"
+                      <input class="form-control form-control-form-group-product" type="text"
+                        required v-model="form.name"
                       />
                     </div>
                   </div>
@@ -93,17 +79,13 @@
                       <span class="sr-only">Lựa chọn nhóm hàng cho sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        placeholder="---Lựa chọn---"
-                        v-model="form.group"
+                      <input class="form-control form-control-form-group-product" type="text"
+                        placeholder="---Lựa chọn---" v-model="form.group"
                       />
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-sort-down" aria-hidden="true"></i>
                         <a href="#" class="add-product-group-icon btn-icon add-group-product fas fa-solid fa-plus"
-                          title="Thêm nhóm hàng mới"
-                          aria-hidden="true"
+                          title="Thêm nhóm hàng mới"   aria-hidden="true"
                           @click.prevent="addGroup"></a>
                         <span class="sr-only">Thêm nhóm hàng mới</span>
                       </div>
@@ -118,18 +100,14 @@
                       <span class="sr-only">Thương hiệu, nhãn hiệu của sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        id="productTrademark"
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        placeholder="---Chọn thương hiệu---"
+                      <input id="productTrademark"  class="form-control form-control-form-group-product"
+                        type="text"   placeholder="---Chọn thương hiệu---"
                         v-model="form.brand"
                       />
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-sort-down" id="hideAddProductTrademarkForm" aria-hidden="true"></i>
                         <a href="#" class="add-trademark-icon btn-icon add-group-product fas fa-solid fa-plus"
-                          title="Thêm thương hiệu mới"
-                          id="addProductTrademarkForm"
+                          title="Thêm thương hiệu mới"  id="addProductTrademarkForm"
                           aria-hidden="true"
                           @click.prevent="addBrand"></a>
                         <span class="sr-only">Thêm thương hiệu mới</span>
@@ -145,18 +123,13 @@
                       <span class="sr-only">Sử dụng để ghi lại vị trí mà hàng hóa được cất giữ hoặc trưng bày. Ví dụ: kệ số 1, số 2...</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        id="productLocation"
-                        class="form-control form-control-form-group-product"
-                        type="text"
-                        v-model="form.location"
+                      <input id="productLocation"   class="form-control form-control-form-group-product"
+                        type="text"   v-model="form.location"
                       />
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-pen" id="hideAddAccountFormproduct" aria-hidden="true"></i>
                         <a href="#" class="add-account-icon btn-icon add-group-product fas fa-solid fa-plus"
-                          title="Thêm vị trí mới"
-                          id="addNewAccountFormAddProduct"
-                          aria-hidden="true"
+                          title="Thêm vị trí mới"  id="addNewAccountFormAddProduct" aria-hidden="true"  
                           @click.prevent="addLocation"></a>
                         <span class="sr-only">Thêm vị trí mới</span>
                       </div>
@@ -328,44 +301,20 @@
                   </h3>
                   <div class="form-wrapper form-wrapper-detail-inventory">
                     <div class="form-wrap form-wrap-product-detail-inventory">
-                      <label
-                        class="form-label form-label-wrap-detail-inventory"
-                      >
+                      <label class="form-label form-label-wrap-detail-inventory">
                         Ít nhất
-                        <i
-                          class="inventory-icon fas fa-solid fa-circle-info"
-                          title="Hệ thống sẽ dựa vào thông tin này để cảnh báo hàng dưới định mức tồn nếu tồn kho < Tồn ít nhất"
-                          aria-hidden="true"
-                        ></i>
-                        <span class="sr-only">
-                          Hệ thống sẽ dựa vào thông tin này để cảnh báo hàng dưới định mức tồn nếu tồn kho &lt; Tồn ít nhất
-                        </span>
                       </label>
                       <div class="form-label-icon form-label-icon-inventory">
-                        <input
-                          type="text"
-                          class="form-control form-control-inventory-levels-detail"
-                          placeholder="0"
+                        <input type="text"  class="form-control form-control-inventory-levels-detail"   placeholder="0"
                           v-model="form.minInventory"
                         />
                       </div>
                     </div>
 
                     <div class="form-wrap form-wrap-product-detail-inventory">
-                      <label
-                        class="form-label form-label-wrap-detail-inventory"
-                      >
+                      <label class="form-label form-label-wrap-detail-inventory">
                         Nhiều nhất
-                        <i
-                          class="inventory-icon fas fa-solid fa-circle-info"
-                          title="Hệ thống sẽ dựa vào thông tin này để cảnh báo hàng vượt định mức tồn nếu tồn kho > Tồn nhiều nhất"
-                          aria-hidden="true"
-                        ></i>
-                        <span class="sr-only">
-                          Hệ thống sẽ dựa vào thông tin này để cảnh báo hàng vượt định mức tồn nếu tồn kho &gt; Tồn nhiều nhất
-                        </span>
                       </label>
-
                       <div class="form-label-icon form-label-icon-inventory">
                         <input type="text" class="form-control form-control-inventory-levels-detail"
                           placeholder="999,999,999" v-model="form.maxInventory"
