@@ -61,8 +61,6 @@
                   <div class="form-group form-group-product">
                     <label class="form-label">
                       Tên hàng
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Tên hàng là tên của sản phẩm" aria-hidden="true"></i>
-                      <span class="sr-only">Tên hàng là tên của sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input class="form-control form-control-form-group-product" type="text"
@@ -75,8 +73,6 @@
                   <div class="form-group form-group-product">
                     <label class="form-label">
                       Nhóm hàng
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Lựa chọn nhóm hàng cho sản phẩm" aria-hidden="true"></i>
-                      <span class="sr-only">Lựa chọn nhóm hàng cho sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input class="form-control form-control-form-group-product" type="text"
@@ -96,8 +92,6 @@
                   <div class="form-group form-group-product">
                     <label class="form-label">
                       Thương hiệu
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Thương hiệu, nhãn hiệu của sản phẩm" aria-hidden="true"></i>
-                      <span class="sr-only">Thương hiệu, nhãn hiệu của sản phẩm</span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input id="productTrademark"  class="form-control form-control-form-group-product"
@@ -139,6 +133,23 @@
 
 
                 <!--  -->
+                <div class="form-group form-price-add-product">
+                    <label class="form-label">
+                      Màu sắc
+                    </label>
+                    <div class="form-wrap form-wrap-product">
+                      <input
+                        type="text"
+                        class="form-control form-control-form-price-add-product"
+                        v-model="form.originalPrice"
+                      />
+                    </div>
+                    <div class="variant-selector">
+                      <button class="variant-btn">
+                          Xóa
+                      </button>
+                    </div>
+                </div>
                 <div class="form-image-group">
                   <div class="form-image-product" style="margin-right: 34px;">
                     <div class="wrap-img wrap-img-form-product">
@@ -182,19 +193,26 @@
 
               <!-- right content -->
               <div class="info-form-price-add-product right-content-info-product">
+                <div class="variant-selector">
+                  <button
+                    class="variant-btn"
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
+                  </button>
+                  <button
+                    class="variant-btn"
+                  >
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Xanh
+                  </button>
+                </div>
+
                 <div class="information-group information-group-form-product">
                   <!--  -->
                   <div class="form-group form-price-add-product">
                     <label class="form-label">
-                      Màu sắc
-                      <i
-                        class="parameter-type-icon fas fa-solid fa-circle-info"
-                        title="Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)"
-                        aria-hidden="true"
-                      ></i>
-                      <span class="sr-only">
-                        Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)
-                      </span>
+                      Phiên bản
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input
@@ -250,9 +268,7 @@
                   <div class="form-group form-price-add-product">
                     <label class="form-label">Giá bán</label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
+                      <input  type="text"  class="form-control form-control-form-price-add-product"
                         v-model="form.finalPrice"
                       />
                       <i
@@ -276,9 +292,7 @@
                       </span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
+                      <input  type="text" class="form-control form-control-form-price-add-product"
                         v-model="form.inventory"
                       />
                     </div>
@@ -350,25 +364,17 @@
 
         <!-- add product bottom -->
         <div class="add-product-bottom">
-          <button id="btnSaveApplicationProductMore" class="btn btn-success btn-success-bottom"
-            @click="handleAddNew"
-          >
+          <button id="btnSaveApplicationProductMore" class="btn btn-success btn-success-bottom">
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
             <span>Thêm mới</span>
           </button>
 
-          <button id="btnSaveApplicationProductCopy" class="btn btn-success btn-success-bottom"
-            @click="handleSaveAndCopy"
-          >
+          <button id="btnSaveApplicationProductCopy" class="btn btn-success btn-success-bottom">
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
             <span>Lưu &amp; Sao chép</span>
           </button>
 
-          <button
-            id="cancelAddProduct"
-            class="btn btn-default btn-default-bottom"
-            @click="handleCancel"
-          >
+          <button id="cancelAddProduct" class="btn btn-default btn-default-bottom">
             <i class="btn-success-icon fas fa-solid fa-ban" aria-hidden="true"></i>
             <span>Bỏ qua</span>
           </button>
