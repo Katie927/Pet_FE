@@ -9,7 +9,6 @@
             <i class="add-product-icon fas fa-solid fa-close" aria-hidden="true" 
                   @click="$emit('close')"></i>
           </div>
-
           
         </div>
         <!-- add product container -->
@@ -17,16 +16,21 @@
 
           <!-- form content -->
           <div class="tab-content tab-content-form-product" style="display: block;">
-
             <div class="form-wrapper">
-
 
               <!-- left content -->
               <div class="info-form-image-add-product left-content-info-product">
-                
+                <div class="variant-selector">
+                <!-- variant selector -->
+                  <button :class="['variant-btn', { active: vIndex === selectedVariantIndex }]"
+                    v-for="(variant, vIndex) in form.variants || []" :key="variant.id"
+                    @click="selectVariant(vIndex)"
+                  >
+                      {{ variant.color || 'Variant ' + (vIndex + 1) }}
+                  </button>
+                </div>
                 <!-- Initialization information -->
                 <div class="information-group information-group-form-product">
-                  
                   <!-- Mã hàng -->
                   <div class="form-group form-group-product">
                     <label class="form-label">
@@ -140,7 +144,7 @@
                         />
                       </div>
                       <div class="variant-selector">
-                        <button class="variant-btn">
+                        <button class="variant-btn" @click="removeVariant(vIndex)">
                             Xóa
                         </button>
                       </div>
@@ -165,8 +169,7 @@
                   </div>
                 </div>
                 <div class="variant-selector">
-                  <button class="variant-btn">
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                  <button type="button" class="variant-btn" @click="addVariant">
                       Thêm
                   </button>
                 </div>
@@ -177,17 +180,14 @@
               <!-- right content -->
               <div class="info-form-price-add-product right-content-info-product">
                 <div class="variant-selector">
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
+                  <button class="variant-btn">
+                      8 / 265
                   </button>
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
+                  <button class="variant-btn">
+                      12 / 512
+                  </button>
+                  <button class="variant-btn">
+                      +
                   </button>
                 </div>
 
@@ -476,6 +476,39 @@ const handleImageChange = (event, vIndex, index) => {
 
   form.variants[vIndex].detailImages[index] = imageUrl;
 };
+
+const addVariant = () => {
+  form.variants.push({
+    id: null,
+    color: '',
+    originalPrice: '',
+    finalPrice: '',
+    detailImages: [null, null, null, null, null, null, null, null]  
+  });
+};
+
+const removeVariant = (vIndex) => {
+  if (confirm("Bạn có chắc muốn xóa biến thể này không?")) {
+    if (form.variants.length > 1) {
+      form.variants.splice(vIndex, 1);
+    } else {
+      // reset lại variant cuối cùng thay vì xóa hết
+      form.variants[0] = {
+        id: null,
+        color: '',
+        originalPrice: '',
+        finalPrice: '',
+        detailImages: [null, null, null, null, null, null, null, null]
+      };
+    }
+  }
+};
+
+// select variant
+const selectedVariantIndex = ref(0)
+function selectVariant(index) {
+  selectedVariantIndex.value = index
+}
 </script>
 
 

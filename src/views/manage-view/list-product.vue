@@ -293,7 +293,7 @@ import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
 import ProductAdd from './product-add.vue';
 
 import axios from "axios";
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import router from '@/router';
 
 const productTypes = ref([
@@ -353,6 +353,14 @@ defineProps({
 
 const showProductAdd = ref(false);
 const selectedProduct = ref(null);
+
+watch(showProductAdd, (val) => {
+  if (val) {
+    document.body.style.overflow = "hidden"; // chặn cuộn nền
+  } else {
+    document.body.style.overflow = ""; // trả lại bình thường
+  }
+});
 const handleEditProduct = (product) => {
     selectedProduct.value = { ...product };  // clone product
     showProductAdd.value = true;

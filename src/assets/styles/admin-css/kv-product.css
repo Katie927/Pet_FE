@@ -576,7 +576,7 @@ table .cell-img {
 .product-detail-body {
     /* width: 1042px; */
     /* height: 545px; */
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255, 254, 254);
     color: rgb(46, 46, 46);
     padding: 25px 45px 0px 30px;
 }
@@ -597,7 +597,7 @@ table .cell-img {
     justify-content: start;
     position: relative;
     margin: 0px;
-    border-top: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(55, 55, 55);
 }
 
 .identification-item-title {
@@ -706,7 +706,7 @@ table .cell-img {
     padding-top: 3px;
     padding-bottom: 10px;
     min-height: 24px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #010101;
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -720,6 +720,7 @@ table .cell-img {
     padding-top: 7px;
     padding-right: 5px;
     color: #121212;
+    font-weight: bold;
 }
 
 .identification-item-code {
@@ -753,6 +754,7 @@ table .cell-img {
     padding-top: 3px;
     padding-bottom: 10px;
     line-height: 24px;
+    font-weight: bold;
 }
 
 .description-item-code {
@@ -761,7 +763,7 @@ table .cell-img {
     line-height: 18px;
     min-height: 90px;
     color: #2e2e2e;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #060606;
     word-break: break-word;
 }
 
@@ -812,11 +814,13 @@ table .cell-img {
 /*  */
 
 .add-product {
-    position: absolute;
-    top: 60px;
+    position: fixed;
+    top: 50px;
     right: 0;
     left: 0;
+    bottom: 0;
     z-index: 999;
+    overflow-y: auto; /* Chỉ phần body này cuộn */
 }
 
 .mask {
