@@ -24,21 +24,6 @@
               <!-- left content -->
               <div class="info-form-image-add-product left-content-info-product">
                 
-                <div class="variant-selector">
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
-                  </button>
-                  <button
-                    class="variant-btn"
-                  >
-                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
-                      Xanh
-                  </button>
-                </div>
-                
                 <!-- Initialization information -->
                 <div class="information-group information-group-form-product">
                   
@@ -131,61 +116,59 @@
                   </div>
                 </div>
 
-
-                <!--  -->
-                <div class="form-group form-price-add-product">
-                    <label class="form-label">
-                      Màu sắc
-                    </label>
-                    <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
-                        v-model="form.originalPrice"
-                      />
-                    </div>
-                    <div class="variant-selector">
-                      <button class="variant-btn">
-                          Xóa
-                      </button>
-                    </div>
-                </div>
-                <div class="form-image-group">
                   <div class="form-image-product" style="margin-right: 34px;">
-                    <div class="wrap-img wrap-img-form-product">
-                      <label for="mainProductImg" class="custom-upload-btn">
-                        <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
-                      </label>
+                      <div class="wrap-img wrap-img-form-product">
+                        <label for="mainProductImg" class="custom-upload-btn">
+                          <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
+                        </label>
+                      </div>
+                      <div class="dropzone">
+                        <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
+                          <input type="file" id="mainProductImg" accept="image/*"
+                            @change="e => handleMainImageChange(e)"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div class="dropzone">
-                      <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
-                        <input type="file" id="mainProductImg" accept="image/*"
-                          @change="e => handleMainImageChange(e)"
+        <!-- Variant Images -->
+                <div v-for="(variant, vIndex) in form.variants" :key="variant.id">
+                  <div class="form-group form-price-add-product">
+                      <label class="form-label"> Màu sắc </label>
+                      <div class="form-wrap form-wrap-product">
+                        <input type="text"  class="form-control form-control-form-price-add-product"
+                          v-model="variant.color"
                         />
+                      </div>
+                      <div class="variant-selector">
+                        <button class="variant-btn">
+                            Xóa
+                        </button>
+                      </div>
+                  </div>
+                  <div class="form-image-group">
+                    <div class="form-image-product" style="margin-left: 7px;"
+                      v-for="(img, index) in variant.detailImages" :key="index"
+                    >
+                      <div class="wrap-img wrap-img-form-product">
+                        <label :for="`productImg-${vIndex}-${index}`" class="custom-upload-btn">
+                          <img :src="img || ''" alt="Preview Image"/>
+                        </label>
+                      </div>
+                      <div class="dropzone">
+                        <div class="upload-button">
+                          <input type="file"  :id="`productImg-${vIndex}-${index}`"  accept="image/*"
+                            @change="e => handleImageChange(e, vIndex, index)"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-
-                  <div class="form-image-product" style="margin-left: 7px;"
-                    v-for="(img, index) in form.detailImages"
-                    :key="index"
-                  >
-                    <div class="wrap-img wrap-img-form-product">
-                      <label :for="'productImg' + (index + 1)" class="custom-upload-btn">
-                        <img  :id="`previewImg${index + 1}`"  :src="img || ''" alt="Preview Image"/>
-                      </label>
-                    </div>
-                    <div class="dropzone">
-                      <div class="upload-button" :id="'previewImg' + (index + 1)" 
-                        :data-preview-id="'previewImg' + (index + 1)"
-                      >
-                        <input type="file" :id="`productImg${index + 1}`"
-                          accept="image/*"
-                          @change="e => handleImageChange(e, index)"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                </div>
+                <div class="variant-selector">
+                  <button class="variant-btn">
+                    <!-- {{ variant.color || 'Variant ' + (vIndex + 1) }} -->
+                      Thêm
+                  </button>
                 </div>
 
                 
@@ -226,10 +209,8 @@
                   <div class="form-group form-price-add-product">
                     <label class="form-label">
                       Giá vốn
-                      <i
-                        class="parameter-type-icon fas fa-solid fa-circle-info"
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info" aria-hidden="true"
                         title="Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)"
-                        aria-hidden="true"
                       ></i>
                       <span class="sr-only">
                         Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)
@@ -354,7 +335,6 @@
                     </div>
                   </div>
                 </div>
-
                 <!-- detail notes -->
                 
               </div>
@@ -391,17 +371,17 @@ import '@/assets/styles/admin-css/kv-style.css';
 import router from '@/router';
 import axios from 'axios';
 
-import { reactive, watch, ref } from 'vue'
+import { reactive, watch, ref, onMounted } from 'vue'
 
 const form = reactive({
   id: '',
   name: '',
-  originalPrice: '',
-  finalPrice: '',
   image: '',
-  color: '',
-  // location: '',
-  detailImages: [null, null, null, null, null, null]  
+  variants: [
+    {
+      detailImages: [null, null, null, null, null]
+    }
+  ] 
 })
 
 const emit = defineEmits(['added-success', 'close']);
@@ -444,13 +424,35 @@ const props = defineProps({
     default: () => ({})
   }
 });
+
 watch(() => props.product, (newVal) => {
-  if (newVal) {
-    form.name = newVal.name || '';
-    form.originalPrice = newVal.originalPrice || '';
-    form.finalPrice = newVal.finalPrice || '';
-    form.image = newVal.image || '';
-    form.detailImages = newVal.detailImages || '';
+  if (newVal && Object.keys(newVal).length) {
+    form.id = newVal.id;
+    form.name = newVal.name;
+    form.image = newVal.image;
+    form.variants = (newVal.variants || []).map(v => {
+      let images = [...(v.detailImages || [])];
+
+      // luôn đủ 5 ô
+      while (images.length < 8) {
+        images.push(null);
+      }
+      return {
+        id: v.id,
+        color: v.color,
+        originalPrice: v.originalPrice,
+        finalPrice: v.finalPrice,
+        detailImages: images
+      };
+    });
+  } else {
+    form.variants = [{
+      id: null,
+      color: '',
+      originalPrice: '',
+      finalPrice: '',
+      detailImages: [null, null, null, null, null, null, null, null]
+    }];
   }
 }, { immediate: true });
 
@@ -466,11 +468,13 @@ const handleMainImageChange = (event) => {
   }
 };
 
-const handleImageChange = (event, index) => {
+const handleImageChange = (event, vIndex, index) => {
   const file = event.target.files[0];
   if (!file) return;
+
   const imageUrl = URL.createObjectURL(file);
-  form.detailImages[index] = imageUrl;
+
+  form.variants[vIndex].detailImages[index] = imageUrl;
 };
 </script>
 
