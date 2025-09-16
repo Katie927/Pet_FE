@@ -19,14 +19,25 @@
                 {{ variant.color || 'Variant ' + (vIndex + 1) }}
               </button>
             </div>
+            <!--  Attribute selector -->
+            <div class="attribute-selector" v-if="productDetails.variants?.[selectedVariantIndex]?.attributes?.length">
+              <button
+                v-for="(attr, aIndex) in productDetails.variants[selectedVariantIndex].attributes"
+                :key="aIndex"
+                :class="['variant-btn', { active: aIndex === selectedAttributeIndex }]"
+                @click="selectAttribute(aIndex)"
+              >
+                {{ attr.name }}
+              </button>
+            </div>
 
             <div class="form-wrapper product-detail-body-container">
               <div class="product-detail-left">
-                <div class="profile-img-detail-large">
+                <!-- <div class="profile-img-detail-large">
                   <div class="wrap-img-detail-large">
                     <img class="preview-img-detail-large" :src="productDetails?.variants?.[selectedVariantIndex]?.detailImages?.[0]" alt="Preview" />
                   </div>
-                </div>
+                </div> -->
                 <div class="profile-img-detail-group">
                   <div
                     v-for="(img, index) in productDetails?.variants?.[selectedVariantIndex]?.detailImages || []"
@@ -62,8 +73,20 @@
                       <div class="identification-item"><span class="identification-item-name">Thương hiệu:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
                       <div class="identification-item"><span class="identification-item-name">Giá bán:</span><span class="identification-item-code">{{ productDetails.variants[0].originalPrice.toLocaleString('vi-VN') }}</span></div>
                       <div class="identification-item"><span class="identification-item-name">Giá vốn:</span><span class="identification-item-code">{{ productDetails.variants[0].finalPrice.toLocaleString('vi-VN') }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Trọng lượng:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá niêm yết:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code"></span></div>
+                    </div>
+                  </div>
+
+                  <div class="product-detail-identification">
+                    <div class="identification-group">
+                      <div class="identification-item"><span class="identification-item-name">Tồn kho:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Đã bán:</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Ngày nhập hàng</span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name"></span><span class="identification-item-code">{{ productDetails.name }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá bán:</span><span class="identification-item-code">{{ productDetails.variants[0].originalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giá vốn:</span><span class="identification-item-code">{{ productDetails.variants[0].finalPrice.toLocaleString('vi-VN') }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Trạng thái:</span><span class="identification-item-code"></span></div>
                     </div>
                   </div>
 
@@ -110,11 +133,17 @@ const props = defineProps({
 const emit = defineEmits(['edit-product', 'deleted-success']);
 
 // --- details ------------------------------------------------------------------------------------
-const selectedVariantIndex = ref(0)
+const selectedVariantIndex = ref(0);
+const selectedAttributeIndex = ref(0);
 
-function selectVariant(index) {
-  selectedVariantIndex.value = index
-}
+const selectVariant = (vIndex) => {
+  selectedVariantIndex.value = vIndex;
+  // selectedAttributeIndex.value = 0; // reset attribute khi đổi variant
+};
+
+const selectAttribute = (aIndex) => {
+  selectedAttributeIndex.value = aIndex;
+};
 
 const productDetails = ref(null)
 const handleFetchProductDetails = async () => {

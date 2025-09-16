@@ -20,8 +20,8 @@
 
               <!-- left content -->
               <div class="info-form-image-add-product left-content-info-product">
-                <div class="variant-selector">
                 <!-- variant selector -->
+                <div class="variant-selector">
                   <button :class="['variant-btn', { active: vIndex === selectedVariantIndex }]"
                     v-for="(variant, vIndex) in form.variants || []" :key="variant.id"
                     @click="selectVariant(vIndex)"
@@ -344,7 +344,9 @@
 
         <!-- add product bottom -->
         <div class="add-product-bottom">
-          <button id="btnSaveApplicationProductMore" class="btn btn-success btn-success-bottom">
+          <button id="btnSaveApplicationProductMore" class="btn btn-success btn-success-bottom"
+            @click="handleAddNew"
+          >
             <i class="btn-success-icon fas fa-solid fa-floppy-disk" aria-hidden="true"></i>
             <span>Thêm mới</span>
           </button>
@@ -377,12 +379,22 @@ const form = reactive({
   id: '',
   name: '',
   image: '',
+  status: 1,          
+  createDate: '',     
   variants: [
     {
-      detailImages: [null, null, null, null, null]
+      id: null,
+      color: '',
+      originalPrice: 0,
+      finalPrice: 0,
+      discount: 0,
+      stockQuantity: 0,
+      soldQuantity: 0,
+      detailImages: [null, null, null, null, null],
+      attributes: []
     }
-  ] 
-})
+  ]
+});
 
 const emit = defineEmits(['added-success', 'close']);
 const handleAddNew = async () => {
