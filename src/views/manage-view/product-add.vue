@@ -121,19 +121,44 @@
                 </div>
 
                   <div class="form-image-product" style="margin-right: 34px;">
-                      <div class="wrap-img wrap-img-form-product">
-                        <label for="mainProductImg" class="custom-upload-btn">
+                    <div class="wrap-img wrap-img-form-product">
+                      <label for="mainProductImg" class="custom-upload-btn">
                           <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
+                      </label>
+                    </div>
+                    <div class="dropzone">
+                      <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
+                          <input type="file" id="mainProductImg" accept="image/*"
+                            @change="e => handleMainImageChange(e)"
+                          />
+                      </div>
+                    </div>
+                    <div
+                      class="form-image-product"
+                      style="margin-left: 7px;"
+                      v-for="(img, index) in introImages"
+                      :key="`intro-${index}`"
+                    >
+                      <div class="wrap-img wrap-img-form-product">
+                        <label
+                          :for="`productImg-${index}`"
+                          class="custom-upload-btn"
+                        >
+                          <img :src="img || ''" alt="Preview Image" />
                         </label>
                       </div>
                       <div class="dropzone">
-                        <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
-                          <input type="file" id="mainProductImg" accept="image/*"
-                            @change="e => handleMainImageChange(e)"
+                        <div class="upload-button">
+                          <input
+                            type="file"
+                            :id="`productImg-${index}`"
+                            accept="image/*"
+                            @change="handleImageChange($event, index)"
                           />
                         </div>
                       </div>
                     </div>
+                  </div>
         <!-- Variant Images -->
                 <div v-for="(variant, vIndex) in form.variants" :key="variant.id">
                   <div class="form-group form-price-add-product">
@@ -380,7 +405,8 @@ const form = reactive({
   name: '',
   image: '',
   status: 1,          
-  createDate: '',     
+  createDate: '',
+  introImages: [null, null, null, null, null],
   variants: [
     {
       id: null,
@@ -408,7 +434,8 @@ const handleAddNew = async () => {
         name: form.name,
         originalPrice: form.originalPrice,
         finalPrice: form.finalPrice,
-        Image: form.image
+        Image: form.image,
+        introImages: form.introImages
       },
       {
         headers: { Authorization: `Bearer ${token}` }
@@ -442,10 +469,10 @@ watch(() => props.product, (newVal) => {
     form.id = newVal.id;
     form.name = newVal.name;
     form.image = newVal.image;
+    form.introImages = newVal.introImages;
     form.variants = (newVal.variants || []).map(v => {
       let images = [...(v.detailImages || [])];
 
-      // luôn đủ 5 ô
       while (images.length < 8) {
         images.push(null);
       }
@@ -500,7 +527,7 @@ const addVariant = () => {
 };
 
 const removeVariant = (vIndex) => {
-  if (confirm("Bạn có chắc muốn xóa biến thể này không?")) {
+  if (confirm("Bạn có chắc muốn xóa không?")) {
     if (form.variants.length > 1) {
       form.variants.splice(vIndex, 1);
     } else {
