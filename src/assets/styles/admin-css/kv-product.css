@@ -717,7 +717,7 @@ table .cell-img {
 }
 
 .identification-item-name {
-    width: 110px;
+    /* width: 110px; */
     position: absolute;
     padding-top: 7px;
     padding-right: 5px;
@@ -839,7 +839,7 @@ table .cell-img {
 }
 
 .add-product #containerAddProduct {
-    width: 1200px;
+    width: 1300px;
     margin-right: auto;
     margin-left: auto;
     background-color: #fff;

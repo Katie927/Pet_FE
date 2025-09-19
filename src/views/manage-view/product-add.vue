@@ -121,40 +121,34 @@
                 </div>
 
                   <div class="form-image-product" style="margin-right: 34px;">
-                    <div class="wrap-img wrap-img-form-product">
-                      <label for="mainProductImg" class="custom-upload-btn">
-                          <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
-                      </label>
-                    </div>
-                    <div class="dropzone">
-                      <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
-                          <input type="file" id="mainProductImg" accept="image/*"
-                            @change="e => handleMainImageChange(e)"
-                          />
+                    <div class="form-image-group">
+                      <div>
+                        <div class="wrap-img wrap-img-form-product">
+                          <label for="mainProductImg" class="custom-upload-btn">
+                              <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
+                          </label>
+                        </div>
+                        <div class="dropzone">
+                          <div class="upload-button" id="mainUploadBtn" data-preview-id="mainPreviewImg">
+                              <input type="file" id="mainProductImg" accept="image/*"
+                                @change="e => handleMainImageChange(e)"
+                              />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div
-                      class="form-image-product"
-                      style="margin-left: 7px;"
-                      v-for="(img, index) in introImages"
-                      :key="`intro-${index}`"
-                    >
-                      <div class="wrap-img wrap-img-form-product">
-                        <label
-                          :for="`productImg-${index}`"
-                          class="custom-upload-btn"
-                        >
-                          <img :src="img || ''" alt="Preview Image" />
-                        </label>
-                      </div>
-                      <div class="dropzone">
-                        <div class="upload-button">
-                          <input
-                            type="file"
-                            :id="`productImg-${index}`"
-                            accept="image/*"
-                            @change="handleImageChange($event, index)"
-                          />
+
+                      <div class="form-image-product" style="margin-left: 7px; width: 170px;"
+                        v-for="(img, index) in form.introImages" :key="index"
+                      >
+                        <div class="wrap-img wrap-img-form-product" style="margin-left: 7px; width: 170px;">
+                          <label :for="`productImg-${vIndex}-${index}`" class="custom-upload-btn" style="margin-left: 7px; width: 170px;">
+                            <img :src="img || ''" alt="Preview Image"/>
+                          </label>
+                        </div>
+                        <div class="dropzone">
+                          <div class="upload-button">
+                            <input type="file"  :id="`productImg-${vIndex}-${index}`"  accept="image/*"/>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -404,9 +398,9 @@ const form = reactive({
   id: '',
   name: '',
   image: '',
-  status: 1,          
+  status: 1,
   createDate: '',
-  introImages: [null, null, null, null, null],
+  introImages: Array(6).fill(null),
   variants: [
     {
       id: null,
@@ -416,12 +410,70 @@ const form = reactive({
       discount: 0,
       stockQuantity: 0,
       soldQuantity: 0,
-      detailImages: [null, null, null, null, null],
+      detailImages: Array(8).fill(null),
       attributes: []
     }
   ]
 });
 
+const props = defineProps({
+  product: {
+    type: Object,
+    default: () => ({})
+  }
+});
+
+watch(
+  () => props.product,
+  (newVal) => {
+    if (newVal && Object.keys(newVal).length) {
+      form.id = newVal.id;
+      form.name = newVal.name;
+      form.image = newVal.image;
+
+      // chuẩn hóa introImages
+      let introImgs = [...(newVal.introImages || [])];
+      while (introImgs.length < 6) introImgs.push(null);
+      form.introImages = introImgs;
+
+      // chuẩn hóa variants
+      form.variants = (newVal.variants || []).map(v => {
+        let images = [...(v.detailImages || [])];
+        while (images.length < 8) images.push(null);
+        return {
+          id: v.id,
+          color: v.color,
+          originalPrice: v.originalPrice,
+          finalPrice: v.finalPrice,
+          discount: v.discount ?? 0,
+          stockQuantity: v.stockQuantity ?? 0,
+          soldQuantity: v.soldQuantity ?? 0,
+          detailImages: images,
+          attributes: v.attributes || []
+        };
+      });
+    } else {
+      form.introImages = Array(6).fill(null);
+      form.variants = [
+        {
+          id: null,
+          color: '',
+          originalPrice: 0,
+          finalPrice: 0,
+          discount: 0,
+          stockQuantity: 0,
+          soldQuantity: 0,
+          detailImages: Array(8).fill(null),
+          attributes: []
+        }
+      ];
+    }
+  },
+  { immediate: true }
+);
+
+
+// add new -----------------------------------------------------------------------------
 const emit = defineEmits(['added-success', 'close']);
 const handleAddNew = async () => {
   const token = localStorage.getItem("token");
@@ -456,45 +508,6 @@ const handleAddNew = async () => {
     alert("Thêm hàng hóa thất bại!");
   }
 }
-
-const props = defineProps({
-  product: {
-    type: Object,
-    default: () => ({})
-  }
-});
-
-watch(() => props.product, (newVal) => {
-  if (newVal && Object.keys(newVal).length) {
-    form.id = newVal.id;
-    form.name = newVal.name;
-    form.image = newVal.image;
-    form.introImages = newVal.introImages;
-    form.variants = (newVal.variants || []).map(v => {
-      let images = [...(v.detailImages || [])];
-
-      while (images.length < 8) {
-        images.push(null);
-      }
-      return {
-        id: v.id,
-        color: v.color,
-        originalPrice: v.originalPrice,
-        finalPrice: v.finalPrice,
-        detailImages: images
-      };
-    });
-  } else {
-    form.variants = [{
-      id: null,
-      color: '',
-      originalPrice: '',
-      finalPrice: '',
-      detailImages: [null, null, null, null, null, null, null, null]
-    }];
-  }
-}, { immediate: true });
-
 
 // preview img
 const previewUrl = ref(null);

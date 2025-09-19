@@ -39,20 +39,15 @@
                         <div class="product-group-list">
                             <div class="product-group-icon-input">
                             <i class="product-group-search-icon fas fa-search" aria-hidden="true"></i>
-                            <input
-                                id="productGroupListSearch"
-                                type="search"
-                                class="form-control hide-show-product-group"
-                                placeholder="Tìm kiếm nhóm hàng"
+                            <input id="productGroupListSearch" type="search"
+                                class="form-control hide-show-product-group" placeholder="Tìm kiếm nhóm hàng"
                                 v-model="searchKeyword"
                             />
                             </div>
 
                             <div class="product-group-list-items">
                             <ul class="form-items">
-                                <li
-                                v-for="(group, index) in filteredProductGroups"
-                                :key="index"
+                                <li v-for="(group, index) in filteredProductGroups"  :key="index"
                                 class="form-item"
                                 >
                                 <span class="item-name product-group-name">{{ group }}</span>
@@ -240,10 +235,7 @@
 
                             <tbody>
                                 <template v-for="(product, index) in productData" :key="product.id">
-                                    <tr
-                                        class="kv-table-row"
-                                        @click="toggleDetail(product.id)"
-                                    >
+                                    <tr class="kv-table-row" @click="toggleDetail(product.id)" >
                                         <td class="cell-check">
                                             <label class="container-check-box">
                                                 <input type="checkbox" :value="product.id" />

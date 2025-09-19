@@ -1,5 +1,4 @@
 <template>
-
 <div class="kv-product">
     <div class="kv-container">
         <div class="kv-product-main-body">
@@ -145,25 +144,6 @@
                                                 <span class="checkmark"></span>
                                             </label>
 
-                                            <label class="container-check-box check-box-menu">Thương hiệu
-                                                <input id="containerCheckBoxTrademark" type="checkbox" checked="checked">
-                                                <span class="checkmark"></span>
-                                            </label>
-
-                                            <label class="container-check-box check-box-menu">Tồn kho
-                                                <input id="containerCheckBoxInventory" type="checkbox" checked="checked">
-                                                <span class="checkmark"></span>
-                                            </label>
-
-                                            <label class="container-check-box check-box-menu">Vị trí
-                                                <input id="containerCheckBoxLocation" type="checkbox" checked="checked">
-                                                <span class="checkmark"></span>
-                                            </label>
-
-                                            <label class="container-check-box check-box-menu">Trạng thái
-                                                <input id="containerCheckBoxProductStatus" type="checkbox" checked="checked">
-                                                <span class="checkmark"></span>
-                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -205,32 +185,32 @@
                         </thead>
 
                         <tbody>
-                            <tr
-                                v-for="(employee, index) in employeeData"
-                                :key="employee.id"
-                                class="kv-table-row"
-                            >
-                                <td class="cell-check">
-                                    <label class="container-check-box">
-                                        <input
-                                        type="checkbox"
-                                        :value="employee.id"
-                                        />
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </td>
-                                <td class="cell-img">
-                                    <img :src="employee.image" alt="img" style="width: 30px" />
-                                </td>
-                                <!-- <td class="cell-img"></td> -->
-                                <td class="product-name">{{ employee.fullName }}</td>
-                                <td class="product-type">{{ employee.fullName }}</td>
-                                <td class="selling-price">{{ employee.phoneNumber }}</td>
-                                <td class="cost-price">{{ employee.phoneNumber }}</td>
-                                <td class="trademark">{{ employee.dob }}</td>
-                                <td class="inventory">{{ employee.address }}</td>
-                                <td class="inventory">{{ employee.email }}</td>
-                            </tr>
+                            <template v-for="employee in employeeData" :key="employee.id">
+                                <tr class="kv-table-row" @click="toggleDetail(employee.id)">
+                                    <td class="cell-check">
+                                        <label class="container-check-box">
+                                            <input type="checkbox" :value="employee.id" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                    <td class="cell-img">
+                                        <img :src="employee.image" alt="img" style="width: 30px" />
+                                    </td>
+                                    <!-- <td class="cell-img"></td> -->
+                                    <td class="product-name">{{ employee.id }}</td>
+                                    <td class="product-type">{{ employee.fullName }}</td>
+                                    <td class="selling-price">{{ employee.phoneNumber }}</td>
+                                    <td class="cost-price">{{ employee.phoneNumber }}</td>
+                                    <td class="trademark">{{ employee.dob }}</td>
+                                    <td class="inventory">{{ employee.address }}</td>
+                                    <td class="inventory">{{ employee.email }}</td>
+                                </tr>
+                                <tr v-if="expandedId === employee.id">
+                                    <td colspan="9" class="cell-detail p-0">
+                                        <EmployeeDetails :employee-id ="employee.id" />
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
@@ -249,6 +229,7 @@ import '@/assets/styles/admin-css/kv-style.css';
 import axios from "axios";
 import { ref, onMounted } from 'vue';
 import { useRouter } from "vue-router";
+import EmployeeDetails from './employee-details.vue';
 
 const router = useRouter();
 
@@ -285,5 +266,16 @@ const fetchEmployeeData = async () => {
     }
 };
 onMounted(fetchEmployeeData);
+
+
+const expandedId = ref(null)
+function toggleDetail(id) {
+  expandedId.value = expandedId.value === id ? null : id
+  console.log(expandedId)
+}
+
+defineProps({
+  employeeData: Array
+})
 
 </script>
