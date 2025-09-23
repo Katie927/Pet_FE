@@ -157,6 +157,7 @@ const handleFetchProductDetails = async () => {
   try {
     const response = await axios.get(
       `http://localhost:8080/bej3/admin/product/${props.productId}`,
+      // `https://btn-bej3-api.onrender.com/bej3/admin/product/${props.productId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`

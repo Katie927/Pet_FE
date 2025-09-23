@@ -65,7 +65,8 @@
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input class="form-control form-control-form-group-product" type="text"
-                        placeholder="---Lựa chọn---" v-model="form.group"
+                        placeholder="---Lựa chọn---" 
+                        v-model="form.group"
                       />
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-sort-down" aria-hidden="true"></i>
@@ -102,8 +103,7 @@
                   <div class="form-group form-group-product">
                     <label class="form-label">
                       Vị trí
-                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Sử dụng để ghi lại vị trí mà hàng hóa được cất giữ hoặc trưng bày. Ví dụ: kệ số 1, số 2..." aria-hidden="true"></i>
-                      <span class="sr-only">Sử dụng để ghi lại vị trí mà hàng hóa được cất giữ hoặc trưng bày. Ví dụ: kệ số 1, số 2...</span>
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info" title="Sử dụng để ghi lại vị trí cửa hàng còn bán" aria-hidden="true"></i>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input id="productLocation"   class="form-control form-control-form-group-product"
@@ -120,12 +120,12 @@
                   </div>
                 </div>
 
-                  <div class="form-image-product" style="margin-right: 34px;">
+                  <div class="form-image-product" style="margin-right: 34px; margin-top: 39px;">
                     <div class="form-image-group">
                       <div>
                         <div class="wrap-img wrap-img-form-product">
                           <label for="mainProductImg" class="custom-upload-btn">
-                              <img  id="mainPreviewImg"   :src="form.image || ''" alt="Preview Image" />
+                              <img  id="mainPreviewImg"   :src="form.imagePreview || ''" alt="Preview Image" />
                           </label>
                         </div>
                         <div class="dropzone">
@@ -137,20 +137,20 @@
                         </div>
                       </div>
 
-                      <div class="form-image-product" style="margin-left: 7px; width: 170px;"
-                        v-for="(img, index) in form.introImages" :key="index"
+                      <div class="form-image-product"  style="margin-left: 7px; width: 170px;"
+                        v-for="(img, index) in form.introImagesPreview"  :key="index"
                       >
-                        <div class="wrap-img wrap-img-form-product" style="margin-left: 7px; width: 170px;">
-                          <label :for="`productImg-${vIndex}-${index}`" class="custom-upload-btn" style="margin-left: 7px; width: 170px;">
-                            <img :src="img || ''" alt="Preview Image"/>
-                          </label>
-                        </div>
-                        <div class="dropzone">
-                          <div class="upload-button">
-                            <input type="file"  :id="`productImg-${vIndex}-${index}`"  accept="image/*"/>
-                          </div>
-                        </div>
+                      <div class="wrap-img wrap-img-form-product" style="margin-left: 7px; width: 170px;">
+                        <label class="custom-upload-btn" style="margin-left: 7px; width: 170px;">
+                          <img  v-if="img"  :src="img"  alt="Preview Image" 
+                            style="width:100%; height:100%; object-fit:cover;" />
+                          <span v-else>Chưa có ảnh</span>
+                          <input  type="file"  accept="image/*"  style="display:none;" 
+                            @change="onIntroChange($event, index)" />
+                        </label>
                       </div>
+
+                    </div>
                     </div>
                   </div>
         <!-- Variant Images -->
@@ -170,7 +170,7 @@
                   </div>
                   <div class="form-image-group">
                     <div class="form-image-product" style="margin-left: 7px;"
-                      v-for="(img, index) in variant.detailImages" :key="index"
+                      v-for="(img, index) in variant.detailImagesPreview" :key="index"
                     >
                       <div class="wrap-img wrap-img-form-product">
                         <label :for="`productImg-${vIndex}-${index}`" class="custom-upload-btn">
@@ -199,14 +199,15 @@
               <!-- right content -->
               <div class="info-form-price-add-product right-content-info-product">
                 <div class="variant-selector">
-                  <button class="variant-btn">
-                      8 / 265
+                  <button :class="['variant-btn', { active: aIndex === selectedAttributeIndex }]"
+                    v-for="(attr, aIndex) in form.variants[selectedVariantIndex].attributes || []" :key="aIndex" :value="aIndex"
+                    @click="selectAttribute(aIndex)"
+                  >
+                      {{ attr.name || 'Attr ' + (aIndex + 1)}}
                   </button>
-                  <button class="variant-btn">
-                      12 / 512
-                  </button>
-                  <button class="variant-btn">
-                      +
+                  <!-- Thêm Attribute mới -->
+                  <button @click="addAttribute">
+                    + 
                   </button>
                 </div>
 
@@ -217,11 +218,14 @@
                       Phiên bản
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
-                        v-model="form.originalPrice"
+                      <input type="text" class="form-control form-control-form-price-add-product"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].name"
                       />
+                    </div>
+                    <div class="variant-selector">
+                        <button class="variant-btn" @click="removeAttribute(aIndex)">
+                            Xóa
+                        </button>
                     </div>
                   </div>
                   <!--  -->
@@ -231,15 +235,10 @@
                       <i class="parameter-type-icon fas fa-solid fa-circle-info" aria-hidden="true"
                         title="Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)"
                       ></i>
-                      <span class="sr-only">
-                        Giá vốn dùng để tính lợi nhuận cho sản phẩm (sẽ tự động thay đổi khi thay đổi phương pháp tính giá vốn)
-                      </span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
-                        v-model="form.originalPrice"
+                      <input type="text" class="form-control form-control-form-price-add-product"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].originalPrice"
                       />
                     </div>
                   </div>
@@ -247,20 +246,16 @@
                   <div class="form-group form-price-add-product">
                     <label class="form-label">
                       Giá niêm yết
-                      <i
-                        class="parameter-type-icon fas fa-solid fa-circle-info"
-                        title="Giá niêm yết hãng đưa ra"
-                        aria-hidden="true"
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info"
+                        title="Giá niêm yết hãng đưa ra" aria-hidden="true"
                       ></i>
                       <span class="sr-only">
                         Giá niêm yết hãng đưa ra
                       </span>
                     </label>
                     <div class="form-wrap form-wrap-product">
-                      <input
-                        type="text"
-                        class="form-control form-control-form-price-add-product"
-                        v-model="form.originalPrice"
+                      <input type="text" class="form-control form-control-form-price-add-product"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].originalPrice"
                       />
                     </div>
                   </div>
@@ -269,31 +264,33 @@
                     <label class="form-label">Giá bán</label>
                     <div class="form-wrap form-wrap-product">
                       <input  type="text"  class="form-control form-control-form-price-add-product"
-                        v-model="form.finalPrice"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].finalPrice"
                       />
-                      <i
-                        id="tagsIconProduct"
-                        class="parameter-type-icon fas fa-solid fa-tags"
-                        aria-hidden="true"
-                      ></i>
+                      <i id="tagsIconProduct" class="parameter-type-icon fas fa-solid fa-tags" aria-hidden="true"></i>
                     </div>
                   </div>
 
                   <div class="form-group form-price-add-product">
                     <label class="form-label">
                       Tồn kho
-                      <i
-                        class="parameter-type-icon fas fa-solid fa-circle-info"
+                      <i class="parameter-type-icon fas fa-solid fa-circle-info"
                         title="Số lượng tồn kho của sản phẩm (sẽ tự động tạo ra phiếu kiểm kho cho sản phẩm)"
                         aria-hidden="true"
                       ></i>
-                      <span class="sr-only">
-                        Số lượng tồn kho của sản phẩm (sẽ tự động tạo ra phiếu kiểm kho cho sản phẩm)
-                      </span>
                     </label>
                     <div class="form-wrap form-wrap-product">
                       <input  type="text" class="form-control form-control-form-price-add-product"
-                        v-model="form.inventory"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].stockQuantity"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group form-price-add-product">
+                    <label class="form-label">
+                      Đã bán
+                    </label>
+                    <div class="form-wrap form-wrap-product">
+                      <input  type="text" class="form-control form-control-form-price-add-product"
+                        v-model="form.variants[selectedVariantIndex].attributes[selectedAttributeIndex].soldQuantity"
                       />
                     </div>
                   </div>
@@ -392,26 +389,33 @@ import '@/assets/styles/admin-css/kv-style.css';
 import router from '@/router';
 import axios from 'axios';
 
-import { reactive, watch, ref, onMounted } from 'vue'
+import { reactive, watch, ref, onMounted, toRaw } from 'vue'
 
 const form = reactive({
   id: '',
   name: '',
   image: '',
+  imagePreview: '',
   status: 1,
   createDate: '',
   introImages: Array(6).fill(null),
+  introImagesPreview: Array(6).fill(null),
   variants: [
     {
       id: null,
       color: '',
-      originalPrice: 0,
-      finalPrice: 0,
-      discount: 0,
-      stockQuantity: 0,
-      soldQuantity: 0,
-      detailImages: Array(8).fill(null),
-      attributes: []
+      detailImages: Array(11).fill(null),
+      detailImagesPreview: Array(11).fill(null), // URL[]
+      attributes: [
+        {
+          name: '',
+          originalPrice: 0,
+          finalPrice: 0,
+          discount: 0,
+          stockQuantity: 0,
+          soldQuantity: 0,
+        }
+      ]
     }
   ]
 });
@@ -429,42 +433,61 @@ watch(
     if (newVal && Object.keys(newVal).length) {
       form.id = newVal.id;
       form.name = newVal.name;
-      form.image = newVal.image;
+      form.status = newVal.status ?? 1;
+      form.createDate = newVal.createDate ?? null;
 
-      // chuẩn hóa introImages
+      // ảnh chính
+      form.image = null;                     // reset file
+      form.imagePreview = newVal.image || null;
+
+      // intro images (6 ảnh)
       let introImgs = [...(newVal.introImages || [])];
       while (introImgs.length < 6) introImgs.push(null);
-      form.introImages = introImgs;
+      form.introImages = Array(6).fill(null);   // File[]
+      form.introImagesPreview = introImgs;      // URL[]
 
-      // chuẩn hóa variants
+      // variants
       form.variants = (newVal.variants || []).map(v => {
         let images = [...(v.detailImages || [])];
-        while (images.length < 8) images.push(null);
+        while (images.length < 11) images.push(null);
+
         return {
           id: v.id,
           color: v.color,
-          originalPrice: v.originalPrice,
-          finalPrice: v.finalPrice,
-          discount: v.discount ?? 0,
-          stockQuantity: v.stockQuantity ?? 0,
-          soldQuantity: v.soldQuantity ?? 0,
-          detailImages: images,
-          attributes: v.attributes || []
+          detailImages: Array(11).fill(null),     // File[]
+          detailImagesPreview: images,            // URL[]
+          attributes: (v.attributes || []).map(attr => ({
+            name: attr.name,
+            originalPrice: attr.originalPrice ?? 0,
+            finalPrice: attr.finalPrice ?? 0,
+            discount: attr.discount ?? 0,
+            stockQuantity: attr.stockQuantity ?? 0,
+            soldQuantity: attr.soldQuantity ?? 0
+          }))
         };
       });
     } else {
+      // reset mặc định
+      form.image = null;
+      form.imagePreview = null;
       form.introImages = Array(6).fill(null);
+      form.introImagesPreview = Array(6).fill(null);
       form.variants = [
         {
           id: null,
           color: '',
-          originalPrice: 0,
-          finalPrice: 0,
-          discount: 0,
-          stockQuantity: 0,
-          soldQuantity: 0,
-          detailImages: Array(8).fill(null),
-          attributes: []
+          detailImages: Array(11).fill(null),
+          detailImagesPreview: Array(11).fill(null),
+          attributes: [
+            {
+              name: '',
+              originalPrice: 0,
+              finalPrice: 0,
+              discount: 0,
+              stockQuantity: 0,
+              soldQuantity: 0
+            }
+          ]
         }
       ];
     }
@@ -474,28 +497,53 @@ watch(
 
 
 // add new -----------------------------------------------------------------------------
+function objectToFormData(obj, formData = new FormData(), parentKey = "") {
+  if (obj === null || obj === undefined) return formData;
+
+  if (obj instanceof File || obj instanceof Blob) {
+    formData.append(parentKey, obj);
+  } else if (Array.isArray(obj)) {
+    obj.forEach((value, index) => {
+      const key = parentKey ? `${parentKey}[${index}]` : `${index}`;
+      objectToFormData(value, formData, key);
+    });
+  } else if (typeof obj === "object" && !(obj instanceof Date)) {
+    Object.keys(obj).forEach((key) => {
+      const value = obj[key];
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+      objectToFormData(value, formData, fullKey);
+    });
+  } else {
+    if (parentKey) {
+      formData.append(parentKey, obj);
+    }
+  }
+
+  return formData;
+}
+
 const emit = defineEmits(['added-success', 'close']);
 const handleAddNew = async () => {
   const token = localStorage.getItem("token");
   if (!token) return router.push("/login");
 
   try {
+    // convert reactive form -> FormData
+    const formData = objectToFormData(toRaw(form)); 
+
     await axios.post(
       "http://localhost:8080/bej3/admin/product/add",
+      formData,
       {
-        name: form.name,
-        originalPrice: form.originalPrice,
-        finalPrice: form.finalPrice,
-        Image: form.image,
-        introImages: form.introImages
-      },
-      {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data"
+        }
       }
     );
+
     alert("Thêm hàng hóa thành công!");
-    Object.assign(form, { name: '', originalPrice: '', finalPrice: '' });
-    emit('added-success');
+    emit("added-success");
   } catch (error) {
     console.error("Lỗi khi thêm sản phẩm:", error.message);
     if (error.response) {
@@ -507,40 +555,56 @@ const handleAddNew = async () => {
     }
     alert("Thêm hàng hóa thất bại!");
   }
-}
+};
 
-// preview img
+// preview img -----------------------------------------------------------
 const previewUrl = ref(null);
 const handleMainImageChange = (event) => {
   const file = event.target.files[0];
   if (file) {
-    form.image = URL.createObjectURL(file);
+    form.image = file; // giữ file gốc để gửi
+    form.imagePreview = URL.createObjectURL(file); // giữ preview để hiển thị
   } else {
-    form.image = '';
+    form.image = null;
+    form.imagePreview = '';
   }
 };
-
 const handleImageChange = (event, vIndex, index) => {
   const file = event.target.files[0];
   if (!file) return;
 
-  const imageUrl = URL.createObjectURL(file);
-
-  form.variants[vIndex].detailImages[index] = imageUrl;
+  form.variants[vIndex].detailImages[index] = file;
+  form.variants[vIndex].detailImagesPreview[index] = URL.createObjectURL(file);
 };
-
+const onIntroChange = (event, index) => {
+  const file = event.target.files[0];
+  if (!file) return;
+  form.introImages[index] = file;
+  form.introImagesPreview[index] = URL.createObjectURL(file);
+  
+};
+// them variant -------------------------------------------------------------------------------
 const addVariant = () => {
   form.variants.push({
     id: null,
     color: '',
-    originalPrice: '',
-    finalPrice: '',
-    detailImages: [null, null, null, null, null, null, null, null]  
+    detailImages: Array(11).fill(null),  // chuẩn hóa 11 ảnh
+    detailImagesPreview: Array(11).fill(null),
+    attributes: [
+      {
+        name: '',
+        originalPrice: 0,
+        finalPrice: 0,
+        discount: 0,
+        stockQuantity: 0,
+        soldQuantity: 0
+      }
+    ]
   });
 };
-
+// ---
 const removeVariant = (vIndex) => {
-  if (confirm("Bạn có chắc muốn xóa không?")) {
+  if (confirm("Bạn có chắc muốn xóa variant này không?")) {
     if (form.variants.length > 1) {
       form.variants.splice(vIndex, 1);
     } else {
@@ -548,19 +612,74 @@ const removeVariant = (vIndex) => {
       form.variants[0] = {
         id: null,
         color: '',
-        originalPrice: '',
-        finalPrice: '',
-        detailImages: [null, null, null, null, null, null, null, null]
+        detailImages: Array(11).fill(null),
+        attributes: [
+          {
+            name: '',
+            originalPrice: 0,
+            finalPrice: 0,
+            discount: 0,
+            stockQuantity: 0,
+            soldQuantity: 0
+          }
+        ]
       };
+    }
+  }
+};
+
+// attribute -------------------------------------------------------------------------------
+const addAttribute = () => {
+  const variant = form.variants[selectedVariantIndex.value];
+  if (!variant.attributes) variant.attributes = [];
+
+  variant.attributes.push({
+    name: '',
+    originalPrice: 0,
+    finalPrice: 0,
+    discount: 0,
+    stockQuantity: 0,
+    soldQuantity: 0
+  });
+
+  selectedAttributeIndex.value = variant.attributes.length - 1;
+};
+// ----
+const removeAttribute = (aIndex) => {
+  const variant = form.variants[selectedVariantIndex.value];
+  if (!variant || !variant.attributes) return;
+
+  if (confirm("Bạn có chắc muốn xóa attribute này không?")) {
+    if (variant.attributes.length > 1) {
+      variant.attributes.splice(aIndex, 1);
+      // nếu đang xoá cái attribute đang chọn thì reset lại index
+      if (selectedAttributeIndex.value >= variant.attributes.length) {
+        selectedAttributeIndex.value = variant.attributes.length - 1;
+      }
+    } else {
+      // reset lại attribute cuối cùng thay vì xóa hết
+      variant.attributes[0] = {
+        name: '',
+        originalPrice: 0,
+        finalPrice: 0,
+        discount: 0,
+        stockQuantity: 0,
+        soldQuantity: 0
+      };
+      selectedAttributeIndex.value = 0;
     }
   }
 };
 
 // select variant
 const selectedVariantIndex = ref(0)
+const selectedAttributeIndex = ref(0)
 function selectVariant(index) {
   selectedVariantIndex.value = index
 }
+const selectAttribute = (index) => {
+  selectedAttributeIndex.value = parseInt(index);
+};
 </script>
 
 

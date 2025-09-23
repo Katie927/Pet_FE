@@ -312,7 +312,9 @@ const fetchProductData = async () => {
         return;
     }
     try {
-      const response = await axios.get('http://localhost:8080/bej3/admin/product/list',{
+      const response = await axios.get('http://localhost:8080/bej3/admin/product/list'
+    //   const response = await axios.get('https://btn-bej3-api.onrender.com/bej3/admin/product/list'
+      ,{
             headers: {
                 Authorization: `Bearer ${token}` // Gửi token trong header
             }

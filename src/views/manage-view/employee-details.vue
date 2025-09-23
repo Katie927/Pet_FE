@@ -23,11 +23,11 @@
                 <div class="product-detail-right-content">
                   <div class="product-detail-identification">
                     <div class="identification-group">
-                      <div class="identification-item"><span class="identification-item-name">Mã nhân viên:</span><span class="identification-item-code">{{   }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Họ tên:</span><span class="identification-item-code">{{   }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Ngày sinh:</span><span class="identification-item-code">{{   }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Giới tính:</span><span class="identification-item-code">{{   }}</span></div>
-                      <div class="identification-item"><span class="identification-item-name">Số CMND/CCCD:</span><span class="identification-item-code">{{   }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Mã nhân viên:</span><span class="identification-item-code">{{ employeeDetails.id }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Họ tên:</span><span class="identification-item-code">{{ employeeDetails.fullName  }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Ngày sinh:</span><span class="identification-item-code">{{ employeeDetails.dob  }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Giới tính:</span><span class="identification-item-code">{{ employeeDetails.dob  }}</span></div>
+                      <div class="identification-item"><span class="identification-item-name">Số CMND/CCCD:</span><span class="identification-item-code">{{ employeeDetails.name }}</span></div>
                       <div class="identification-item"><span class="identification-item-name">Phòng ban:</span><span class="identification-item-code">{{   }}</span></div>
                       <div class="identification-item"><span class="identification-item-name">Chức danh:</span><span class="identification-item-code">{{   }}</span></div>
                       <div class="identification-item"><span class="identification-item-name">Vị trí:</span><span class="identification-item-code"></span></div>
@@ -59,7 +59,7 @@
 
             <div class="add-edit-product">
               <button class="btn btn-success btn-edit-product" @click=" ">Cập nhật</button>
-              <button class="btn btn-red btn-lock-product" @click=" ">Ngừng kinh doanh</button>
+              <button class="btn btn-red btn-lock-product" @click=" ">Lịch làm việc</button>
               <button class="btn btn-red btn-remove-product" @click=" ">Xóa</button>
               <button class="btn btn-more btn-more-product">...</button>
             </div>

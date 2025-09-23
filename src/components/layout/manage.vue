@@ -50,7 +50,7 @@ const navbarItems = ref([
       { label: 'Nhân viên', icon: 'fas fa-user-friends', link: '/admin/employee' },
       { label: 'Chấm công', icon: 'fas fa-calendar-alt', link: '' },
       { label: 'Bảng tính lương', icon: 'fas fa-coins', link: '' },
-      { label: 'Bảng hoa hồng', icon: 'fas fa-sack-dollar', link: '' },
+      { label: 'Lịch làm việc', icon: 'fas fa-sack-dollar', link: '' },
       { label: 'Thiết lập chung', icon: 'fas fa-cog', link: '' }
     ]
   },
