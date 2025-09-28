@@ -45,11 +45,11 @@
                     class="profile-img-detail"
                   >
                     <div class="wrap-img-detail">
-                      <img :class="'preview-img-detail-' + (index + 1)" :src="img" alt="Preview" />
+                      <img :class="'preview-img-detail-' + (index + 1)" :src="img.url" alt="Preview" />
                     </div>
                   </div>
                   <div
-                    v-for="n in (8 - productDetails?.variants?.[0]?.detailImages?.length)"
+                    v-for="n in (11 - productDetails?.variants?.[0]?.detailImages?.length)"
                     :key="'empty-' + n"
                     class="profile-img-detail"
                   >
