@@ -137,22 +137,21 @@
                         </div>
                       </div>
 
-                      <div class="form-image-product"  style="margin-left: 7px; width: 170px;"
-                        v-for="(img, index) in form.introImagesPreview"  :key="index"
-                      >
+                      <div class="form-image-product" style="margin-left: 7px; width: 170px;"
+                          v-for="(img, index) in form.introImagesPreview" :key="index">
                         <div class="wrap-img wrap-img-form-product" style="margin-left: 7px; width: 170px;">
                           <label class="custom-upload-btn" style="margin-left: 7px; width: 170px;">
-                            <img  v-if="img"  :src="img.url"  alt="Preview Image" 
-                              style="width:100%; height:100%; object-fit:cover;" />
+                            <img v-if="img && img.url" :src="img.url" alt="Preview Image"
+                                style="width:100%; height:100%; object-fit:cover;" />
                             <span v-else>Chưa có ảnh</span>
                             <input type="file" accept="image/*" style="display:none;"
-                                @change="e => replaceIntroImage(e, index)" />
+                                  @change="e => replaceIntroImage(e, index)" />
                           </label>
                           <button type="button" @click="removeIntroImage(index)">X</button>
                         </div>
                       </div>
-                      <div class="" style=" display: block; height:31px; width: 31px; padding: 9px;">
-                        <label class="custom-upload-btn" style="display: block; height:31px; width: 31px; padding: 9px;">
+                      <div style="display: block; height:31px; width:31px; padding:9px;">
+                        <label class="custom-upload-btn" style="display:block; height:31px; width:31px; padding:9px;">
                           <span>+</span>
                           <input type="file" accept="image/*" style="display:none;" @change="addIntroImage" />
                         </label>
@@ -413,16 +412,23 @@ const form = reactive({
   imagePreview: '',
   status: 1,
   createDate: '',
-  introImages: [],
+  introImages: [{
+    id: null,
+    file: ''
+  }],
   introImagesPreview: [],
   variants: [
     {
       id: null,
       color: '',
       detailImages: [],
-      detailImagesPreview: [], // URL[]
+      detailImagesPreview: [{
+        id: null,
+        file: ''
+      }], // URL[]
       attributes: [
         {
+          id: null,
           name: '',
           originalPrice: 0,
           finalPrice: 0,
@@ -550,7 +556,6 @@ const handleAddNew = async () => {
   try {
     // convert reactive form -> FormData
     const formData = objectToFormData(toRaw(form)); 
-
     await axios.post(
       "http://localhost:8080/bej3/admin/product/add",
       formData,
@@ -618,7 +623,6 @@ const handleUpdate = async () => {
 // update api ===============================================================
 
 // preview img -----------------------------------------------------------
-const previewUrl = ref(null);
 const handleMainImageChange = (event) => {
   const file = event.target.files[0];
   if (file) {
@@ -653,19 +657,44 @@ const removeDetailImage = (vIndex, index) => {
 };
 const addIntroImage = (event) => {
   const file = event.target.files?.[0];
-  if (file) {
-    form.introImages.push(file);
-    form.introImagesPreview.push(URL.createObjectURL(file));
+  if (!file) {
+    event.target.value = "";
+    return;
   }
-  event.target.value = ""; // reset input
+
+  const url = URL.createObjectURL(file);
+
+  // push object có cấu trúc nhất quán
+  form.introImages.push({ id: null, file });
+  form.introImagesPreview.push({ id: null, url });
+
+  // reset để có thể chọn cùng 1 file lại
+  event.target.value = "";
 };
 
+// Thay ảnh tại index
 const replaceIntroImage = (event, index) => {
   const file = event.target.files?.[0];
-  if (file) {
-    form.introImages[index] = file;
-    form.introImagesPreview[index] = URL.createObjectURL(file);
+  if (!file) {
+    event.target.value = "";
+    return;
   }
+
+  const url = URL.createObjectURL(file);
+
+  // revoke URL cũ nếu có
+  const prev = form.introImagesPreview[index];
+  if (prev && prev.url) {
+    try { URL.revokeObjectURL(prev.url); } catch (e) { /* ignore */ }
+  }
+
+  // splice để Vue đảm bảo reactivity
+  const oldId = form.introImages[index]?.id ?? null;
+  form.introImages.splice(index, 1, { id: oldId, file });
+
+  const prevId = form.introImagesPreview[index]?.id ?? null;
+  form.introImagesPreview.splice(index, 1, { id: prevId, url });
+
   event.target.value = "";
 };
 
