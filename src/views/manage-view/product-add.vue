@@ -86,7 +86,7 @@
                     <div class="form-wrap form-wrap-product">
                       <input id="productTrademark"  class="form-control form-control-form-group-product"
                         type="text"   placeholder="---Chọn thương hiệu---"
-                        v-model="form.brand"
+                        v-model="form.name"
                       />
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-sort-down" id="hideAddProductTrademarkForm" aria-hidden="true"></i>
@@ -175,17 +175,18 @@
                   </div>
                   <div class="form-image-group">
                     <div class="form-image-product" style="margin-left: 7px;"
-                        v-for="(img, index) in variant.detailImagesPreview"
-                        :key="index"
+                      v-for="(img, index) in variant.detailImagesPreview"
+                      :key="index"
                     >
                       <div class="wrap-img wrap-img-form-product">
                         <label :for="`productImg-${vIndex}-${index}`" class="custom-upload-btn">
-                          <img v-if="img" :src="img.url" alt="Preview Image"/>
+                          <img v-if="img?.url" :src="img.url" alt="Preview Image"/>
                           <span v-else>Chưa có ảnh</span>
                         </label>
                         <input type="file" :id="`productImg-${vIndex}-${index}`"
-                              accept="image/*" style="display:none;"
-                              @change="e => replaceDetailImage(e, vIndex, index)" />
+                          accept="image/*" style="display:none;"
+                          @change="e => replaceDetailImage(e, vIndex, index)"
+                        />
                       </div>
                       <button type="button" @click="removeDetailImage(vIndex, index)">X</button>
                     </div>
@@ -194,11 +195,16 @@
                     <div class="form-image-product add-btn" style="margin-left: 7px;">
                       <label class="custom-upload-btn">
                         <span>+</span>
-                        <input type="file" accept="image/*" style="display:none;"
-                              @change="e => addDetailImage(e, vIndex)" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          style="display:none;"
+                          @change="e => addDetailImage(e, vIndex)"
+                        />
                       </label>
                     </div>
                   </div>
+
                 </div>
                 <div class="variant-selector">
                   <button type="button" class="variant-btn" @click="addVariant">
@@ -408,24 +414,28 @@ import { reactive, watch, ref, onMounted, toRaw } from 'vue'
 const form = reactive({
   id: '',
   name: '',
-  image: '',
-  imagePreview: '',
+  image: null,             // file chính
+  imagePreview: '',        // preview (bỏ qua khi gửi)
   status: 1,
   createDate: '',
-  introImages: [{
-    id: null,
-    file: ''
-  }],
-  introImagesPreview: [],
+  introImages: [           // list ảnh giới thiệu
+    {
+      id: null,
+      file: null           // file upload
+    }
+  ],
+  introImagesPreview: [],  // bỏ qua khi gửi
   variants: [
     {
       id: null,
       color: '',
-      detailImages: [],
-      detailImagesPreview: [{
-        id: null,
-        file: ''
-      }], // URL[]
+      detailImages: [      // list ảnh chi tiết
+        {
+          id: null,
+          file: null
+        }
+      ],
+      detailImagesPreview: [], // bỏ qua
       attributes: [
         {
           id: null,
@@ -473,6 +483,7 @@ watch(
           detailImages: [], // File[]
           detailImagesPreview: [...(v.detailImages || [])], // URL[]
           attributes: (v.attributes || []).map(attr => ({
+            id: attr.id,
             name: attr.name,
             originalPrice: attr.originalPrice ?? 0,
             finalPrice: attr.finalPrice ?? 0,
@@ -496,6 +507,7 @@ watch(
           detailImagesPreview: [],
           attributes: [
             {
+              id: null,
               name: '',
               originalPrice: 0,
               finalPrice: 0,
@@ -511,41 +523,70 @@ watch(
   { immediate: true }
 );
 
-
 // add new -----------------------------------------------------------------------------
 function objectToFormData(obj, formData = new FormData(), parentKey = "") {
   if (obj === null || obj === undefined) return formData;
 
+  // Nếu là File (ảnh upload)
   if (obj instanceof File || obj instanceof Blob) {
-    if (parentKey) formData.append(parentKey, obj);
+    if (parentKey) {
+      formData.append(parentKey, obj);
+      console.log(`[FormData-Check] ${parentKey} -> File(${obj.name})`);
+    }
   }
+  // Nếu là Array
   else if (Array.isArray(obj)) {
     obj.forEach((value, index) => {
-      const key = parentKey ? `${parentKey}[${index}]` : `${index}`;
+      // Dùng dot notation để Spring map
+      const key = parentKey ? `${parentKey}.${index}` : `${index}`;
       objectToFormData(value, formData, key);
     });
   }
+  // Nếu là Object
   else if (typeof obj === "object" && !(obj instanceof Date)) {
     Object.keys(obj).forEach((key) => {
-      if (key.toLowerCase().includes("preview")) {
-        return; 
-      }
+      // Bỏ qua preview và createDate
+      if (key.toLowerCase().includes("preview") || key === "createDate") return;
+
       const value = obj[key];
       const fullKey = parentKey ? `${parentKey}.${key}` : key;
-      objectToFormData(value, formData, fullKey);
+
+      // Xử lý riêng cho image chính
+      if (fullKey === "image") {
+        if (value instanceof File) {
+          formData.append(fullKey, value);
+          console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
+        } else {
+          // bỏ qua nếu chỉ là URL (string)
+          console.log(`[FormData-Check] ${fullKey} -> BỎ QUA (URL cũ)`);
+        }
+        return;
+      }
+
+      // Nếu là file trong introImages / detailImages
+      if (key === "file" && value instanceof File) {
+        formData.append(fullKey, value);
+        console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
+      } else {
+        objectToFormData(value, formData, fullKey);
+      }
     });
   }
+  // Bỏ qua Date
   else if (obj instanceof Date) {
-    if (parentKey) formData.append(parentKey, obj.toISOString());
+    return formData;
   }
+  // Nếu là primitive (string, number, boolean, id...)
   else {
     if (parentKey && obj !== null) {
       formData.append(parentKey, obj);
+      console.log(`[FormData-Check] ${parentKey} -> ${obj}`);
     }
   }
 
   return formData;
 }
+
 
 // add api ===============================================================
 const emit = defineEmits(['added-success', 'close']);
@@ -556,13 +597,22 @@ const handleAddNew = async () => {
   try {
     // convert reactive form -> FormData
     const formData = objectToFormData(toRaw(form)); 
+
+    for (let [key, value] of formData.entries()) {
+      if (value instanceof File) {
+        console.log(`[FormData] ${key} -> File(${value.name})`);
+      } else {
+        console.log(`[FormData] ${key} -> ${value}`);
+      }
+    }
+ 
     await axios.post(
       "http://localhost:8080/bej3/admin/product/add",
       formData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data"
+          // "Content-Type": "multipart/form-data"
         }
       }
     );
@@ -633,75 +683,69 @@ const handleMainImageChange = (event) => {
     form.imagePreview = '';
   }
 };
+//
+// Thêm ảnh mới
+function addImage(list, previewList, file) {
+  list.push({ id: null, file });   // wrap object
+  previewList.push({
+    id: null,
+    url: URL.createObjectURL(file)
+  });
+}
+
+// Thay thế ảnh trong list
+function replaceImage(list, previewList, index, file) {
+  list[index] = { 
+    id: list[index]?.id ?? null, 
+    file 
+  };
+  previewList[index] = {
+    id: previewList[index]?.id ?? null,
+    url: URL.createObjectURL(file)
+  };
+}
+
+// Xóa ảnh
+function removeImage(list, previewList, index) {
+  list.splice(index, 1);
+  previewList.splice(index, 1);
+}
+
+// Intro images
+const addIntroImage = (event) => {
+  const file = event.target.files?.[0];
+  if (file) addImage(form.introImages, form.introImagesPreview, file);
+  event.target.value = "";
+};
+
+const replaceIntroImage = (event, index) => {
+  const file = event.target.files?.[0];
+  if (file) replaceImage(form.introImages, form.introImagesPreview, index, file);
+  event.target.value = "";
+};
+
+const removeIntroImage = (index) => {
+  removeImage(form.introImages, form.introImagesPreview, index);
+};
+
+// Detail images
 const addDetailImage = (event, vIndex) => {
   const file = event.target.files?.[0];
-  if (file) {
-    form.variants[vIndex].detailImages.push(file);
-    form.variants[vIndex].detailImagesPreview.push(URL.createObjectURL(file));
-  }
+  if (file) addImage(form.variants[vIndex].detailImages, form.variants[vIndex].detailImagesPreview, file);
   event.target.value = "";
 };
 
 const replaceDetailImage = (event, vIndex, index) => {
   const file = event.target.files?.[0];
-  if (file) {
-    form.variants[vIndex].detailImages[index] = file;
-    form.variants[vIndex].detailImagesPreview[index] = URL.createObjectURL(file);
-  }
+  if (file) replaceImage(form.variants[vIndex].detailImages, form.variants[vIndex].detailImagesPreview, index, file);
   event.target.value = "";
 };
 
 const removeDetailImage = (vIndex, index) => {
-  form.variants[vIndex].detailImages.splice(index, 1);
-  form.variants[vIndex].detailImagesPreview.splice(index, 1);
-};
-const addIntroImage = (event) => {
-  const file = event.target.files?.[0];
-  if (!file) {
-    event.target.value = "";
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-
-  // push object có cấu trúc nhất quán
-  form.introImages.push({ id: null, file });
-  form.introImagesPreview.push({ id: null, url });
-
-  // reset để có thể chọn cùng 1 file lại
-  event.target.value = "";
+  removeImage(form.variants[vIndex].detailImages, form.variants[vIndex].detailImagesPreview, index);
 };
 
-// Thay ảnh tại index
-const replaceIntroImage = (event, index) => {
-  const file = event.target.files?.[0];
-  if (!file) {
-    event.target.value = "";
-    return;
-  }
 
-  const url = URL.createObjectURL(file);
-
-  // revoke URL cũ nếu có
-  const prev = form.introImagesPreview[index];
-  if (prev && prev.url) {
-    try { URL.revokeObjectURL(prev.url); } catch (e) { /* ignore */ }
-  }
-
-  // splice để Vue đảm bảo reactivity
-  const oldId = form.introImages[index]?.id ?? null;
-  form.introImages.splice(index, 1, { id: oldId, file });
-
-  const prevId = form.introImagesPreview[index]?.id ?? null;
-  form.introImagesPreview.splice(index, 1, { id: prevId, url });
-
-  event.target.value = "";
-};
-
-const removeIntroImage = (index) => {
-  form.introImages.splice(index, 1);
-  form.introImagesPreview.splice(index, 1);
-};
 // them variant -------------------------------------------------------------------------------
 const addVariant = () => {
   form.variants.push({
