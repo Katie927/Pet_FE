@@ -60,18 +60,24 @@
 
                   <!-- Nhóm hàng -->
                   <div class="form-group form-group-product">
-                    <label class="form-label">
-                      Nhóm hàng
-                    </label>
+                    <label class="form-label">Loại hàng</label>
                     <div class="form-wrap form-wrap-product">
-                      <input class="form-control form-control-form-group-product" type="text"
-                        placeholder="---Lựa chọn---" 
-                        v-model="form.group"
-                      />
+                      <select 
+                        class="form-control form-control-form-group-product"
+                        v-model="form.category.id"
+                      >
+                        <option disabled value="">---Lựa chọn---</option>
+                        <option v-for="c in categories" :key="c.id" :value="c.id">
+                          {{ c.name }}
+                        </option>
+                      </select>
+
                       <div class="group-icon-add-new">
                         <i class="show-hide-icon fas fa-solid fa-sort-down" aria-hidden="true"></i>
-                        <a href="#" class="add-product-group-icon btn-icon add-group-product fas fa-solid fa-plus"
-                          title="Thêm nhóm hàng mới"   aria-hidden="true"
+                        <a href="#" 
+                          class="add-product-group-icon btn-icon add-group-product fas fa-solid fa-plus"
+                          title="Thêm nhóm hàng mới"
+                          aria-hidden="true"
                           @click.prevent="addGroup"></a>
                         <span class="sr-only">Thêm nhóm hàng mới</span>
                       </div>
@@ -413,6 +419,9 @@ const form = reactive({
   name: '',
   image: null,             // file chính
   imagePreview: '',        // preview (bỏ qua khi gửi)
+  category: {
+    name: '',
+  },
   status: 1,
   createDate: '',
   introImages: [           // list ảnh giới thiệu
@@ -463,13 +472,16 @@ watch(
       form.name = newVal.name;
       form.status = newVal.status ?? 1;
       form.createDate = newVal.createDate ?? null;
-
+      form.category = newVal.category;
       // ảnh chính
       form.image = newVal.image || null;                     // chỉ set khi user upload ảnh mới
       form.imagePreview = newVal.image || null; // preview ảnh cũ
 
       // intro images (6 ảnh)
-      form.introImages = []; // File[]
+      form.introImages = (newVal.introImages || []).map(img => ({
+        id: img.id,
+        file: null   // ảnh cũ thì chưa có file mới
+      })); // File[]
       form.introImagesPreview = [...(newVal.introImages || [])]; // URL[]
 
       // variants
@@ -477,7 +489,10 @@ watch(
         return {
           id: v.id,
           color: v.color,
-          detailImages: [], // File[]
+          detailImages: (v.detailImages || []).map(img => ({
+            id: img.id,
+            file: null   // ảnh cũ thì chưa có file mới
+          })),
           detailImagesPreview: [...(v.detailImages || [])], // URL[]
           attributes: (v.attributes || []).map(attr => ({
             id: attr.id,
@@ -557,13 +572,21 @@ function objectToFormData(obj, formData = new FormData(), parentKey = "") {
         }
       }
       // xử lý riêng cho introImages và detailImages
-      else if ((parentKey.endsWith("introImages") || parentKey.endsWith("detailImages")) && key === "url") {
-        if (value instanceof File) {
+      else if (parentKey.endsWith("introImages") || parentKey.endsWith("detailImages")) {
+        // xử lý riêng cho từng ảnh trong list
+        if (key === "file" && value instanceof File) {
+          // ảnh mới
           formData.append(fullKey, value);
           console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
-        } else {
-          // bỏ qua url cũ (server chỉ cần id khi không có file mới)
-          console.log(`[FormData-Check] ${fullKey} -> skipped (old url)`);
+        } 
+        else if (key === "id" && value) {
+          // ảnh cũ
+          formData.append(fullKey, value);
+          console.log(`[FormData-Check] ${fullKey} -> old image id=${value}`);
+        } 
+        // bỏ qua url (server không cần)
+        else if (key === "url") {
+          console.log(`[FormData-Check] ${fullKey} -> skipped (url only)`);
         }
       }
       else {
@@ -843,6 +866,19 @@ function selectVariant(index) {
 const selectAttribute = (index) => {
   selectedAttributeIndex.value = parseInt(index);
 };
+
+// category 
+const categories = ref([]);
+const fetchCategories = async () => {
+  const token = localStorage.getItem("token");
+  const res = await axios.get("http://localhost:8080/bej3/admin/category", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  categories.value = res.data.result;
+};
+onMounted(async () => {
+  await fetchCategories();
+});
 </script>
 
 
@@ -862,6 +898,29 @@ const selectAttribute = (index) => {
   background: #009981;
   color: white;
   border-color: #009981;
+}
+
+
+.form-control-form-group-product {
+  -webkit-appearance: none; /* Chrome, Safari */
+  -moz-appearance: none;    /* Firefox */
+  appearance: none;         /* chuẩn */
+  padding-right: 30px;      /* chừa chỗ cho icon custom */
+  background: white;        /* đảm bảo không bị trong suốt */
+}
+
+.form-wrap-product {
+  position: relative;
+}
+
+.show-hide-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* để click vào icon vẫn bấm được select */
+  font-size: 16px;
+  color: #4d4d4d;
 }
 
 </style>
