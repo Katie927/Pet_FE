@@ -193,12 +193,9 @@
 
                     <!-- nút thêm ảnh -->
                     <div class="form-image-product add-btn" style="margin-left: 7px;">
-                      <label class="custom-upload-btn">
+                      <label class="custom-upload-btn" style="display: block; height: 31px; width: 31px; padding: 9px;">
                         <span>+</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          style="display:none;"
+                        <input type="file" accept="image/*" style="display:none;"
                           @change="e => addDetailImage(e, vIndex)"
                         />
                       </label>
@@ -527,47 +524,49 @@ watch(
 function objectToFormData(obj, formData = new FormData(), parentKey = "") {
   if (obj === null || obj === undefined) return formData;
 
-  // Nếu là File (ảnh upload)
+  // Nếu là file
   if (obj instanceof File || obj instanceof Blob) {
     if (parentKey) {
       formData.append(parentKey, obj);
       console.log(`[FormData-Check] ${parentKey} -> File(${obj.name})`);
     }
   }
-  // Nếu là Array
+  // Nếu là array
   else if (Array.isArray(obj)) {
     obj.forEach((value, index) => {
-      // Dùng dot notation để Spring map
-      const key = parentKey ? `${parentKey}.${index}` : `${index}`;
+      const key = parentKey ? `${parentKey}[${index}]` : `${index}`;
       objectToFormData(value, formData, key);
     });
   }
-  // Nếu là Object
+  // Nếu là object
   else if (typeof obj === "object" && !(obj instanceof Date)) {
     Object.keys(obj).forEach((key) => {
-      // Bỏ qua preview và createDate
       if (key.toLowerCase().includes("preview") || key === "createDate") return;
 
       const value = obj[key];
       const fullKey = parentKey ? `${parentKey}.${key}` : key;
 
-      // Xử lý riêng cho image chính
-      if (fullKey === "image") {
+      // xử lý riêng cho image chính
+      if (key === "image") {
         if (value instanceof File) {
           formData.append(fullKey, value);
           console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
         } else {
-          // bỏ qua nếu chỉ là URL (string)
-          console.log(`[FormData-Check] ${fullKey} -> BỎ QUA (URL cũ)`);
+          // formData.append(fullKey, null);
+          // console.log(`[FormData-Check] ${fullKey} -> null`);
         }
-        return;
       }
-
-      // Nếu là file trong introImages / detailImages
-      if (key === "file" && value instanceof File) {
-        formData.append(fullKey, value);
-        console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
-      } else {
+      // xử lý riêng cho introImages và detailImages
+      else if ((parentKey.endsWith("introImages") || parentKey.endsWith("detailImages")) && key === "url") {
+        if (value instanceof File) {
+          formData.append(fullKey, value);
+          console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
+        } else {
+          // bỏ qua url cũ (server chỉ cần id khi không có file mới)
+          console.log(`[FormData-Check] ${fullKey} -> skipped (old url)`);
+        }
+      }
+      else {
         objectToFormData(value, formData, fullKey);
       }
     });
@@ -576,7 +575,7 @@ function objectToFormData(obj, formData = new FormData(), parentKey = "") {
   else if (obj instanceof Date) {
     return formData;
   }
-  // Nếu là primitive (string, number, boolean, id...)
+  // Nếu là primitive
   else {
     if (parentKey && obj !== null) {
       formData.append(parentKey, obj);

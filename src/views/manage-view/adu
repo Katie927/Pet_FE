@@ -64,3 +64,67 @@
             }
         ]
     }
+
+
+function objectToFormData(obj, formData = new FormData(), parentKey = "") {
+  if (obj === null || obj === undefined) return formData;
+
+  // Nếu là File (ảnh upload)
+  if (obj instanceof File || obj instanceof Blob) {
+    if (parentKey) {
+      formData.append(parentKey, obj);
+      console.log(`[FormData-Check] ${parentKey} -> File(${obj.name})`);
+    }
+  }
+  // Nếu là Array
+  else if (Array.isArray(obj)) {
+    obj.forEach((value, index) => {
+      // Dùng dot notation để Spring map
+      const key = parentKey ? `${parentKey}.${index}` : `${index}`;
+      objectToFormData(value, formData, key);
+    });
+  }
+  // Nếu là Object
+  else if (typeof obj === "object" && !(obj instanceof Date)) {
+    Object.keys(obj).forEach((key) => {
+      // Bỏ qua preview và createDate
+      if (key.toLowerCase().includes("preview") || key === "createDate") return;
+
+      const value = obj[key];
+      const fullKey = parentKey ? `${parentKey}.${key}` : key;
+
+      // Xử lý riêng cho image chính
+      if (fullKey === "image") {
+        if (value instanceof File) {
+          formData.append(fullKey, value);
+          console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
+        } else {
+          // bỏ qua nếu chỉ là URL (string)
+          console.log(`[FormData-Check] ${fullKey} -> BỎ QUA (URL cũ)`);
+        }
+        return;
+      }
+
+      // Nếu là file trong introImages / detailImages
+      if (key === "file" && value instanceof File) {
+        formData.append(fullKey, value);
+        console.log(`[FormData-Check] ${fullKey} -> File(${value.name})`);
+      } else {
+        objectToFormData(value, formData, fullKey);
+      }
+    });
+  }
+  // Bỏ qua Date
+  else if (obj instanceof Date) {
+    return formData;
+  }
+  // Nếu là primitive (string, number, boolean, id...)
+  else {
+    if (parentKey && obj !== null) {
+      formData.append(parentKey, obj);
+      console.log(`[FormData-Check] ${parentKey} -> ${obj}`);
+    }
+  }
+
+  return formData;
+}
