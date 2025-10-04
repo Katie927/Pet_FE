@@ -14,6 +14,7 @@ import ListEmployee from "@/views/manage-view/list-employee.vue";
 import EmployeeDetails from "@/views/manage-view/employee-details.vue";
 import ProductDetailRow from "@/views/manage-view/product-detail-row.vue";
 import ProductAdd from "@/views/manage-view/product-add.vue";
+import EmployeeAdd from "@/views/manage-view/employee-add.vue";
 
 //-----------------------------------------------------------------
 const customerRoutes = [
@@ -47,6 +48,7 @@ const customerRoutes = [
         { path: 'product/list', component: ListProduct },
         { path: 'employee', component: ListEmployee },
         { path: 'employee/details', component: EmployeeDetails },
+        { path: 'employee/add', component: EmployeeAdd },
         { path: 'product/details', component: ProductDetailRow },
         { path: 'product/add', component: ProductAdd }
       ]

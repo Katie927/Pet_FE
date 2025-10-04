@@ -95,7 +95,7 @@
                                 </button>
                                 <ul class="btn-add-product-list" id="btnAddProductList">
                                     <li>
-                                        <button class="operation" id="addCommodityProductButton" data-action="">
+                                        <button class="operation" id="addCommodityProductButton" data-action="" @click="showEmpployeeAdd = true">
                                         <i class="btn-icon fas fa-solid fa-plus" aria-hidden="true"></i>
                                         <span>Thêm nhân viên</span>
                                         </button>
@@ -219,6 +219,8 @@
     </div>
 </div>
 
+<EmployeeAdd v-if="showEmpployeeAdd" @close="showEmpployeeAdd = false"/>
+
 </template>
 
 <script setup>
@@ -227,11 +229,15 @@ import '@/assets/styles/admin-css/kv-product.css';
 import '@/assets/styles/admin-css/kv-style.css'; 
 
 import axios from "axios";
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRouter } from "vue-router";
 import EmployeeDetails from './employee-details.vue';
 
+import EmployeeAdd from './employee-add.vue';
+
 const router = useRouter();
+
+const showEmpployeeAdd = ref(false)
 
 const productTypes = ref([
   { label: 'Staff', checked: true },
@@ -277,5 +283,13 @@ function toggleDetail(id) {
 defineProps({
   employeeData: Array
 })
+
+watch(showEmpployeeAdd, (val) => {
+  if (val) {
+    document.body.style.overflow = "hidden"; // chặn cuộn nền
+  } else {
+    document.body.style.overflow = ""; // trả lại bình thường
+  }
+});
 
 </script>
