@@ -7,7 +7,7 @@
       <div class="add-employee-head header">
         <div class="add-employee-head-title header-title">
           <span class="add-employee-title-heading span-heading">Thêm mới nhân viên</span>
-          <i class="add-employee-icon fas fa-solid fa-close" id="closeAddEmployee"></i>
+          <i class="add-employee-icon fas fa-solid fa-close" id="closeAddEmployee" @click="closeForm"></i>
         </div>
       </div>
 
@@ -67,8 +67,8 @@
                   <div class="form-group">
                     <label class="form-label">Tên nhân viên</label>
                     <div class="form-wrap">
-                      <input id="employeeName" class="form-control" type="text" />
-                      
+                      <input id="employeeName" class="form-control" type="text" 
+                          v-model="form.fullName"/>
                     </div>
                   </div>
 
@@ -76,7 +76,8 @@
                     <label class="form-label">Số điện thoại</label>
                     <div class="form-wrap">
                       <input id="phoneNumber" class="form-control" type="tel" placeholder="0123-456-789"
-                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required maxlength="10"/>
+                        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required maxlength="10"
+                        v-model="form.phoneNumber"/>
                     </div>
                   </div>
 
@@ -625,7 +626,7 @@
                 <div class="new-application-head-title head-title">
                   <span class="span-heading">Thêm mới mẫu áp dụng</span>
                   <div class="new-application-head-icon">
-                    <i class="head-icon fas fa-solid fa-close" id="closeNewApplication" @click="$emit('close')"></i>
+                    <i class="head-icon fas fa-solid fa-close" id="closeNewApplication"></i>
                   </div>
                   
                 </div>
@@ -975,11 +976,63 @@
 import '@/assets/styles/admin-css/kv-employee.css'; 
 import '@/assets/styles/admin-css/kv-style.css';
 
-import { ref } from "vue";
+import { reactive, ref, watch } from "vue";
 
 const isEInfoForm = ref(true);
 const emit = defineEmits(['added-success', 'close']);
 
+const form = reactive({
+  id: '',
+  fullName: '',
+  address: '',
+  dob: '',
+  email: '',
+  phoneNumber: '',
+  roles: [],
+})
+
+const props = defineProps({
+  user: {
+    type: Object,
+    default: null
+  }
+});
+
+watch(
+  () => props.user,
+  (newVal) => {
+    console.log('User received:', newVal);
+
+    if (newVal && Object.keys(newVal).length > 0) {
+      // === TRƯỜNG HỢP EDIT ===
+      form.id = newVal.id ?? '';
+      form.fullName = newVal.fullName ?? '';
+      form.address = newVal.address ?? '';
+      form.dob = newVal.dob ?? '';
+      form.email = newVal.email ?? '';
+      form.phoneNumber = newVal.phoneNumber ?? '';
+      form.roles = newVal.roles ?? [];
+    } else {
+      // === TRƯỜNG HỢP ADD MỚI ===
+      resetForm();
+    }
+  },
+  { immediate: true }
+);
+function resetForm() {
+  form.id = '';
+  form.fullName = '';
+  form.address = '';
+  form.dob = '';
+  form.email = '';
+  form.phoneNumber = '';
+  form.roles = [];
+}
+// hàm đóng form
+function closeForm() {
+  resetForm();        // xoá toàn bộ dữ liệu trong form
+  emit('close');      // báo cho cha biết để ẩn form
+}
 </script>
 
 

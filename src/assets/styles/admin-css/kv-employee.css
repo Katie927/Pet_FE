@@ -4,15 +4,16 @@
 .add-employee{
     overflow-y: auto;
     position: fixed;
-    top: 60px;
+    top: 50px;
     right: 0;
     left: 0;
     z-index: 999;
+    max-height: 93vh;
 }
 
 .mask-1{
     background-color: rgba(0, 0, 0, .2);
-      z-index: 1000;
+    z-index: 1000;
 }
 
 .add-employee #containerAddEmployee{
@@ -27,6 +28,7 @@
 
 .add-employee-head{
     background-color: #fff;
+    border-radius: 4px;
 }
 
 .add-employee-head:hover{

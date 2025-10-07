@@ -629,7 +629,7 @@ const handleAddNew = async () => {
     }
  
     await axios.post(
-      "http://localhost:8080/bej3/admin/product/add",
+      "http://localhost:8080/bej3/manage/product/add",
       formData,
       {
         headers: {
@@ -669,7 +669,7 @@ const handleUpdate = async () => {
       console.log(k, v);
     }
     await axios.put(
-      `http://localhost:8080/bej3/admin/product/update/${form.id}`,
+      `http://localhost:8080/bej3/manage/product/update/${form.id}`,
       formData,
       {
         headers: {
@@ -871,7 +871,7 @@ const selectAttribute = (index) => {
 const categories = ref([]);
 const fetchCategories = async () => {
   const token = localStorage.getItem("token");
-  const res = await axios.get("http://localhost:8080/bej3/admin/category", {
+  const res = await axios.get("http://localhost:8080/bej3/manage/category", {
     headers: { Authorization: `Bearer ${token}` },
   });
   categories.value = res.data.result;

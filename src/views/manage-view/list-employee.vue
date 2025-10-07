@@ -207,7 +207,8 @@
                                 </tr>
                                 <tr v-if="expandedId === employee.id">
                                     <td colspan="9" class="cell-detail p-0">
-                                        <EmployeeDetails :employee-id ="employee.id" />
+                                        <EmployeeDetails :employee-id ="employee.id"
+                                                        @edit-user="handleEditUser" />
                                     </td>
                                 </tr>
                             </template>
@@ -219,7 +220,7 @@
     </div>
 </div>
 
-<EmployeeAdd v-if="showEmpployeeAdd" @close="showEmpployeeAdd = false"/>
+<EmployeeAdd v-if="showEmpployeeAdd" :user="selectedUser" @close="showEmpployeeAdd = false, selectedUser=null"/>
 
 </template>
 
@@ -253,7 +254,7 @@ const fetchEmployeeData = async () => {
         return;
     }
     try {
-        const response = await axios.get(`http://localhost:8080/bej3/users`, {
+        const response = await axios.get(`http://localhost:8080/bej3/manage/users`, {
             headers: {
                 Authorization: `Bearer ${token}` // Gửi token trong header
             }
@@ -273,6 +274,12 @@ const fetchEmployeeData = async () => {
 };
 onMounted(fetchEmployeeData);
 
+// edit --------------------------------------------------------
+const selectedUser = ref(false)
+const handleEditUser = (user) => {
+    selectedUser.value = {...user};
+    showEmpployeeAdd.value = true;
+}
 
 const expandedId = ref(null)
 function toggleDetail(id) {

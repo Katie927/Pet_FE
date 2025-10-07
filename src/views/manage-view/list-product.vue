@@ -310,10 +310,10 @@ const fetchProductData = async () => {
     }
     try {
       const [productListResponse, categoryListResponse] = await Promise.all([
-            axios.get("http://localhost:8080/bej3/admin/product/list", {
+            axios.get("http://localhost:8080/bej3/manage/product/list", {
                 headers: { Authorization: `Bearer ${token}` },
             }),
-            axios.get("http://localhost:8080/bej3/admin/category", {
+            axios.get("http://localhost:8080/bej3/manage/category", {
                 headers: { Authorization: `Bearer ${token}` },
             }),
         ]);
