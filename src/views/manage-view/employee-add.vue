@@ -60,7 +60,7 @@
                     <label class="form-label">Mã nhân viên</label>
                     <div class="form-wrap">
                       <input id="employeeCode" class="form-control" type="text" placeholder="Mã nhân viên tự động"
-                        maxlength="10" />
+                            v-model="form.id" />
                     </div>
                   </div>
 
@@ -85,7 +85,7 @@
                     <label class="form-label">Chức vụ</label>
                     <div class="form-wrap">
                       <div class="select-salary-branch">
-                        <input id="salaryBranch" class="form-control" role="listbox" value="Chi nhánh trung tâm">
+                        <input id="salaryBranch" class="form-control" role="listbox" v-model="form.roles">
                         <i id="salaryBranchSortDownIcon" class="salary-branch-icon fas fa-solid fa-sort-down"></i>
                       </div>
                       <div id="branchListId" class="form-list branch-list-items">
@@ -171,8 +171,8 @@
                     <div class="form-group">
                       <label class="form-label">Chức danh</label>
                       <div class="form-wrap">
-                        <input id="employeePosition" class="form-control" type="text" placeholder="Chọn chức danh" />
-                        <div class="group-icon-add-new">
+                        <input id="employeePosition" class="form-control" type="text" v-model="form.roles" />
+                        <!-- <div class="group-icon-add-new">
                           <i
                           href="#"
                           class="show-hide-icon fas fa-solid fa-sort-down"
@@ -184,7 +184,7 @@
                           title="Thêm chức danh mới"
                           id="addNewPositionFormAddEmployee"
                         ></a>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
 
@@ -234,7 +234,8 @@
                     <div class="form-group">
                       <label class="form-label">Ngày sinh</label>
                       <div class="form-wrap">
-                        <input id="dateOfBirth" class="form-control" type="date" />
+                        <input id="dateOfBirth" class="form-control" type="date" 
+                                v-model="form.dob"/>
                       </div>
                     </div>
 
@@ -259,7 +260,7 @@
                     <div class="form-group">
                       <label class="form-label">Địa chỉ</label>
                       <div class="form-wrap">
-                        <input id="employeeAddress" class="form-control" type="text" />
+                        <input id="employeeAddress" class="form-control" type="text" v-model="form.address"/>
                       </div>
                     </div>
 
@@ -273,7 +274,7 @@
                     <div class="form-group">
                       <label class="form-label">Email</label>
                       <div class="form-wrap">
-                        <input id="employeeEmail" class="form-control" type="email" placeholder="admin@gmail.com" />
+                        <input id="employeeEmail" class="form-control" type="email" v-model="form.email" />
                       </div>
                     </div>
 
@@ -297,7 +298,7 @@
           </div>
           <!-- add employee bottom -->
           <div class="add-employee-bottom">
-            <button id="btnSaveApplicationEmployee" class="btn btn-success btn-success-bottom">
+            <button id="btnSaveApplicationEmployee" class="btn btn-success btn-success-bottom" @click="handleUpdateUserProfile">
               <i class="btn-success-icon fas fa-solid fa-floppy-disk"></i>
               <span>Lưu</span>
             </button>
@@ -613,359 +614,7 @@
 
         </div>
         <!-- add new application -->
-        <div class="new-application">
-          <div class="mask mask-2"></div>
-
-          <!-- add new application form container -->
-          <div class="new-application-container">
-            <!-- add new application form -->
-            <div class="new-application-head">
-
-              <!-- new application form header -->
-              <div class="new-application-heading application-heading">
-                <div class="new-application-head-title head-title">
-                  <span class="span-heading">Thêm mới mẫu áp dụng</span>
-                  <div class="new-application-head-icon">
-                    <i class="head-icon fas fa-solid fa-close" id="closeNewApplication"></i>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-
-            <!-- new-application form container -->
-            <div class="new-application-form-container">
-              <!-- new application name -->
-              <div class="new-application-name">
-                <label for="applicationNewName" class="new-application-name-title form-control">Mẫu áp dụng</label>
-                <input class="new-application-name-input" name="application-new-name" id="applicationNewName"
-                  placeholder="Vd: Mẫu lương nhân viên hành chính">
-              </div>
-
-              <!-- add new application form group-->
-              <div class="new-application-form-group">
-
-                <!-- form commission -->
-                <div class="new-application-form">
-                  <!-- new application content -->
-                  <div class="new-application-content">
-                    <div class="new-application-commission-content">
-                      <div class="new-application-toggle commission-pay">
-                        <label for="btnToggleCommissionPay" class="commission-pay-label toggle-standard">Hoa
-                          hồng</label>
-                        <button class="btn-toggle btn-toggle-standard" id="btnToggleCommissionPay">
-                          <i class="btn-toggle-icon fas fa-solid fa-circle"></i>
-                        </button>
-                        
-                      </div>
-                    </div>
-
-                    <!-- table commission application-->
-                    <div class="table-commission-application table-application-container">
-                      <table class="employee-table-list table-application">
-                        <thead class="table-header-application">
-                          <tr class="table-row-header-application">
-                            <th class="table-type-application"><span>Loại hình</span></th>
-                            <th class="table-origin-application"><span>Doanh thu thuần</span></th>
-                            <th class="table-commission-application"><span>Hoa hồng thụ hưởng</span>
-                            </th>
-                            <th class="table-icon-add-remove"></th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-body">
-                          <tr class="table-row-data-application">
-                            <td class="table-type-application"><span>Tư vấn bán hàng</span></td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>Từ</span>
-                                <span>10000000</span>
-                              </div>
-
-                            </td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>Hoa hồng</span>
-                                <span>10%</span>
-                              </div>
-                            </td>
-                            <td class="table-icon-add-remove">
-                              <div class="table-icon-add-remove">
-                                <i class="icon-add fas fa-solid fa-pen"></i>
-                                <i class="icon-remove fas fa-solid fa-trash-can"></i>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="add-condition">
-                        <button id="addCondition" class="btn btn-condition">
-                          <i class="btn-success-icon fas fa-solid fa-plus"></i>
-                          <span>Thêm điều kiện</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- form reward -->
-                <div class="new-application-form">
-                  <!-- new application content -->
-                  <div class="new-application-content">
-                    <div class="new-application-reward-content">
-                      <div class="new-application-toggle reward-pay">
-                        <label for="rewardType" class="reward-pay-label toggle-standard">Thưởng</label>
-                        <div class="form-label-select">
-                          <select class="form-reward-type form-select" name="reward-type" id="rewardType"
-                            aria-placeholder="---Chọn loại thưởng---">
-                            <option value="rewardDefault">---Chọn loại thưởng---</option>
-                            <option value="rewardDefault">Theo doanh thu cá nhân</option>
-                            <option value="rewardDefault">Theo doanh thu chi nhánh/Cửa hàng</option>
-                            <option value="rewardDefault">Theo lợi nhuận gộp cá nhân</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="new-application-toggle method-pay">
-                        <label for="methodType" class="method-pay-label toggle-standard">Hình thức</label>
-                        <div class="form-label-icon">
-                          <select class="form-method-type form-select" name="method-type" id="methodType"
-                            aria-placeholder="---Chọn hình thức thưởng---">
-                            <option value="methodDefault">---Chọn hình thức thưởng---</option>
-                            <option value="methodDefault">Tính theo mức tổng doanh thu</option>
-                            <option value="methodDefault">Tính theo nấc bậc thang tổng doanh thu</option>
-                            <option value="methodDefault">Tính theo mức vượt doanh thu tối thiểu</option>
-                          </select>
-                          <i class="salary-type-icon  fa fa-solid fa-circle-info"></i>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- table reward application-->
-                    <div class="table-application-container">
-                      <table class="employee-table-list table-application">
-                        <thead class="table-header-application">
-                          <tr class="table-row-header-application">
-                            <th class="table-type-application"><span>Loại hình</span></th>
-                            <th class="table-origin-application"><span>Doanh thu thuần</span></th>
-                            <th class="table-reward-application"><span>Thưởng</span></th>
-                            <th class="table-icon-add-remove"></th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-body">
-                          <tr class="table-row-data-application">
-                            <td class="table-type-application"><span>Tư vấn bán hàng</span></td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>Từ</span>
-                                <span>10000000</span>
-                              </div>
-                            </td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>10%</span>
-                                <span>Doanh thu</span>
-                              </div>
-                            </td>
-                            <td class="table-icon-add-remove">
-                              <div class="table-icon-add-remove">
-                                <i class="icon-add fas fa-solid fa-pen"></i>
-                                <i class="icon-remove fas fa-solid fa-trash-can"></i>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="add-condition">
-                        <button id="addCondition" class="btn btn-condition">
-                          <i class="btn-success-icon fas fa-solid fa-plus"></i>
-                          <span>Thêm điều kiện</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- form allowance -->
-                <div class="new-application-form">
-                  <!-- new application content -->
-                  <div class="new-application-content">
-                    <div class="new-application-allowance-content">
-                      <div class="new-application-toggle allowance-pay">
-                        <label for="btnToggleAllowancePay" class="allowance-pay-label toggle-standard">Phụ
-                          cấp</label>
-                        <button class="btn-toggle btn-toggle-standard" id="btnToggleAllowancePay">
-                          <i class="btn-toggle-icon fas fa-solid fa-circle"></i>
-                        </button>
-                        
-                      </div>
-                    </div>
-
-                    <!-- table allowance application-->
-                    <div class="table-allowance-application table-application-container">
-                      <table class="employee-table-list table-application">
-                        <thead class="table-header-application">
-                          <tr class="table-row-header-application">
-                            <th class="table-type-application"><span>Tên phụ cấp</span></th>
-                            <th class="table-origin-application"><span>Doanh thu thuần</span></th>
-                            <th class="table-allowance-application"><span>Loại phụ cấp</span>
-                            </th>
-                            <th class="table-icon-add-remove"></th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-body">
-                          <tr class="table-row-data-application">
-                            <td></td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>100000</span>
-                                <span>VND</span>
-                              </div>
-
-                            </td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>Phụ cấp cho mỗi ngày làm việc</span>
-                              </div>
-                            </td>
-                            <td class="table-icon-add-remove">
-                              <div class="table-icon-add-remove">
-                                <i class="icon-add fas fa-solid fa-pen"></i>
-                                <i class="icon-remove fas fa-solid fa-trash-can"></i>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="table-type-application">
-                              <div class="allowance-pay">
-                                <div class="form-label-select">
-                                  <select class="form-allowance-type form-select" name="allowance-type"
-                                    id="allowanceType" aria-placeholder="---Chọn loại thưởng---">
-                                    <option value="allowanceDefault">---Chọn loại phụ cấp---</option>
-                                    <option value="allowancePetrol">Xăng xe</option>
-                                    <option value="allowanceLunch">Ăn trưa</option>
-                                    <option value="allowanceAirline">Vé máy bay</option>
-                                  </select>
-                                </div>
-                                <label for="allowanceType" class="allowance-pay-label toggle-standard"></label>
-                              </div>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="add-condition">
-                        <button id="addCondition" class="btn btn-condition">
-                          <i class="btn-success-icon fas fa-solid fa-plus"></i>
-                          <span>Thêm phụ cấp</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- form decrease -->
-                <div class="new-application-form">
-                  <!-- new application content -->
-                  <div class="new-application-content">
-                    <div class="new-application-decrease-content">
-                      <div class="new-application-toggle decrease-pay">
-                        <label for="btnToggleDecreasePay" class="decrease-pay-label toggle-standard">Giảm
-                          trừ</label>
-                        <button class="btn-toggle btn-toggle-standard" id="btnToggleDecreasePay">
-                          <i class="btn-toggle-icon fas fa-solid fa-circle"></i>
-                        </button>
-                        
-                      </div>
-                    </div>
-
-                    <!-- table decrease application-->
-                    <div class="table-decrease-application table-application-container">
-                      <table class="employee-table-list table-application">
-                        <thead class="table-header-application">
-                          <tr class="table-row-header-application">
-                            <th class="table-type-application"><span>Mã tên giảm trừ</span></th>
-                            <th class="table-origin-application"><span>Khoản giảm trừ</span></th>
-                            <!-- <th class="table-condition-application"><span>Điều kiện</span> -->
-                            <th class="table-decrease-application"><span>Loại giảm trừ</span></th>
-                            <th class="table-icon-add-remove"></th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-body">
-                          <tr class="table-row-data-application">
-                            <td></td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>10000</span>
-                                <span>VND</span>
-                              </div>
-
-                            </td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>1</span>
-                                <span>phút</span>
-                              </div>
-                            </td>
-                            <td class="table-origin-application">
-                              <div class="row-data-salary">
-                                <span>Đi muộn</span>
-                              </div>
-                            </td>
-                            <td class="table-icon-add-remove">
-                              <div class="table-icon-add-remove">
-                                <i class="icon-add fas fa-solid fa-pen"></i>
-                                <i class="icon-remove fas fa-solid fa-trash-can"></i>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="table-type-application">
-                              <!-- <div class="decrease-pay"> -->
-                                <div class="form-label-select">
-                                  <select class="form-rate-type form-select" name="decrease-type" id="decreaseType"
-                                    aria-placeholder="---Chọn loại thưởng---">
-                                    <option value="decreaseDefault">---Chọn giảm trừ---</option>
-                                    <option value="decreaseLate">Đi muộn</option>
-                                    <option value="decreaseAbsent">Nghỉ không phép</option>
-                                  </select>
-                                </div>
-                                <label for="decreaseType" class="allowance-pay-label toggle-standard"></label>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="add-condition">
-                        <button id="addCondition" class="btn btn-condition">
-                          <i class="btn-success-icon fas fa-solid fa-plus"></i>
-                          <span>Thêm giảm trừ</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- add employee bottom -->
-              <div class="add-employee-bottom">
-                <button class="btn btn-success btn-success-bottom" id="saveSetNewApplicationSalary">
-                  <i class="btn-success-icon fas fa-solid fa-floppy-disk"></i>
-                  <span>Lưu</span>
-                </button>
-                <button class="btn btn-default btn-default-bottom" id="cancelSetNewApplicationSalary">
-                  <i class="btn-success-icon fas fa-solid fa-ban"></i>
-                  <span>Bỏ qua</span>
-                </button>
-                
-              </div>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>
@@ -975,11 +624,12 @@
 <script setup>
 import '@/assets/styles/admin-css/kv-employee.css'; 
 import '@/assets/styles/admin-css/kv-style.css';
+import axios from 'axios';
 
 import { reactive, ref, watch } from "vue";
 
 const isEInfoForm = ref(true);
-const emit = defineEmits(['added-success', 'close']);
+const emit = defineEmits(['updated-success', 'close']);
 
 const form = reactive({
   id: '',
@@ -1011,7 +661,7 @@ watch(
       form.dob = newVal.dob ?? '';
       form.email = newVal.email ?? '';
       form.phoneNumber = newVal.phoneNumber ?? '';
-      form.roles = newVal.roles ?? [];
+      form.roles = (newVal.roles || []).map(role => role.name);
     } else {
       // === TRƯỜNG HỢP ADD MỚI ===
       resetForm();
@@ -1028,11 +678,64 @@ function resetForm() {
   form.phoneNumber = '';
   form.roles = [];
 }
+
+// ---------update -------------------------------------------------
+const handleUpdateUserProfile = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return router.push("/login");
+
+  if (!form.id) {
+    alert("Không tìm thấy ID người dùng!");
+    return;
+  }
+
+  try {
+    await axios.put(
+      `http://localhost:8080/bej3/manage/users/update/${form.id}`,
+      form, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    alert("Cập nhật thông tin thành công!");
+    emit("adupdated-success"); 
+  } catch (error) {
+    console.error("Lỗi khi cập nhật thông tin:", error.message);
+    if (error.response) {
+      console.error("Chi tiết:", error.response.data);
+      if ([401, 403].includes(error.response.status)) {
+        localStorage.removeItem("token");
+        router.push("/login");
+      }
+    }
+    alert("Cập nhật thông tin thất bại!");
+  }
+};
+// ---------update -------------------------------------------------
+
+
 // hàm đóng form
 function closeForm() {
   resetForm();        // xoá toàn bộ dữ liệu trong form
   emit('close');      // báo cho cha biết để ẩn form
 }
+
+
+// roles 
+// const roles = ref([]);
+// const fetchRoles = async () => {
+//   const token = localStorage.getItem("token");
+//   const res = await axios.get("http://localhost:8080/bej3/manage/roles", {
+//     headers: { Authorization: `Bearer ${token}` },
+//   });
+//   categories.value = res.data.result;
+// };
+// onMounted(async () => {
+//   await fetchCategories();
+// });
 </script>
 
 

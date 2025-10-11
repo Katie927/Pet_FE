@@ -665,9 +665,9 @@ const handleUpdate = async () => {
 
   try {
     const formData = objectToFormData(toRaw(form));
-    for (let [k, v] of formData.entries()) {
-      console.log(k, v);
-    }
+    // for (let [k, v] of formData.entries()) {
+    //   console.log(k, v);
+    // }
     await axios.put(
       `http://localhost:8080/bej3/manage/product/update/${form.id}`,
       formData,
@@ -679,7 +679,7 @@ const handleUpdate = async () => {
     );
 
     alert("Cập nhật hàng hóa thành công!");
-    emit("added-success"); // có thể đổi thành "updated-success" nếu muốn tách sự kiện
+    emit("added-success");
   } catch (error) {
     console.error("Lỗi khi cập nhật sản phẩm:", error.message);
     if (error.response) {
