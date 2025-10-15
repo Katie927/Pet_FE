@@ -164,6 +164,18 @@
     const selectColor = (color) => {
     selectedColor.value = color;
     };
+
+    const fetchProductData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/bej3/');
+      // console.log("Response Data:", response.data);
+      productData.value = response.data.result;
+      // console.log("Product Data in Vue:", productData.value);
+    } catch (error) {
+        console.error('Error: ', error);
+        }
+    };
+    onMounted(fetchProductData);
     
 
 </script>

@@ -83,27 +83,27 @@
                             </a>
                           </div>
                           <div class="specs">
-                            <ul v-if="product.attributes && product.attributes.length > 0">
+                            <!-- <ul v-if="product.attributes && product.attributes.length > 0">
                               <li v-for="(attribute, i) in product.attributes" :key="i" class="spec-item">
                                 <label>
                                   <span :class="['icon-CPU', 'icon-Battery', 'icon-Storage'][i % 3]"></span>
                                 </label>
                                 <div><span>{{ attribute }}</span></div>
                               </li>
-                            </ul>
+                            </ul> -->
                           </div>
                         </div>
                         <h3><a href="">{{ product.name }}</a></h3>
                         <div class="item-gap8px">
                           <div class="price price-last">
                             <!-- <span style="text-decoration: line-through;" v-if="product.originalPrice"> -->
-                              <s>{{ product.originalPrice.toLocaleString('vi-VN') }} ₫</s>
+                              <s>{{ product.variant.finalPrice == product.variant.originalPrice ? product.variant.finalPrice.toLocaleString('vi-VN') + " ₫" : "" }}</s>
                               
                             <!-- </span> -->
                             <span v-if="product.discount">- {{ product.discount }}%</span>
                           </div>
                           <div class="price">
-                            <strong>{{ product.finalPrice > 0 ? product.finalPrice.toLocaleString('vi-VN') + " ₫" : "Liên hệ" }}</strong>
+                            <strong>{{ product.variant.finalPrice > 0 ? product.variant.finalPrice.toLocaleString('vi-VN') + " ₫" : "Liên hệ" }}</strong>
                           </div>
                         </div>
                       </div>
