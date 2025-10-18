@@ -3,7 +3,7 @@
     <div class="container">
         <div class="product-detail">
             <div class="box-header">
-                <h1>Điện thoại Samsung Galaxy S25 Ultra - 12GB/256GB</h1>
+                <h1>{{ productDetails.name }}</h1>
             </div>
             <div class="box-detail-info">
                 <div class="detail-info-left">
@@ -123,9 +123,11 @@
     import "@/assets/styles/style.css";
     import "@/assets/styles/product-detail.css";
 
-    import { ref } from "vue";
+    import { ref, onMounted } from "vue";
     import { Swiper, SwiperSlide } from "swiper/vue";
     import { Navigation, Thumbs } from "swiper/modules";
+    import axios from "axios";
+    import { useRoute } from 'vue-router';
 
     import "swiper/css";
     import "swiper/css/navigation";
@@ -133,6 +135,33 @@
 
     
     // Dữ liệu: Danh sách ảnh theo màu sắc
+    
+
+    // Màu sắc đang được chọn (mặc định là xanh dương)
+    const selectedColor = ref("Xanh dương");
+    const thumbsSwiper = ref(null);
+
+    // Khi chọn màu mới, cập nhật slider chính
+    const selectColor = (color) => {
+    selectedColor.value = color;
+    };
+
+    const route = useRoute();
+    const productDetails = ref({});
+    const productId = route.params.productId;
+    const fetchProductData = async () => {
+        try{
+            // console.log("id: "+productId)
+            const response = await axios.get(`http://localhost:8080/bej3/home/product/${productId}`)
+            productDetails.value = response.data.result;
+        } catch (error) {
+            console.error("Lỗi", error);
+            alert("Không thể tải chi tiết sản phẩm!");
+        }
+    }
+    onMounted(fetchProductData);
+    
+
     const productImages = {
     "Xanh dương": [
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-silver-blue-1-8225f9e1f4.png",
@@ -155,29 +184,6 @@
         "https://cdn.hoanghamobile.com/i/previewV2/Uploads/2025/01/23/galaxy-s25-ultra-titan-black-1-5ffaab118c.png",
     ],
     };
-
-    // Màu sắc đang được chọn (mặc định là xanh dương)
-    const selectedColor = ref("Xanh dương");
-    const thumbsSwiper = ref(null);
-
-    // Khi chọn màu mới, cập nhật slider chính
-    const selectColor = (color) => {
-    selectedColor.value = color;
-    };
-
-    const fetchProductData = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/bej3/');
-      // console.log("Response Data:", response.data);
-      productData.value = response.data.result;
-      // console.log("Product Data in Vue:", productData.value);
-    } catch (error) {
-        console.error('Error: ', error);
-        }
-    };
-    onMounted(fetchProductData);
-    
-
 </script>
 
 

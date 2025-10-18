@@ -34,7 +34,7 @@ const customerRoutes = [
           { path: 'order', component: UserOrders },
         ]
       },
-      { path: '/product-detail', component: ProductDetails },
+      { path: '/product-detail/:productId', component: ProductDetails },
     ]
   }
 ];

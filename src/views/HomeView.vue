@@ -78,9 +78,9 @@
                         <div class="img">
                           <div class="img-info">
                             <span class="left-sticker"> Góp 0%, 0 phí </span>
-                            <a href="">
+                            <router-link :to="`/product-detail/${product.id}`">
                               <img :src="product.image" :alt="product.name" style="max-width: 140px; max-height: 100%;">
-                            </a>
+                            </router-link>
                           </div>
                           <div class="specs">
                             <!-- <ul v-if="product.attributes && product.attributes.length > 0">
@@ -93,7 +93,9 @@
                             </ul> -->
                           </div>
                         </div>
-                        <h3><a href="">{{ product.name }}</a></h3>
+                        <h3>
+                          <router-link :to="`/product-detail/${product.id}`">{{ product.name }}</router-link>
+                        </h3>
                         <div class="item-gap8px">
                           <div class="price price-last">
                             <!-- <span style="text-decoration: line-through;" v-if="product.originalPrice"> -->
@@ -202,7 +204,7 @@
   ])
   const fetchProductData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/bej3/');
+      const response = await axios.get('http://localhost:8080/bej3/home');
       // console.log("Response Data:", response.data);
       productData.value = response.data.result;
       // console.log("Product Data in Vue:", productData.value);

@@ -1,0 +1,87 @@
+{
+        "name": "iPhone 17",
+        "image": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-1-mist-blue-color-vn-vi.webp",
+        "status": 1,
+        "createDate": "2025-09-23",
+        "introImages": [
+            {
+                "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-5-feature-story-vn-vi.webp"
+            },
+            {
+                "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-6-features-and-specs-vn-vi.webp"
+            },
+            {
+                "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-7-colors-vn-vi.webp"
+            },
+            {
+                "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-9-accessory-vn-vi.webp"
+            },
+            {
+                "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-10-accessory-detail-vn-vi.webp"
+            }
+        ],
+        "variants": [
+            {
+                "color": "Xanh Lam ",
+                "detailImages": [
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-1-mist-blue-color-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-2-mist-blue-color-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-3-design-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-4-design-detail-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-mist-blue-pdp-image-position-8-usb-c-charge-cable-vn-vi.webp"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "name": "512 GB",
+                        "originalPrice": 31490000,
+                        "finalPrice": 31490000,
+                        "discount": 0
+                    },
+                    {
+                        "name": "256 GB",
+                        "originalPrice": 24990000,
+                        "finalPrice": 24990000,
+                        "discount": 0
+                    }
+                ]
+            },
+            {
+                "color": "Tím Oải Hương",
+                "detailImages": [
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-lavender-pdp-image-position-1-lavender-color-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-lavender-pdp-image-position-2-lavender-color-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-lavender-pdp-image-position-3-design-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-lavender-pdp-image-position-4-design-detail-vn-vi.webp"
+                    },
+                    {
+                        "url": "http://localhost:8080/bej3/images/iphone-17-lavender-pdp-image-position-8-usb-c-charge-cable-vn-vi.webp"
+                    }
+                ],
+                "attributes": [
+                    {
+                        "name": "256 GB",
+                        "originalPrice": 31490000,
+                        "finalPrice": 31490000,
+                        "discount": 0
+                    }
+                ]
+            }
+        ]
+    }
