@@ -323,7 +323,7 @@ const fetchProductData = async () => {
     } catch (error) {
         console.error('Lỗi:', error);
         // Nếu lỗi 401 (Unauthorized) hoặc 403 (Forbidden), chuyển hướng về trang login
-        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+        if (error.response && (error.response.status === 401 || error.response.status === 500)) {
             localStorage.removeItem("token"); // Xóa token cũ
             router.push("/login"); // Chuyển hướng về trang đăng nhập
         }
