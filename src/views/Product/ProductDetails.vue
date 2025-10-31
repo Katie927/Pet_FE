@@ -85,7 +85,9 @@
                         </strong>
                         <div class="list-option" id="option-color">
                             <div v-for="(variant, index) in productDetails?.variants ?? []" :key="index"
-                                class="item-option btn-active" :class="{ selected: selectedVariantIndex === index }">
+                                class="item-option btn-active" :class="{ selected: selectedVariantIndex === index }"
+                                @click="selectVariant(index), isIntroImages = 0"
+                            >
                                     <img :src="variant.detailImages?.[0]?.url" title="Samsung Galaxy S25 Ultra - 12GB/256GB Đen" alt="Samsung Galaxy S25 Ultra - 12GB/256GB Đen">
                                 <div class="color-price">
                                     <span>{{ variant.color }}</span>
