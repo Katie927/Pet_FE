@@ -177,31 +177,7 @@
     },
   ]);
 
-  const productData = ref([
-  // {
-  //        "name": "iPhone 16 - Chính hãng VN/A",
-  //        "image": "https://cdn.hoanghamobile.com/Uploads/2024/09/10/ip16-xanh-mong-ket.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
-  //        "specs": [
-  //            "A18",
-  //            "8GB",
-  //            "128GB"
-  //        ],
-  //        "originalPrice": "22,990,000 ",
-  //        "discount": 17,
-  //        "finalPrice": "18,990,000 ",
-  //    },
-  //    {
-  //        "name": "Samsung Galaxy S25 Ultra - 12GB/256GB (BHĐT)",
-  //        "image": "https://cdn.hoanghamobile.com/Uploads/2025/02/03/s25-ultra.png;trim.threshold=80;trim.percentpadding=0.5;width=180;height=180;mode=pad;",
-  //        "specs": [
-  //            "Snap 8 Gen 3",
-  //            "12GB"
-  //        ],
-  //        "originalPrice": "N/A",
-  //        "discount": 0,
-  //        "finalPrice": "26,990,000 ",
-  //    }
-  ])
+  const productData = ref([])
   const fetchProductData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/bej3/home');
