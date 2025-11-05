@@ -65,7 +65,7 @@ const customerRoutes = [
     }
   ]
 
-const routes = [...customerRoutes, ...adminRoutes];
+const routes = [...customerRoutes, ...adminRoutes, ...employeeRoutes];
 
 const router = createRouter({
   history: createWebHistory(),
